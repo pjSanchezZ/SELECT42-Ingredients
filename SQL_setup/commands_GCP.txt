@@ -1,0 +1,2 @@
+gcloud sql connect select42new --user=root
+show columns in brand
