@@ -4,3 +4,4 @@ from django.http import HttpResponse
 
 def display_img(request):
   return render(request, 'displaytest.html')
+

@@ -3,5 +3,5 @@ from django.urls.resolvers import URLPattern
 from . import views
 #URL config
 urlpatterns = [
-  path('image', views.display_img),
+  path('search_results', views.search_test, name='search_result'),
 ]
