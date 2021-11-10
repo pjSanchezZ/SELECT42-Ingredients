@@ -8,6 +8,7 @@ def homepage(request):
 
 def search_test(request):
   search_content = request.GET.get('search_content')
-  search_result = list(product_info.objects.filter(Product_Name__icontains=search_content).values())
+  search_result = list(product_info.objects.filter(Product_Name__icontains=search_content).values()[:15])
   print(search_result)
-  return render(request, 'search_result.html',)
+  id = search_result[0]['Product_Name']
+  return render(request, 'search_result.html',{'content': search_result})
