@@ -10,4 +10,4 @@ def search_test(request):
   search_content = request.GET.get('search_content')
   search_result = list(product_info.objects.filter(Product_Name__icontains=search_content).values())
   print(search_result)
-  return render(request, 'search_result.html',)
+  return render(request, 'search_result.html', {'content': search_result})
