@@ -49,6 +49,7 @@ class seller(models.Model):
       return self.Seller_Id
 
 class product_type(models.Model):
+  Type_Id = models.CharField(max_length=25, primary_key=True)
   Product_Type = models.CharField(max_length = 50, unique = True)
   
   def __str__(self) :
@@ -59,10 +60,10 @@ class product_info(models.Model):
   Product_Id = models.CharField(max_length = 25, primary_key = True)
   Product_Name = models.CharField(max_length = 100)
   Price = models.FloatField(null = True)
-  Product_Type = models.ForeignKey('product_type', on_delete = models.CASCADE, db_column = 'Product_Type')
+  Type_Id = models.ForeignKey('product_type', on_delete = models.CASCADE, db_column = 'Type_Id')
   Seller_Id = models.ForeignKey('seller', on_delete = CASCADE, db_column = 'Seller_Id')
   Description = models.TextField(blank=True)
-  Image = models.ImageField(blank = True)
+  Image = models.URLField(blank = True)
 
   class Meta:
     ordering = ('Product_Id',)
