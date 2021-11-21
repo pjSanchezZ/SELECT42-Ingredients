@@ -168,3 +168,26 @@ def details(request):
   search_result = [{'Product_Id': '101484506', 'Product_Name': 'Granny Smith Apple', 'Price': 0.99, 'Type_Id': '54\r', 'Seller_Id': 'Schnucks2', 'Description': 'Apples', 'Image': 'https://storage.cloud.google.com/select_42/product_img/101484506.png'}, {'Product_Id': '10771038646', 'Product_Name': 'Good & Gather Passion Fruit Pineapple Chunks, Dragon Fruit Chunks, Passion Fruit Juice & Mango Puree Blended Cubes Tropical Blend', 'Price': 4.99, 'Type_Id': '73\r', 'Seller_Id': 
 'Target0', 'Description': 'Ingredients,Pineapple, Dragon Fruit, Passion Fruit Juice, Mango Puree.', 'Image': 'https://storage.cloud.google.com/select_42/product_img/10771038646.png'}]
   return render(request, 'product_details.html', {'content': search_result})
+
+def login(request):
+  """
+  This is the function for login.
+    Input from front-end:
+      1. 'User_Name'
+      2. 'Password'
+    Output to front-end:
+      1. 'content':
+        - if the user name can't be found, return content = 100
+        - if the user name can be found, but the password is incorrect, return content = 101
+        - login succeeded, return content = 102.
+    TO BE DETERMINED:
+      if the user login in successfully, the website will jump to 'TBD.html'.
+  """
+  name = request.GET.get('User_Name')
+  password = request.Get.get('Password')
+  if(not (user.objects.filter(User_Name__exact = name))):
+    return render(request, {'content': 100})
+  elif(not user.objects.filter(User_Name__exact = name).filter(Password__exact = password)):
+    return render(request, {'content': 101})
+  else:
+    return render(request, 'TBD.html', {'content': 102})
