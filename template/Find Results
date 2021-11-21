@@ -1,0 +1,100 @@
+Searching 147 files for "askbootstrap"
+
+D:\Projects\htdocs\dev\Theme\grofarweb\template\change_password.html:
+  272                       <div class="p-4 profile text-center border-bottom">
+  273                          <img src="img/user.png" class="img-fluid rounded-pill">
+  274:                         <h6 class="font-weight-bold m-0 mt-2">Askbootstrap</h6>
+  275                          <p class="small text-muted m-0">iamosahan@gmail.com</p>
+  276                       </div>
+
+D:\Projects\htdocs\dev\Theme\grofarweb\template\deactivate_account.html:
+  273                       <div class="p-4 profile text-center border-bottom">
+  274                          <img src="img/user.png" class="img-fluid rounded-pill">
+  275:                         <h6 class="font-weight-bold m-0 mt-2">Askbootstrap</h6>
+  276                          <p class="small text-muted m-0">iamosahan@gmail.com</p>
+  277                       </div>
+
+D:\Projects\htdocs\dev\Theme\grofarweb\template\faq.html:
+  273                       <div class="p-4 profile text-center border-bottom">
+  274                          <img src="img/user.png" class="img-fluid rounded-pill">
+  275:                         <h6 class="font-weight-bold m-0 mt-2">Askbootstrap</h6>
+  276                          <p class="small text-muted m-0">iamosahan@gmail.com</p>
+  277                       </div>
+
+D:\Projects\htdocs\dev\Theme\grofarweb\template\help_support.html:
+  273                       <div class="p-4 profile text-center border-bottom">
+  274                          <img src="img/user.png" class="img-fluid rounded-pill">
+  275:                         <h6 class="font-weight-bold m-0 mt-2">Askbootstrap</h6>
+  276                          <p class="small text-muted m-0">iamosahan@gmail.com</p>
+  277                       </div>
+
+D:\Projects\htdocs\dev\Theme\grofarweb\template\help_ticket.html:
+  273                       <div class="p-4 profile text-center border-bottom">
+  274                          <img src="img/user.png" class="img-fluid rounded-pill">
+  275:                         <h6 class="font-weight-bold m-0 mt-2">Askbootstrap</h6>
+  276                          <p class="small text-muted m-0">iamosahan@gmail.com</p>
+  277                       </div>
+
+D:\Projects\htdocs\dev\Theme\grofarweb\template\js\osahan.js:
+  135        customToggle: $toggle,
+  136        levelSpacing: 40,
+  137:       navTitle: 'Askbootstrap',
+  138        levelTitles: true,
+  139        levelTitleAsBack: true,
+
+D:\Projects\htdocs\dev\Theme\grofarweb\template\my_account.html:
+  273                       <div class="p-4 profile text-center border-bottom">
+  274                          <img src="img/user.png" class="img-fluid rounded-pill">
+  275:                         <h6 class="font-weight-bold m-0 mt-2">Askbootstrap</h6>
+  276                          <p class="small text-muted m-0">iamosahan@gmail.com</p>
+  277                       </div>
+  ...
+  330                             <div class="form-group">
+  331                                <label for="exampleInputName1">Full Name</label>
+  332:                               <input type="text" class="form-control" id="exampleInputName1" value="Askbootstrap">
+  333                             </div>
+  334                             <div class="form-group">
+
+D:\Projects\htdocs\dev\Theme\grofarweb\template\my_address.html:
+  273                       <div class="p-4 profile text-center border-bottom">
+  274                          <img src="img/user.png" class="img-fluid rounded-pill">
+  275:                         <h6 class="font-weight-bold m-0 mt-2">Askbootstrap</h6>
+  276                          <p class="small text-muted m-0">iamosahan@gmail.com</p>
+  277                       </div>
+
+D:\Projects\htdocs\dev\Theme\grofarweb\template\privacy.html:
+  273                       <div class="p-4 profile text-center border-bottom">
+  274                          <img src="img/user.png" class="img-fluid rounded-pill">
+  275:                         <h6 class="font-weight-bold m-0 mt-2">Askbootstrap</h6>
+  276                          <p class="small text-muted m-0">iamosahan@gmail.com</p>
+  277                       </div>
+
+D:\Projects\htdocs\dev\Theme\grofarweb\template\promos.html:
+  272                       <div class="p-4 profile text-center border-bottom">
+  273                          <img src="img/user.png" class="img-fluid rounded-pill">
+  274:                         <h6 class="font-weight-bold m-0 mt-2">Askbootstrap</h6>
+  275                          <p class="small text-muted m-0">iamosahan@gmail.com</p>
+  276                       </div>
+
+D:\Projects\htdocs\dev\Theme\grofarweb\template\refund_payment.html:
+  273                       <div class="p-4 profile text-center border-bottom">
+  274                          <img src="img/user.png" class="img-fluid rounded-pill">
+  275:                         <h6 class="font-weight-bold m-0 mt-2">Askbootstrap</h6>
+  276                          <p class="small text-muted m-0">iamosahan@gmail.com</p>
+  277                       </div>
+
+D:\Projects\htdocs\dev\Theme\grofarweb\template\terms&conditions.html:
+  272                       <div class="p-4 profile text-center border-bottom">
+  273                          <img src="img/user.png" class="img-fluid rounded-pill">
+  274:                         <h6 class="font-weight-bold m-0 mt-2">Askbootstrap</h6>
+  275                          <p class="small text-muted m-0">iamosahan@gmail.com</p>
+  276                       </div>
+
+D:\Projects\htdocs\dev\Theme\grofarweb\template\terms_conditions.html:
+  272                       <div class="p-4 profile text-center border-bottom">
+  273                          <img src="img/user.png" class="img-fluid rounded-pill">
+  274:                         <h6 class="font-weight-bold m-0 mt-2">Askbootstrap</h6>
+  275                          <p class="small text-muted m-0">iamosahan@gmail.com</p>
+  276                       </div>
+
+14 matches across 13 files
