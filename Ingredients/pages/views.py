@@ -169,6 +169,8 @@ def details(request):
 'Target0', 'Description': 'Ingredients,Pineapple, Dragon Fruit, Passion Fruit Juice, Mango Puree.', 'Image': 'https://storage.cloud.google.com/select_42/product_img/10771038646.png'}]
   return render(request, 'product_details.html', {'content': search_result})
 
+username = ''
+
 def login(request):
   """
   This is the function for login.
@@ -183,11 +185,13 @@ def login(request):
     TO BE DETERMINED:
       if the user login in successfully, the website will jump to 'TBD.html'.
   """
-  name = request.GET.get('User_Name')
-  password = request.Get.get('Password')
-  if(not (user.objects.filter(User_Name__exact = name))):
-    return render(request, {'content': 100})
-  elif(not user.objects.filter(User_Name__exact = name).filter(Password__exact = password)):
-    return render(request, {'content': 101})
+  global username 
+  username = request.GET.get("username")
+  password = request.GET.get("password")
+  print(username, password)
+  if(not (user.objects.filter(User_Name__exact = username))):
+    return render(request, 'signin.html', {'content': 100})
+  elif(not user.objects.filter(User_Name__exact = username).filter(Password__exact = password)):
+    return render(request, 'signin.html', {'content': 101})
   else:
-    return render(request, 'TBD.html', {'content': 102})
+    return render(request, 'home.html', {'content': 102})
