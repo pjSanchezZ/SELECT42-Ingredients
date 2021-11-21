@@ -10,10 +10,11 @@ git pull
 
 ==============================
 
-改完：
+改完上传：
+git pull
 
 git add -u
 
-git commit -m "what have you modified"
+git commit -m "say something"
 
 git push origin main
