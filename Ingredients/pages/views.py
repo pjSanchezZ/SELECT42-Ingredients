@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from pages.models import *
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 # Create your views here.
 
 def home(request):
@@ -195,3 +197,4 @@ def login(request):
     return render(request, 'signin.html', {'content': 101})
   else:
     return render(request, 'home.html', {'content': 102})
+
