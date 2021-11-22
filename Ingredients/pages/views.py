@@ -198,3 +198,57 @@ def login(request):
   else:
     return render(request, 'home.html', {'content': 102})
 
+def signup(request):
+  """
+  This is the function for signup:
+    Input from front-end:
+      1. 'User_Name'
+      2. 'Password1'
+      3. 'Password2'
+        - the password should be entered twice and they should match.
+      4. 'Email'
+      5. 'Phone_number'
+    Output to front-end:
+      1. 'Error':
+        - 101: User name is too long, it should be less than 45 characters.
+        - 102: User name already exists.
+        - 103: Password is too short, it should be at least 8 characters.
+        - 104: The 2 Passwords doesn't match
+        - 105: Invalid phone number
+        - 106: Invalid email
+        - 0: Suceed:
+          -- Store the user info to database
+          -- auto log in with the newly created user.
+          -- jump to \home.html.
+  """
+  global username
+  name = request.GET.get('User_Name')
+  password_1 = request.GET.get('Password1')
+  password_2 = request.GET.get('Password2')
+  email = request.GET.get('Email')
+  Phone_number = request.GET.get('Phone_number')
+  try:
+    validate_email(email)
+    email_valid = True
+  except ValidationError:
+    email_valid = False
+  if len(name) > 45:
+    return render(request, {'Error': 101})
+  elif user.objects.filter(User_Name__exact = name):
+    return render(request, {'Error': 102})
+  elif len(password_1) < 8:
+    return render(request, {'Error': 103})
+  elif password_1 != password_2:
+    return render(request, {'Error': 104})
+  elif len(Phone_number) < 10 or len(Phone_number > 15):
+    return render(request, {'Error': 105})
+  elif email_valid == False:
+    return render(request, {'Error': 106})
+  else:
+    new_user = user(User_Name = name, Password = password_2, Email = email, Phone_Number = int(Phone_number))
+    new_user.save()
+    username = name
+    return render(request, 'home.html', {'Error': 0})
+    
+  
+
