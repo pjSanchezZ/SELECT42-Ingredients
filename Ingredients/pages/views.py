@@ -168,3 +168,19 @@ def details(request):
   search_result = [{'Product_Id': '101484506', 'Product_Name': 'Granny Smith Apple', 'Price': 0.99, 'Type_Id': '54\r', 'Seller_Id': 'Schnucks2', 'Description': 'Apples', 'Image': 'https://storage.cloud.google.com/select_42/product_img/101484506.png'}, {'Product_Id': '10771038646', 'Product_Name': 'Good & Gather Passion Fruit Pineapple Chunks, Dragon Fruit Chunks, Passion Fruit Juice & Mango Puree Blended Cubes Tropical Blend', 'Price': 4.99, 'Type_Id': '73\r', 'Seller_Id': 
 'Target0', 'Description': 'Ingredients,Pineapple, Dragon Fruit, Passion Fruit Juice, Mango Puree.', 'Image': 'https://storage.cloud.google.com/select_42/product_img/10771038646.png'}]
   return render(request, 'product_details.html', {'content': search_result})
+
+def cart(request):
+  count_of_items = 2
+  info_of_item = [{'Product_Id': '101484506', 
+                    'Product_Name': 'Granny Smith Apple', 
+                    'Price': 0.99, 'Type_Id': '54\r', 
+                    'Seller_Id': 'Schnucks2', 
+                    'Description': 'Apples', 
+                    'Image': 'https://storage.cloud.google.com/select_42/product_img/101484506.png',
+                    'Count': 2,
+                    'Total_Price': 1.98},
+                  {'Product_Id': '10771038646', 'Product_Name': 'Good & Gather Passion Fruit Pineapple Chunks, Dragon Fruit Chunks, Passion Fruit Juice & Mango Puree Blended Cubes Tropical Blend', 'Price': 4.00, 'Type_Id': '73\r', 'Seller_Id': 'Target0', 'Description': 'Ingredients,Pineapple, Dragon Fruit, Passion Fruit Juice, Mango Puree.', 
+                    'Image': 'https://storage.cloud.google.com/select_42/product_img/10771038646.png', 
+                    'Count': 3,  'Total_Price': 12.00}]
+  sum_of_item = 13.98
+  return render(request, 'cart.html', {'count_of_items': count_of_items, 'info_of_item': info_of_item, 'sum_of_item': sum_of_item})
