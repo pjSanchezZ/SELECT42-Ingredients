@@ -1,13 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from pages.models import *
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 # Create your views here.
 
 def home(request):
   return  render(request, 'home.html')
-
-def cart(request):
-  return  render(request, 'cart.html')
 
 def change_password(request):
   return  render(request, 'change_password.html')
@@ -104,7 +103,7 @@ def search_test(request):
 list_result = []
 list_content =''
 
-def range(request):
+def ranger(request):
   min_value = request.GET.get("min_value")
   max_value = request.GET.get("max_value")
   order = request.GET.get("order")
@@ -151,15 +150,24 @@ def range(request):
   
 #   search_result = [{'Product_Id': '101484506', 'Product_Name': 'Granny Smith Apple', 'Price': 0.99, 'Type_Id': '54\r', 'Seller_Id': 'Schnucks2', 'Description': 'Apples', 'Image': 'https://storage.cloud.google.com/select_42/product_img/101484506.png'}, {'Product_Id': '10771038646', 'Product_Name': 'Good & Gather Passion Fruit Pineapple Chunks, Dragon Fruit Chunks, Passion Fruit Juice & Mango Puree Blended Cubes Tropical Blend', 'Price': 4.99, 'Type_Id': '73\r', 'Seller_Id': 
 # 'Target0', 'Description': 'Ingredients,Pineapple, Dragon Fruit, Passion Fruit Juice, Mango Puree.', 'Image': 'https://storage.cloud.google.com/select_42/product_img/10771038646.png'}]
-  return render(request, 'listing.html', {'content': list(list_result)})
 
-def list_test(request):
+  # cxt = product_info.objects.filter(
+  #     Product_Name__icontains='apple juice').values()
+  # paginator = Paginator(cxt, 8)  # Show 10 contacts per page.
+  paginator = Paginator(list_result, 8)  # Show 10 contacts per page.
+  page_number = request.GET.get('page')
+  page_obj = paginator.get_page(page_number)
+  print('Page:', page_number)
+
+  return render(request, 'listing.html', {'page_obj': page_obj, 'content': list_result})
+
+
+def listing_search(request):
   global list_result
   global list_content
   list_content = request.GET.get("list_key")
   list_result = product_info.objects.filter(Product_Name__icontains=list_content)
   print(list_content)
-  # print(343)
   return render(request, 'listing.html', {'content': list(list_result.values())})
 
 def details(request):
@@ -169,18 +177,57 @@ def details(request):
 'Target0', 'Description': 'Ingredients,Pineapple, Dragon Fruit, Passion Fruit Juice, Mango Puree.', 'Image': 'https://storage.cloud.google.com/select_42/product_img/10771038646.png'}]
   return render(request, 'product_details.html', {'content': search_result})
 
+
 def cart(request):
-  count_of_items = 2
-  info_of_item = [{'Product_Id': '101484506', 
-                    'Product_Name': 'Granny Smith Apple', 
-                    'Price': 0.99, 'Type_Id': '54\r', 
-                    'Seller_Id': 'Schnucks2', 
-                    'Description': 'Apples', 
-                    'Image': 'https://storage.cloud.google.com/select_42/product_img/101484506.png',
-                    'Count': 2,
-                    'Total_Price': 1.98},
-                  {'Product_Id': '10771038646', 'Product_Name': 'Good & Gather Passion Fruit Pineapple Chunks, Dragon Fruit Chunks, Passion Fruit Juice & Mango Puree Blended Cubes Tropical Blend', 'Price': 4.00, 'Type_Id': '73\r', 'Seller_Id': 'Target0', 'Description': 'Ingredients,Pineapple, Dragon Fruit, Passion Fruit Juice, Mango Puree.', 
-                    'Image': 'https://storage.cloud.google.com/select_42/product_img/10771038646.png', 
-                    'Count': 3,  'Total_Price': 12.00}]
-  sum_of_item = 13.98
-  return render(request, 'cart.html', {'count_of_items': count_of_items, 'info_of_item': info_of_item, 'sum_of_item': sum_of_item})
+  list_result = list(product_info.objects.filter(Product_Name__icontains='apple juice').values())
+  count_of_items = len(list_result)
+  print(count_of_items)
+  sum_of_item = 0
+  count_of_things = 0
+  for i in range(count_of_items):
+    list_result[i]['Count'] = (i + 1) % 3 + 1
+    list_result[i]['Total_Price'] = round(list_result[i]['Count'] * list_result[i]['Price'], 2)
+    sum_of_item += list_result[i]['Total_Price']
+    count_of_things += list_result[i]['Count']
+  
+  paginator = Paginator(list_result, 10)  # Show 10 contacts per page.
+  page_number = request.GET.get('page')
+  page_obj = paginator.get_page(page_number)
+  total_page = paginator.num_pages
+
+  if page_number:
+    page_number = (int)(page_number)
+  
+  return render(request, 'cart.html', {
+      'count_of_items': count_of_items, 
+      'count_of_things': count_of_things,
+      # 'info_of_item': list_result,
+      'sum_of_item': round(sum_of_item, 2),
+      'page_obj': page_obj,
+      'curr_page': page_number,
+      'total_page': total_page,
+      'range': paginator.page_range
+      })
+
+
+def try_search(request):
+
+  list_result = product_info.objects.filter(
+      Product_Name__icontains='apple juice').values()
+  
+  paginator = Paginator(list_result, 3)  # Show 10 contacts per page.
+
+  page_number = request.GET.get('page')
+  page_obj = paginator.get_page(page_number)
+  total_page = paginator.num_pages
+  print(page_obj.count, ', ', page_number, '/', total_page)
+
+  if page_number:
+    page_number = (int)(page_number)  # page_number本来是string型
+
+  return render(request, 'try.html', {
+        'page_obj': page_obj,
+        'curr_page': page_number,
+        'total_page': total_page,
+        'range': paginator.page_range
+        })

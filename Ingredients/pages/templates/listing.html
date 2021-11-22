@@ -282,8 +282,29 @@
                            <a href="/#" data-toggle="modal" data-target="#exampleModal" class="btn text-muted bg-white"><i class="icofont-signal mr-1"></i> Sort</a>
                         </div>
                      </div>
+                     <body>
+                        <div> --------------------------- </div>
+                        <div class="pagination">
+                           <span class="step-links">
+                              {% if page_obj.has_previous %}
+                              <a href="?page=1">&laquo; first</a>
+                              <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                              {% endif %}
+                     
+                              <span class="current">
+                                 Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                              </span>
+                     
+                              {% if page_obj.has_next %}
+                              <a href="?page={{ page_obj.next_page_number }}">next</a>
+                              <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                              {% endif %}
+                           </span>
+                        </div>
+                        <div> --------------------------- </div>
+                     </body>
                      <div class="row">
-                        {% for i in content %}
+                        {% for i in page_obj %}
                         <div class="col-6 col-md-3 mb-3">
                            <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
                               <div class="list-card-image">
