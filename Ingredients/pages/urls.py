@@ -2,6 +2,10 @@ from django.urls import path
 from django.urls.resolvers import URLPattern
 from django.conf.urls import include, url
 from . import views
+
+from django.conf.urls.static import static
+from django.conf import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 #URL config
 
 urlpatterns = [
@@ -36,7 +40,8 @@ urlpatterns = [
     url(r'^verification/', views.verification), 
     url(r'^home/', views.home),
     url(r'^find/', views.search_test),
-    url(r'^range/', views.range),
+    url(r'^range/', views.ranger),
     url(r'^details/', views.details),
-    url(r'^list/', views.list_test),
+    url(r'^list/', views.listing_search),
+    url(r'^try/', views.try_search),
 ]

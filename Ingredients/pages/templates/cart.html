@@ -19,7 +19,38 @@
       <link href="{% static '/css/style.css' %}" rel="stylesheet">
       <!-- Sidebar CSS -->
       <link href="{% static '/vendor/sidebar/demo.css' %}" rel="stylesheet">
+
+      <style>
+         ul.pagination {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+         }
+   
+         ul.pagination li {
+            display: inline;
+         }
+   
+         ul.pagination li a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+         }
+   
+         ul.pagination li a.active {
+            background-color: #f0c127;
+            color: white;
+            border-radius: 5px;
+         }
+   
+         ul.pagination li a:hover:not(.active) {
+            background-color: #ddd;
+         }
+      </style>
    </head>
+
    <body class="fixed-bottom-padding">
       <div class="top-bar">
          <div class="container">
@@ -275,17 +306,54 @@
                         <div class="card-header bg-white border-0 p-0" id="headingOne">
                            <h2 class="mb-0">
                               <button class="btn d-flex align-items-center bg-white btn-block text-left btn-lg h5 px-3 py-4 m-0" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                              <span class="c-number">1</span> Cart (3 items)
+                              <!-- <span class="c-number">1</span> Cart ({{count_of_items}} item(s)) -->
+                              Cart ({{count_of_items}} item(s))
                               </button>
                            </h2>
+                        </div>
+                        <!-- labels of pages -->
+                        <div>
+                           &nbsp &nbsp
+                           <ul class="pagination">
+                              <li><a href="?page=1">«</a></li>
+                           
+                              {% for idx in range %}
+                                 <li><a {% if idx == curr_page %} class="active" {% endif %} href="?page={{idx}}">{{idx}}</a></li>
+                              {% endfor %}
+                           
+                              <li><a href="?page={{total_page}}">»</a></li>
+                           </ul>
                         </div>
                         <!-- body cart items -->
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                            <div class="card-body p-0 border-top">
                               <div class="osahan-cart">
+                                 {% for i in page_obj %}
                                  <div class="cart-items bg-white position-relative border-bottom">
                                     <a href="/product_details/" class="position-absolute">
-                                    <span class="badge badge-danger m-3">10%</span>
+                                    <span class="badge badge-danger m-3">{{i.Seller_Id}}</span>
+                                    </a>
+                                    <div class="d-flex  align-items-center p-3">
+                                       <a href="/product_details/"><img src="{{i.Image}}" class="img-fluid"></a>
+                                       <a href="/product_details/" class="ml-3 text-dark text-decoration-none w-100">
+                                          <h5 class="mb-1">{{i.Prodcut_Name}}</h5>
+                                          <p class="text-muted mb-2">{{i.Product_Name}} </p>
+                                          <p> ${{i.Price}} / per </p>
+                                          <div class="d-flex align-items-center">
+                                             <p class="total_price font-weight-bold m-0">${{i.Total_Price}}</p>
+                                             <form id='myform' class="cart-items-number d-flex ml-auto" method='POST' action='#'>
+                                                <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
+                                                <input type='text' name='quantity' value={{i.Count}} class='qty form-control' />
+                                                <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
+                                             </form>
+                                          </div>
+                                       </a>
+                                    </div>
+                                 </div>
+                                 {% endfor %}
+                                 <!-- <div class="cart-items bg-white position-relative border-bottom">
+                                    <a href="/product_details/" class="position-absolute">
+                                       <span class="badge badge-danger m-3">10%</span>
                                     </a>
                                     <div class="d-flex  align-items-center p-3">
                                        <a href="/product_details/"><img src="{% static 'img/cart/g1.png' %}" class="img-fluid"></a>
@@ -336,34 +404,48 @@
                                           </div>
                                        </a>
                                     </div>
-                                 </div>
-                                 <div>
+                                 </div> -->
+                                 <!-- <div>
                                     <a href="/#" class="text-decoration-none btn btn-block p-3" type="button" data-toggle="collapse" data-target="#collapsetwo" aria-expanded="true" aria-controls="collapsetwo">
                                        <div class="rounded shadow bg-success d-flex align-items-center p-3 text-white">
                                           <div class="more">
-                                             <h6 class="m-0">Subtotal $8.52</h6>
+                                             <h6 class="m-0">Subtotal ${{sum_of_item}}</h6>
                                              <p class="small m-0">Proceed to checkout</p>
                                           </div>
                                           <div class="ml-auto"><i class="icofont-simple-right"></i></div>
                                        </div>
                                     </a>
-                                 </div>
+                                 </div> -->
                               </div>
                            </div>
                         </div>
+                        <!-- labels of pages -->
+                        <div>
+                           <br>
+                           &nbsp &nbsp
+                           <ul class="pagination">
+                              <li><a href="?page=1">«</a></li>
+                        
+                              {% for idx in range %}
+                              <li><a {% if idx == curr_page %} class="active" {% endif %} href="?page={{idx}}">{{idx}}</a></li>
+                              {% endfor %}
+                        
+                              <li><a href="?page={{total_page}}">»</a></li>
+                           </ul>
+                        </div>
                      </div>
                      <!-- cart address -->
-                     <div class="card border-0 osahan-accor rounded shadow-sm overflow-hidden mt-3">
+                     <!-- <div class="card border-0 osahan-accor rounded shadow-sm overflow-hidden mt-3"> -->
                         <!-- address header -->
-                        <div class="card-header bg-white border-0 p-0" id="headingtwo">
+                        <!-- <div class="card-header bg-white border-0 p-0" id="headingtwo">
                            <h2 class="mb-0">
                               <button class="btn d-flex align-items-center bg-white btn-block text-left btn-lg h5 px-3 py-4 m-0" type="button" data-toggle="collapse" data-target="#collapsetwo" aria-expanded="true" aria-controls="collapsetwo">
                               <span class="c-number">2</span> Order Address <a href="/#"  data-toggle="modal" data-target="#exampleModal" class="text-decoration-none text-success ml-auto"> <i class="icofont-plus-circle mr-1"></i>Add New Delivery Address</a>
                               </button>
                            </h2>
-                        </div>
+                        </div> -->
                         <!-- body address -->
-                        <div id="collapsetwo" class="collapse" aria-labelledby="headingtwo" data-parent="#accordionExample">
+                        <!-- <div id="collapsetwo" class="collapse" aria-labelledby="headingtwo" data-parent="#accordionExample">
                            <div class="card-body p-0 border-top">
                               <div class="osahan-order_address">
                                  <div class="p-3 row">
@@ -410,19 +492,19 @@
                               </div>
                            </div>
                         </div>
-                     </div>
+                     </div> -->
                      <!-- cart delivery -->
-                     <div class="card border-0 osahan-accor rounded shadow-sm overflow-hidden mt-3">
-                        <!-- delivery header -->
-                        <div class="card-header bg-white border-0 p-0" id="headingthree">
+                     <!-- <div class="card border-0 osahan-accor rounded shadow-sm overflow-hidden mt-3">-->
+                        <!--delivery header-->
+                        <!--<div class="card-header bg-white border-0 p-0" id="headingthree">
                            <h2 class="mb-0">
                               <button class="btn d-flex align-items-center bg-white btn-block text-left btn-lg h5 px-3 py-4 m-0" type="button" data-toggle="collapse" data-target="#collapsethree" aria-expanded="true" aria-controls="collapsethree">
                               <span class="c-number">3</span> Delivery Time
                               </button>
                            </h2>
-                        </div>
-                        <!-- body delivery --> 
-                        <div id="collapsethree" class="collapse" aria-labelledby="headingthree" data-parent="#accordionExample">
+                        </div> -->
+                        <!-- body delivery -->
+                        <!-- <div id="collapsethree" class="collapse" aria-labelledby="headingthree" data-parent="#accordionExample">
                            <div class="card-body p-0 border-top">
                               <div class="osahan-order_address">
                                  <div class="text-center mb-4 py-4">
@@ -640,10 +722,10 @@
                               </div>
                            </div>
                         </div>
-                     </div>
-                     <!-- cart payment -->
+                     </div> -->
+                     <!-- cart payment
                      <div class="card border-0 osahan-accor rounded shadow-sm overflow-hidden mt-3">
-                        <!-- payment header -->
+                        payment header
                         <div class="card-header bg-white border-0 p-0" id="headingfour">
                            <h2 class="mb-0">
                               <button class="btn d-flex align-items-center bg-white btn-block text-left btn-lg h5 px-3 py-4 m-0" type="button" data-toggle="collapse" data-target="#collapsefour" aria-expanded="true" aria-controls="collapsefour">
@@ -651,7 +733,7 @@
                               </button>
                            </h2>
                         </div>
-                        <!-- body payment -->
+                        body payment
                         <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
                            <div class="card-body px-3 pb-3 pt-1 border-top">
                               <div class="schedule">
@@ -744,33 +826,35 @@
                               <a href="/checkout/" class="btn btn-success btn-lg btn-block mt-3" type="button">Continue</a>
                            </div>
                         </div>
-                     </div>
+                     </div> -->
                   </div>
                </div>
                <div class="col-lg-4">
                   <div class="sticky_sidebar">
                      <div class="bg-white rounded overflow-hidden shadow-sm mb-3 checkout-sidebar">
-                        <div class="d-flex align-items-center osahan-cart-item-profile border-bottom bg-white p-3">
+                        <!-- <div class="d-flex align-items-center osahan-cart-item-profile border-bottom bg-white p-3">
                            <img alt="osahan" src="{% static 'img/starter1.jpg' %}" class="mr-3 rounded-circle img-fluid">
                            <div class="d-flex flex-column">
                               <h6 class="mb-1 font-weight-bold">Osahan Fresh Store</h6>
                               <p class="mb-0 small text-muted"><i class="feather-map-pin"></i> 2036 2ND AVE, NEW YORK, NY 10029</p>
                            </div>
-                        </div>
+                        </div> -->
                         <div>
-                           <div class="bg-white p-3 clearfix">
+                           <!-- <div class="bg-white p-3 clearfix">
                               <p class="font-weight-bold small mb-2">Bill Details</p>
                               <p class="mb-1">Item Total <span class="small text-muted">(3 item)</span> <span class="float-right text-dark">$3140</span></p>
                               <p class="mb-1">Store Charges <span class="float-right text-dark">$62.8</span></p>
                               <p class="mb-3">Delivery Fee <span  data-toggle="tooltip" data-placement="top" title="Delivery partner fee - $3" class="text-info ml-1"><i class="icofont-info-circle"></i></span><span class="float-right text-dark">$10</span></p>
                               <h6 class="mb-0 text-success">Total Discount<span class="float-right text-success">$1884</span></h6>
-                           </div>
+                           </div> -->
                            <div class="p-3 border-top">
-                              <h5 class="mb-0">TO PAY  <span class="float-right text-danger">$1329</span></h5>
+                              <h5 class="mb-0">COUNT <span class="float-right text-danger">{{count_of_things}} piece(s)</span></h5>
+                              <br>
+                              <h5 class="mb-0">TOTAL PRICE <span class="float-right text-danger">${{sum_of_item}}</span></h5>
                            </div>
                         </div>
                      </div>
-                     <p class="text-success text-center">Your Total Savings on this order $8.52</p>
+                     <!-- <p class="text-success text-center">Your Total Savings on this order $8.52</p> -->
                   </div>
                </div>
             </div>
