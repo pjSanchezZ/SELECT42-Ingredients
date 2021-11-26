@@ -105,29 +105,35 @@
                      <div class="p-3">
                         <h2 class="my-0">Let's get started</h2>
                         <p class="small mb-4">Create account to see our top picks for you!</p>
-                        <form action="verification/">
+                        <form action="/signup1/">
                            <div class="form-group">
                               <label for="exampleInputName1">Name</label>
-                              <input placeholder="Enter Name" type="text" class="form-control" id="exampleInputName1" aria-describedby="emailHelp">
+                              <input placeholder="Enter Name" type="text" name='User_Name' class="form-control" id="exampleInputName1" aria-describedby="emailHelp">
                            </div>
                            <div class="form-group">
                               <label for="exampleInputNumber1">Phone Number</label>
-                              <input placeholder="Enter Phone Number" type="number" class="form-control" id="exampleInputNumber1" aria-describedby="emailHelp">
+                              <input placeholder="Enter Phone Number" type="number" name='Phone_number' class="form-control" id="exampleInputNumber1" aria-describedby="emailHelp">
                            </div>
                            <div class="form-group">
                               <label for="exampleInputEmail1">Email</label>
-                              <input placeholder="Enter Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                              <input placeholder="Enter Email" type="email" name='Email' class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                            </div>
                            <div class="form-group">
                               <label for="exampleInputPassword1">Password</label>
-                              <input placeholder="Enter Password" type="password" class="form-control" id="exampleInputPassword1">
+                              <input placeholder="Enter Password" type="password" name='Password1' class="form-control" id="exampleInputPassword1">
                            </div>
                            <div class="form-group">
                               <label for="exampleInputPassword2">Confirmation Password</label>
-                              <input placeholder="Enter Confirmation Password" type="password" class="form-control" id="exampleInputPassword2">
+                              <input placeholder="Enter Confirmation Password" type="password" name='Password2' class="form-control" id="exampleInputPassword2">
                            </div>
+                           <p style="color:#FF0000;" class="small mb-4">{{Error}}</p>
                            <button type="submit" class="btn btn-success rounded btn-lg btn-block">Create Account</button>
                         </form>
+                        <if condition="$Error == 101">
+                           <span style="color:#FF0000;" class="small mb-4">User name too long!</span>
+                        <else/>
+                           <span style="color:#FF0000;" class="small mb-4">cxt</span>
+                        </if>
                         <p class="text-muted text-center small py-2 m-0">or</p>
                         <a href="/verification/" class="btn btn-dark btn-block rounded btn-lg btn-apple">
                         <i class="icofont-brand-apple mr-2"></i> Sign up with Apple

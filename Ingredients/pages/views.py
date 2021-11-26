@@ -198,7 +198,7 @@ def login(request):
   else:
     return render(request, 'home.html', {'content': 102})
 
-def signup(request):
+def signup1(request):
   """
   This is the function for signup:
     Input from front-end:
@@ -232,18 +232,19 @@ def signup(request):
     email_valid = True
   except ValidationError:
     email_valid = False
-  if len(name) > 45:
-    return render(request, {'Error': 101})
+  print(name, password_1, password_2, email, Phone_number)
+  if name == '' or len(name) > 45:
+    return render(request, 'signup.html', {'Error': 101})
   elif user.objects.filter(User_Name__exact = name):
-    return render(request, {'Error': 102})
-  elif len(password_1) < 8:
-    return render(request, {'Error': 103})
+    return render(request, 'signup.html', {'Error': 102})
+  elif password_1 == '' or len(password_1) < 8:
+    return render(request, 'signup.html', {'Error': 103})
   elif password_1 != password_2:
-    return render(request, {'Error': 104})
-  elif len(Phone_number) < 10 or len(Phone_number > 15):
-    return render(request, {'Error': 105})
+    return render(request, 'signup.html', {'Error': 104})
+  elif Phone_number == '' or len(Phone_number) < 10 or len(Phone_number > 15):
+    return render(request, 'signup.html', {'Error': 105})
   elif email_valid == False:
-    return render(request, {'Error': 106})
+    return render(request, 'signup.html', {'Error': 106})
   else:
     new_user = user(User_Name = name, Password = password_2, Email = email, Phone_Number = int(Phone_number))
     new_user.save()

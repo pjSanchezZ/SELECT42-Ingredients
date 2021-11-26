@@ -40,4 +40,5 @@ urlpatterns = [
     url(r'^details/', views.details),
     url(r'^list/', views.list_test),
     url(r'^login/', views.login),
+    url(r'^signup1/', views.signup1),
 ]
