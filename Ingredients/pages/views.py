@@ -69,7 +69,7 @@ def search(request):
   return  render(request, 'search.html')
 
 def signin(request):
-  return  render(request, 'signin.html')
+  return  render(request, 'signin.html', {'content': 102})
 
 def signup(request):
   return  render(request, 'signup.html')
@@ -191,9 +191,9 @@ def login(request):
   username = request.GET.get("username")
   password = request.GET.get("password")
   print(username, password)
-  if(not (user.objects.filter(User_Name__exact = username))):
+  if(username == '' or not (user.objects.filter(User_Name__exact = username))):
     return render(request, 'signin.html', {'content': 100})
-  elif(not user.objects.filter(User_Name__exact = username).filter(Password__exact = password)):
+  elif(password == '' or not user.objects.filter(User_Name__exact = username).filter(Password__exact = password)):
     return render(request, 'signin.html', {'content': 101})
   else:
     return render(request, 'home.html', {'content': 102})
@@ -241,7 +241,7 @@ def signup1(request):
     return render(request, 'signup.html', {'Error': 103})
   elif password_1 != password_2:
     return render(request, 'signup.html', {'Error': 104})
-  elif Phone_number == '' or len(Phone_number) < 10 or len(Phone_number > 15):
+  elif Phone_number == '' or len(Phone_number) < 10 or len(Phone_number) > 15:
     return render(request, 'signup.html', {'Error': 105})
   elif email_valid == False:
     return render(request, 'signup.html', {'Error': 106})

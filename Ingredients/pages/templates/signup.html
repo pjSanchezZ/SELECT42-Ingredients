@@ -126,14 +126,22 @@
                               <label for="exampleInputPassword2">Confirmation Password</label>
                               <input placeholder="Enter Confirmation Password" type="password" name='Password2' class="form-control" id="exampleInputPassword2">
                            </div>
-                           <p style="color:#FF0000;" class="small mb-4">{{Error}}</p>
                            <button type="submit" class="btn btn-success rounded btn-lg btn-block">Create Account</button>
                         </form>
-                        <if condition="$Error == 101">
-                           <span style="color:#FF0000;" class="small mb-4">User name too long!</span>
-                        <else/>
-                           <span style="color:#FF0000;" class="small mb-4">cxt</span>
-                        </if>
+                        {% if Error == 0 %}
+                        {% elif Error == 101 %}
+                           <span style="color:#FF0000;" class="small mb-4">Username is empty or too long!</span>
+                        {% elif Error == 102 %}
+                           <span style="color:#FF0000;" class="small mb-4">Username already exists!</span>
+                        {% elif Error == 103 %}
+                           <span style="color:#FF0000;" class="small mb-4">Password is empty or too short!</span>
+                        {% elif Error == 104 %}
+                           <span style="color:#FF0000;" class="small mb-4">Password doesn't match!</span>
+                        {% elif Error == 105 %}
+                           <span style="color:#FF0000;" class="small mb-4">Phone number incorrect!</span>
+                        {% elif Error == 106 %}
+                           <span style="color:#FF0000;" class="small mb-4">Email address incorrect!</span>
+                        {% endif %}
                         <p class="text-muted text-center small py-2 m-0">or</p>
                         <a href="/verification/" class="btn btn-dark btn-block rounded btn-lg btn-apple">
                         <i class="icofont-brand-apple mr-2"></i> Sign up with Apple

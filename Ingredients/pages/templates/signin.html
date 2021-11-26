@@ -107,13 +107,19 @@
                         <p class="small mb-4">Sign in to Continue.</p>
                         <form action="/login/">
                            <div class="form-group">
-                              <label for="exampleInputEmail1">Email</label>
-                              <input placeholder="Enter Email" name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                              <label for="exampleInputEmail1">Username</label>
+                              <input placeholder="Enter Username" name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                            </div>
                            <div class="form-group">
                               <label for="exampleInputPassword1">Password</label>
                               <input placeholder="Enter Password" name="password" type="password" class="form-control" id="exampleInputPassword1">
                            </div>
+                           {% if content == 102 %}
+                           {% elif content == 100 %}
+                              <span style="color:#FF0000;" class="small mb-4">Username is empty or doesn't exists!</span>
+                           {% elif content == 101 %}
+                              <span style="color:#FF0000;" class="small mb-4">Password is empty or incorrect!</span>
+                           {% endif %}
                            <button type="submit" class="btn btn-success btn-lg rounded btn-block">Sign in</button>
                         </form>
                         <p class="text-muted text-center small m-0 py-3">or</p>
