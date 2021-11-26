@@ -127,6 +127,7 @@ class recipe_ingredients(models.Model):
       return self.Recipe_Id
 
 class recipe_images(models.Model):
+  id = models.IntegerField(primary_key=True, blank=False)
   Recipe_Id = models.ForeignKey('recipe', on_delete=CASCADE, db_column='Recipe_Id')
   Image = models.URLField()
 
