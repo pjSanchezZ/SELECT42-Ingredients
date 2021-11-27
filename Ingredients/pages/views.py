@@ -192,8 +192,7 @@ def login(request):
         - if the user name can't be found, return content = 100
         - if the user name can be found, but the password is incorrect, return content = 101
         - login succeeded, return content = 102.
-    TO BE DETERMINED:
-      if the user login in successfully, the website will jump to 'TBD.html'.
+      if the user login in successfully, the website will jump to 'home.html'.
   """
   global username 
   username = request.GET.get("username")
@@ -261,6 +260,17 @@ def signup1(request):
   
 
 def cart(request):
+  """
+  This is a function for displaying want is already in the cart
+    Output to front-end:
+      1. Error: 
+        - 100: the user hasn't log in yet, so the website will be redirected to the sign up page. But notations are needed.
+    TODO:
+      1. give some notations or signs if the user clicked on the cart button without logging in. Currently, if the user clicks on the cart button without logging in, the web will jump to sign up page, which is a bit weird and not user-friendly.
+  """
+  if username=='':
+    return render(request, 'signin.html', {'Error': 100})
+  
   list_result = list(product_info.objects.filter(Product_Name__icontains='apple juice').values())
   count_of_items = len(list_result)
   print(count_of_items)
