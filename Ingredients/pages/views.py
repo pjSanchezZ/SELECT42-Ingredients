@@ -268,10 +268,11 @@ def cart(request):
     TODO:
       1. give some notations or signs if the user clicked on the cart button without logging in. Currently, if the user clicks on the cart button without logging in, the web will jump to sign up page, which is a bit weird and not user-friendly.
   """
+  global username
   if username=='':
     return render(request, 'signin.html', {'Error': 100})
   
-  global username
+  
   list_result = list(product_info.objects.filter(Product_Name__icontains='apple juice').values())
   count_of_items = len(list_result)
   print(count_of_items)

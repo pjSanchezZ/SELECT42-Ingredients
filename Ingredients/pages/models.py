@@ -99,8 +99,6 @@ class wanted_item(models.Model):
   Quantity = models.IntegerField()
   Date = DateTimeField(auto_now=True)
 
-  class Meta:
-    unique_together =(('User_Name', 'Product_Id'),)
   
   def __str__(self):
     return self.Product_Id
