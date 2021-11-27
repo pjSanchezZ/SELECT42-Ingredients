@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from pages.models import *
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 # Create your views here.
 
 def home(request):
@@ -67,7 +69,7 @@ def search(request):
   return  render(request, 'search.html')
 
 def signin(request):
-  return  render(request, 'signin.html')
+  return  render(request, 'signin.html', {'content': 102})
 
 def signup(request):
   return  render(request, 'signup.html')
@@ -168,3 +170,86 @@ def details(request):
   search_result = [{'Product_Id': '101484506', 'Product_Name': 'Granny Smith Apple', 'Price': 0.99, 'Type_Id': '54\r', 'Seller_Id': 'Schnucks2', 'Description': 'Apples', 'Image': 'https://storage.cloud.google.com/select_42/product_img/101484506.png'}, {'Product_Id': '10771038646', 'Product_Name': 'Good & Gather Passion Fruit Pineapple Chunks, Dragon Fruit Chunks, Passion Fruit Juice & Mango Puree Blended Cubes Tropical Blend', 'Price': 4.99, 'Type_Id': '73\r', 'Seller_Id': 
 'Target0', 'Description': 'Ingredients,Pineapple, Dragon Fruit, Passion Fruit Juice, Mango Puree.', 'Image': 'https://storage.cloud.google.com/select_42/product_img/10771038646.png'}]
   return render(request, 'product_details.html', {'content': search_result})
+
+username = ''
+
+def login(request):
+  """
+  This is the function for login.
+    Input from front-end:
+      1. 'User_Name'
+      2. 'Password'
+    Output to front-end:
+      1. 'content':
+        - if the user name can't be found, return content = 100
+        - if the user name can be found, but the password is incorrect, return content = 101
+        - login succeeded, return content = 102.
+    TO BE DETERMINED:
+      if the user login in successfully, the website will jump to 'TBD.html'.
+  """
+  global username 
+  username = request.GET.get("username")
+  password = request.GET.get("password")
+  print(username, password)
+  if(username == '' or not (user.objects.filter(User_Name__exact = username))):
+    return render(request, 'signin.html', {'content': 100})
+  elif(password == '' or not user.objects.filter(User_Name__exact = username).filter(Password__exact = password)):
+    return render(request, 'signin.html', {'content': 101})
+  else:
+    return render(request, 'home.html', {'content': 102})
+
+def signup1(request):
+  """
+  This is the function for signup:
+    Input from front-end:
+      1. 'User_Name'
+      2. 'Password1'
+      3. 'Password2'
+        - the password should be entered twice and they should match.
+      4. 'Email'
+      5. 'Phone_number'
+    Output to front-end:
+      1. 'Error':
+        - 101: User name is too long, it should be less than 45 characters.
+        - 102: User name already exists.
+        - 103: Password is too short, it should be at least 8 characters.
+        - 104: The 2 Passwords doesn't match
+        - 105: Invalid phone number
+        - 106: Invalid email
+        - 0: Suceed:
+          -- Store the user info to database
+          -- auto log in with the newly created user.
+          -- jump to \home.html.
+  """
+  global username
+  name = request.GET.get('User_Name')
+  password_1 = request.GET.get('Password1')
+  password_2 = request.GET.get('Password2')
+  email = request.GET.get('Email')
+  Phone_number = request.GET.get('Phone_number')
+  try:
+    validate_email(email)
+    email_valid = True
+  except ValidationError:
+    email_valid = False
+  print(name, password_1, password_2, email, Phone_number)
+  if name == '' or len(name) > 45:
+    return render(request, 'signup.html', {'Error': 101})
+  elif user.objects.filter(User_Name__exact = name):
+    return render(request, 'signup.html', {'Error': 102})
+  elif password_1 == '' or len(password_1) < 8:
+    return render(request, 'signup.html', {'Error': 103})
+  elif password_1 != password_2:
+    return render(request, 'signup.html', {'Error': 104})
+  elif Phone_number == '' or len(Phone_number) < 10 or len(Phone_number) > 15:
+    return render(request, 'signup.html', {'Error': 105})
+  elif email_valid == False:
+    return render(request, 'signup.html', {'Error': 106})
+  else:
+    new_user = user(User_Name = name, Password = password_2, Email = email, Phone_Number = int(Phone_number))
+    new_user.save()
+    username = name
+    return render(request, 'home.html', {'Error': 0})
+    
+  
+

@@ -9,6 +9,8 @@ from django.db.models.fields.related import ForeignKey
 # Create your models here.
 class user(models.Model):
   User_Name = models.CharField(max_length = 50, primary_key = True)
+  Password = models.CharField(max_length = 25, blank=True)
+  Photo = models.ImageField(null=True, blank = True)
   First_Name = models.CharField(max_length = 25)
   Last_Name = models.CharField(max_length = 25)
   Email = models.EmailField()
