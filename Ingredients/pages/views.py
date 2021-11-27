@@ -261,6 +261,7 @@ def signup1(request):
   
 
 def cart(request):
+  global username
   list_result = list(product_info.objects.filter(Product_Name__icontains='apple juice').values())
   count_of_items = len(list_result)
   print(count_of_items)
@@ -281,6 +282,7 @@ def cart(request):
     page_number = (int)(page_number)
   
   return render(request, 'cart.html', {
+      'user_name': username,
       'count_of_items': count_of_items, 
       'count_of_things': count_of_things,
       # 'info_of_item': list_result,
