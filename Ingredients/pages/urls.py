@@ -42,6 +42,12 @@ urlpatterns = [
     url(r'^find/', views.search_test),
     url(r'^range/', views.ranger),
     url(r'^details/', views.details),
+<<<<<<< HEAD
     url(r'^list/', views.listing_search),
     url(r'^try/', views.try_search),
+=======
+    url(r'^list/', views.list_test),
+    url(r'^login/', views.login),
+    url(r'^signup1/', views.signup1),
+>>>>>>> main
 ]

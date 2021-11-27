@@ -9,6 +9,8 @@ from django.db.models.fields.related import ForeignKey
 # Create your models here.
 class user(models.Model):
   User_Name = models.CharField(max_length = 50, primary_key = True)
+  Password = models.CharField(max_length = 25, blank=True)
+  Photo = models.ImageField(null=True, blank = True)
   First_Name = models.CharField(max_length = 25)
   Last_Name = models.CharField(max_length = 25)
   Email = models.EmailField()
@@ -109,7 +111,7 @@ class test_image(models.Model):
 class recipe(models.Model):
   Recipe_Id = models.CharField(max_length=50, primary_key=True)
   Source_Url = models.URLField(null=True, blank=True)
-  Title = models.CharField(max_length=100, null=True)
+  Title = models.TextField(blank=True, null=True)
   Instruction = models.TextField(null=True, blank=True)
 
   class Meta:
@@ -121,12 +123,13 @@ class recipe(models.Model):
 class recipe_ingredients(models.Model):
   Recipe_Id = models.ForeignKey('recipe', on_delete=CASCADE, db_column='Recipe_Id')
   Type_Id = models.ForeignKey('product_type', on_delete=CASCADE, db_column='Type_Id')
-  Ingredient = models.CharField(max_length=50)
+  Ingredient = models.CharField(max_length=250)
 
   def __str__(self):
       return self.Recipe_Id
 
 class recipe_images(models.Model):
+  id = models.IntegerField(primary_key=True, blank=False)
   Recipe_Id = models.ForeignKey('recipe', on_delete=CASCADE, db_column='Recipe_Id')
   Image = models.URLField()
 
