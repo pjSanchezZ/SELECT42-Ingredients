@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models.base import Model
 from django.db.models.deletion import CASCADE
-from django.db.models.fields import DateTimeField
+from django.db.models.fields import BooleanField, DateTimeField
 from django.db.models.fields.files import ImageField
 from django.db.models.fields.related import ForeignKey
 
@@ -98,7 +98,10 @@ class wanted_item(models.Model):
   Price = models.FloatField()
   Quantity = models.IntegerField()
   Date = DateTimeField(auto_now=True)
+  Valid = BooleanField()
 
+  class Meta:
+    unique_together =(('User_Name', 'Product_Id'),)
   
   def __str__(self):
     return self.Product_Id
@@ -109,7 +112,7 @@ class test_image(models.Model):
 class recipe(models.Model):
   Recipe_Id = models.CharField(max_length=50, primary_key=True)
   Source_Url = models.URLField(null=True, blank=True)
-  Title = models.TextField(blank=True, null=True)
+  Title = models.CharField(max_length=100, null=True)
   Instruction = models.TextField(null=True, blank=True)
 
   class Meta:
@@ -121,7 +124,7 @@ class recipe(models.Model):
 class recipe_ingredients(models.Model):
   Recipe_Id = models.ForeignKey('recipe', on_delete=CASCADE, db_column='Recipe_Id')
   Type_Id = models.ForeignKey('product_type', on_delete=CASCADE, db_column='Type_Id')
-  Ingredient = models.CharField(max_length=250)
+  Ingredient = models.CharField(max_length=50)
 
   def __str__(self):
       return self.Recipe_Id

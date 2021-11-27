@@ -271,7 +271,8 @@ def cart(request):
   global username
   if username=='':
     return render(request, 'signin.html', {'Error': 100})
-  
+  wanted_all = wanted_item.objects.filter(User_Name__exact = username).filter(Valid__exact = 1).values()
+  print(wanted_all)
   
   list_result = list(product_info.objects.filter(Product_Name__icontains='apple juice').values())
   count_of_items = len(list_result)
