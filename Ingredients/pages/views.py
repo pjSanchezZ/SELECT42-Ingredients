@@ -1,13 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from pages.models import *
-<<<<<<< HEAD
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-=======
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
->>>>>>> main
 # Create your views here.
 
 def home(request):
@@ -182,62 +179,6 @@ def details(request):
 'Target0', 'Description': 'Ingredients,Pineapple, Dragon Fruit, Passion Fruit Juice, Mango Puree.', 'Image': 'https://storage.cloud.google.com/select_42/product_img/10771038646.png'}]
   return render(request, 'product_details.html', {'content': search_result})
 
-<<<<<<< HEAD
-
-def cart(request):
-  list_result = list(product_info.objects.filter(Product_Name__icontains='apple juice').values())
-  count_of_items = len(list_result)
-  print(count_of_items)
-  sum_of_item = 0
-  count_of_things = 0
-  for i in range(count_of_items):
-    list_result[i]['Count'] = (i + 1) % 3 + 1
-    list_result[i]['Total_Price'] = round(list_result[i]['Count'] * list_result[i]['Price'], 2)
-    sum_of_item += list_result[i]['Total_Price']
-    count_of_things += list_result[i]['Count']
-  
-  paginator = Paginator(list_result, 10)  # Show 10 contacts per page.
-  page_number = request.GET.get('page')
-  page_obj = paginator.get_page(page_number)
-  total_page = paginator.num_pages
-
-  if page_number:
-    page_number = (int)(page_number)
-  
-  return render(request, 'cart.html', {
-      'count_of_items': count_of_items, 
-      'count_of_things': count_of_things,
-      # 'info_of_item': list_result,
-      'sum_of_item': round(sum_of_item, 2),
-      'page_obj': page_obj,
-      'curr_page': page_number,
-      'total_page': total_page,
-      'range': paginator.page_range
-      })
-
-
-def try_search(request):
-
-  list_result = product_info.objects.filter(
-      Product_Name__icontains='apple juice').values()
-  
-  paginator = Paginator(list_result, 3)  # Show 10 contacts per page.
-
-  page_number = request.GET.get('page')
-  page_obj = paginator.get_page(page_number)
-  total_page = paginator.num_pages
-  print(page_obj.count, ', ', page_number, '/', total_page)
-
-  if page_number:
-    page_number = (int)(page_number)  # page_number本来是string型
-
-  return render(request, 'try.html', {
-        'page_obj': page_obj,
-        'curr_page': page_number,
-        'total_page': total_page,
-        'range': paginator.page_range
-        })
-=======
 username = ''
 
 def login(request):
@@ -317,7 +258,62 @@ def signup1(request):
     new_user.save()
     username = name
     return render(request, 'home.html', {'Error': 0})
+  
+
+def cart(request):
+  list_result = list(product_info.objects.filter(Product_Name__icontains='apple juice').values())
+  count_of_items = len(list_result)
+  print(count_of_items)
+  sum_of_item = 0
+  count_of_things = 0
+  for i in range(count_of_items):
+    list_result[i]['Count'] = (i + 1) % 3 + 1
+    list_result[i]['Total_Price'] = round(list_result[i]['Count'] * list_result[i]['Price'], 2)
+    sum_of_item += list_result[i]['Total_Price']
+    count_of_things += list_result[i]['Count']
+  
+  paginator = Paginator(list_result, 10)  # Show 10 contacts per page.
+  page_number = request.GET.get('page')
+  page_obj = paginator.get_page(page_number)
+  total_page = paginator.num_pages
+
+  if page_number:
+    page_number = (int)(page_number)
+  
+  return render(request, 'cart.html', {
+      'count_of_items': count_of_items, 
+      'count_of_things': count_of_things,
+      # 'info_of_item': list_result,
+      'sum_of_item': round(sum_of_item, 2),
+      'page_obj': page_obj,
+      'curr_page': page_number,
+      'total_page': total_page,
+      'range': paginator.page_range
+      })
+
+
+def try_search(request):
+
+  list_result = product_info.objects.filter(
+      Product_Name__icontains='apple juice').values()
+  
+  paginator = Paginator(list_result, 3)  # Show 10 contacts per page.
+
+  page_number = request.GET.get('page')
+  page_obj = paginator.get_page(page_number)
+  total_page = paginator.num_pages
+  print(page_obj.count, ', ', page_number, '/', total_page)
+
+  if page_number:
+    page_number = (int)(page_number)  # page_number本来是string型
+
+  return render(request, 'try.html', {
+        'page_obj': page_obj,
+        'curr_page': page_number,
+        'total_page': total_page,
+        'range': paginator.page_range
+        })
+
     
   
 
->>>>>>> main
