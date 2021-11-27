@@ -94,7 +94,7 @@ class nutrition_table(models.Model):
 
 class wanted_item(models.Model):
   User_Name = models.ForeignKey('user', on_delete=models.CASCADE, db_column='User_Name')
-  Product_Id = models.ForeignKey('product_info', on_delete=models.CASCADE, db_column='product_info')
+  Product_Id = models.ForeignKey('product_info', on_delete=models.CASCADE, db_column='Product_Id')
   Price = models.FloatField()
   Quantity = models.IntegerField()
   Date = DateTimeField(auto_now=True)
@@ -104,7 +104,7 @@ class wanted_item(models.Model):
     unique_together =(('User_Name', 'Product_Id'),)
   
   def __str__(self):
-    return self.Product_Id
+    return str(self.Product_Id)
 
 class test_image(models.Model):
   img = ImageField()

@@ -262,30 +262,43 @@ def signup1(request):
 def cart(request):
   """
   This is a function for displaying want is already in the cart
+    Parameters:
+      1. display_num: determine the num of items on every page.
+      
     Output to front-end:
       1. Error: 
         - 100: the user hasn't log in yet, so the website will be redirected to the sign up page. But notations are needed.
     TODO:
       1. give some notations or signs if the user clicked on the cart button without logging in. Currently, if the user clicks on the cart button without logging in, the web will jump to sign up page, which is a bit weird and not user-friendly.
-  """
+  """ 
+
+  display_num = 10
   global username
   if username=='':
     return render(request, 'signin.html', {'Error': 100})
-  wanted_all = wanted_item.objects.filter(User_Name__exact = username).filter(Valid__exact = 1).values()
-  print(wanted_all)
-  
-  list_result = list(product_info.objects.filter(Product_Name__icontains='apple juice').values())
-  count_of_items = len(list_result)
-  print(count_of_items)
-  sum_of_item = 0
+  # wanted_all is a list of dictionaries
+  wanted_all = list(wanted_item.objects.filter(User_Name__exact = 'XutaoC').filter(Valid__exact = 1).values())
+  sum_of_item = len(wanted_all)
   count_of_things = 0
-  for i in range(count_of_items):
-    list_result[i]['Count'] = (i + 1) % 3 + 1
-    list_result[i]['Total_Price'] = round(list_result[i]['Count'] * list_result[i]['Price'], 2)
-    sum_of_item += list_result[i]['Total_Price']
-    count_of_things += list_result[i]['Count']
-  
-  paginator = Paginator(list_result, 10)  # Show 10 contacts per page.
+  total_cost = 0
+  product_list = []
+  product_count_dict = {}
+  product_cost_dict = {}
+  for cart_item in wanted_all:
+    product_list.append(cart_item['Product_Id_id'])
+    product_count_dict[cart_item['Product_Id_id']] = cart_item['Quantity']
+    product_cost_dict[cart_item['Product_Id_id']] = cart_item['Quantity']*cart_item['Price']
+    count_of_things += cart_item['Quantity']
+    total_cost += cart_item['Quantity']*cart_item['Price']
+  # cart is a list of dictionaries
+  cart = []
+  for product in product_list:
+    product_dict = list(product_info.objects.filter(Product_Id__exact = product).values())[0]
+    product_dict['Total_Price'] = round(product_cost_dict[product],2)
+    product_dict['Count'] = product_count_dict[product]
+    cart.append(product_dict)  
+
+  paginator = Paginator(cart, display_num)  # Show 10 contacts per page.
   page_number = request.GET.get('page')
   page_obj = paginator.get_page(page_number)
   total_page = paginator.num_pages
@@ -295,10 +308,10 @@ def cart(request):
   
   return render(request, 'cart.html', {
       'user_name': username,
-      'count_of_items': count_of_items, 
+      'count_of_items': sum_of_item, 
       'count_of_things': count_of_things,
       # 'info_of_item': list_result,
-      'sum_of_item': round(sum_of_item, 2),
+      'sum_of_item': round(total_cost, 2),
       'page_obj': page_obj,
       'curr_page': page_number,
       'total_page': total_page,
@@ -308,6 +321,11 @@ def cart(request):
 
 def try_search(request):
 
+  global username
+  # if username=='':
+  #   return render(request, 'signin.html', {'Error': 100})
+  # wanted_all = wanted_item.objects.filter(User_Name__exact = username).filter(Valid__exact = 1).values()
+  # print(list(wanted_all))
   list_result = product_info.objects.filter(
       Product_Name__icontains='apple juice').values()
   
