@@ -9,6 +9,9 @@ def home(request):
   return  render(request, 'home.html')
 
 def cart(request):
+  quantity = request.GET.get("quantity")
+  print("quantity:")
+  print(quantity)
   return  render(request, 'cart.html')
 
 def change_password(request):
@@ -46,9 +49,6 @@ def picks_today(request):
 
 def privacy(request):
   return  render(request, 'privacy.html')
-
-def product_details(request):
-  return  render(request, 'product_details.html')
 
 def promo_details(request):
   return  render(request, 'promo_details.html')
@@ -250,6 +250,9 @@ def signup1(request):
     new_user.save()
     username = name
     return render(request, 'home.html', {'Error': 0})
-    
   
+def product_details(request, productid = ''):
+  return render(request, 'product_details.html', {'product_id': productid})
 
+def mydate(requset, year, month, day):
+    return HttpResponse(str(year) + '-' + str(month) + '-' + str(day))

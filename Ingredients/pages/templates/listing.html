@@ -26,14 +26,14 @@
             <div class="row">
                <div class="col-md-6">
                   <ul class="l-top">
-                    <li><a href="/#"><i class="icofont-checked"></i> Accurate Weight</a></li>
-                    <li><a href="/#"><i class="icofont-checked"></i> Fresh & Fast</a></li>
-                    <li><a href="/#"><i class="icofont-checked"></i> Sorted Vegetables</a></li>
+                    <li><a href="#"><i class="icofont-checked"></i> Accurate Weight</a></li>
+                    <li><a href="#"><i class="icofont-checked"></i> Fresh & Fast</a></li>
+                    <li><a href="#"><i class="icofont-checked"></i> Sorted Vegetables</a></li>
                  </ul>
               </div>
                <div class="col-md-6">
                 <ul class="r-top">
-                    <li><a href="/#"><i class="icofont-headphone-alt"></i> Helpline : 910-313-1728</a></li>
+                    <li><a href="#"><i class="icofont-headphone-alt"></i> Helpline : 910-313-1728</a></li>
                  </ul>
                </div>
             </div>
@@ -51,7 +51,7 @@
                <span class="badge badge-danger p-1 ml-1 small">50%</span>
                </a>
             </p>
-            <a class="toggle ml-3" href="/#"><i class="icofont-navigation-menu"></i></a>
+            <a class="toggle ml-3" href="#"><i class="icofont-navigation-menu"></i></a>
          </div>
          <a href="/search/" class="text-decoration-none">
             <div class="input-group mt-3 rounded shadow-sm overflow-hidden bg-white">
@@ -79,7 +79,7 @@
             </button>
             <div class="ml-3 d-flex align-items-center">
                <div class="dropdown mr-3">
-                  <a class="text-dark dropdown-toggle d-flex align-items-center osahan-location-drop" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a class="text-dark dropdown-toggle d-flex align-items-center osahan-location-drop" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      <div><i class="icofont-location-pin d-flex align-items-center bg-light rounded-pill p-2 icofont-size border shadow-sm mr-2"></i></div>
                      <div>
                         <p class="text-muted mb-0 small">Select Location</p>
@@ -100,31 +100,31 @@
                      </form>
                      <div class="city pt-2">
                         <h6>Top Citys</h6>
-                        <p class="border-bottom m-0 py-1"><a href="/#" class="text-dark">Banglore</a></p>
-                        <p class="border-bottom m-0 py-1"><a href="/#" class="text-dark">Noida</a></p>
-                        <p class="border-bottom m-0 py-1"><a href="/#" class="text-dark">Delhi</a></p>
-                        <p class="m-0 py-1"><a href="/#" class="text-dark">Mumbai</a></p>
+                        <p class="border-bottom m-0 py-1"><a href="#" class="text-dark">Banglore</a></p>
+                        <p class="border-bottom m-0 py-1"><a href="#" class="text-dark">Noida</a></p>
+                        <p class="border-bottom m-0 py-1"><a href="#" class="text-dark">Delhi</a></p>
+                        <p class="m-0 py-1"><a href="#" class="text-dark">Mumbai</a></p>
                      </div>
                   </div>
                </div>
                <!-- search  -->
+               <form action="/list/">
                <div class="input-group mr-sm-2 col-lg-12">
-                  <form action="/list/">
                      <input type="text" class="form-control" name='list_key' id="inlineFormInputGroupUsername2" placeholder="Search for Products..">
-                  </form>
                   <div class="input-group-prepend">
-                     <div class="btn btn-success rounded-right"><i class="icofont-search"></i></div>
+                     <button type="submit" class="btn btn-success rounded-right"><i class="icofont-search"></i></button>
                   </div>
                </div>
+               </form>
             </div>
             <div class="ml-auto d-flex align-items-center">
                <!-- login/signup -->
-               <a href="/#" data-toggle="modal" data-target="#login" class="mr-2 text-dark bg-light rounded-pill p-2 icofont-size border shadow-sm">
+               <a href="#" data-toggle="modal" data-target="#login" class="mr-2 text-dark bg-light rounded-pill p-2 icofont-size border shadow-sm">
                <i class="icofont-login"></i>
                </a>
                <!-- my account -->
                <div class="dropdown mr-3">
-                  <a href="/#" class="dropdown-toggle text-dark" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a href="#" class="dropdown-toggle text-dark" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <img src="{% static 'img/user.png' %}" class="img-fluid rounded-circle header-user mr-2"> Hi Osahan
                   </a>
                   <div class="dropdown-menu dropdown-menu-right top-profile-drop" aria-labelledby="dropdownMenuButton">
@@ -139,7 +139,7 @@
                </div>
                <!-- notification -->
                <div class="dropdown">
-                  <a href="/#" class="text-dark dropdown-toggle not-drop" id="dropdownMenuNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a href="#" class="text-dark dropdown-toggle not-drop" id="dropdownMenuNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      <i class="icofont-notification d-flex align-items-center bg-light rounded-pill p-2 icofont-size border shadow-sm">
                         <!-- <p class="mt-n2 mb-0 font-weight-bold text-success">2</p> -->
                      </i>
@@ -195,7 +195,7 @@
                      <a class="nav-link text-white pl-0" href="/home/">Home <span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item dropdown">
-                     <a class="nav-link text-white dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      Products
                      </a>
                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -208,7 +208,7 @@
                      </div>
                   </li>
                   <li class="nav-item dropdown">
-                     <a class="nav-link text-white dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      Checkout Process
                      </a>
                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -218,7 +218,7 @@
                      </div>
                   </li>
                   <li class="nav-item dropdown">
-                     <a class="nav-link text-white dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      My Order
                      </a>
                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -230,7 +230,7 @@
                      </div>
                   </li>
                   <li class="nav-item dropdown">
-                     <a class="nav-link text-white dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      Extra Pages
                      </a>
                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -261,7 +261,7 @@
       <nav aria-label="breadcrumb" class="breadcrumb mb-0">
          <div class="container">
             <ol class="d-flex align-items-center mb-0 p-0">
-               <li class="breadcrumb-item"><a href="/#" class="text-success">Home</a></li>
+               <li class="breadcrumb-item"><a href="#" class="text-success">Home</a></li>
                <li class="breadcrumb-item active" aria-current="page">Listing</li>
             </ol>
          </div>
@@ -278,8 +278,8 @@
                            <!-- <form action="/range/">
                               <button type="submit" class="btn text-muted bg-white mr-2">Relavant</button>
                            </form> -->
-                           <a href="/#" data-toggle="modal" data-target="#exampleModal" class="btn text-muted bg-white mr-2"><i class="icofont-filter mr-1"></i> Filter</a>
-                           <a href="/#" data-toggle="modal" data-target="#exampleModal" class="btn text-muted bg-white"><i class="icofont-signal mr-1"></i> Sort</a>
+                           <a href="#" data-toggle="modal" data-target="#exampleModal" class="btn text-muted bg-white mr-2"><i class="icofont-filter mr-1"></i> Filter</a>
+                           <a href="#" data-toggle="modal" data-target="#exampleModal" class="btn text-muted bg-white"><i class="icofont-signal mr-1"></i> Sort</a>
                         </div>
                      </div>
                      <div class="row">
@@ -287,25 +287,13 @@
                         <div class="col-6 col-md-3 mb-3">
                            <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
                               <div class="list-card-image">
-                                 <a href="/product_details/" class="text-dark">
+                                 <a href="/product_details/{{i.Product_Id}}" class="text-dark">
                                     <div class="member-plan position-absolute"><span class="badge m-3 badge-danger">{{i.Seller_Id}}</span></div>
                                     <div class="p-3">
                                        <img src={{i.Image}} class="img-fluid item-img w-100 mb-3">
                                        <h6>{{i.Product_Name}}</h6>
                                        <div class="d-flex align-items-center">
                                           <h6 class="price m-0 text-success">${{i.Price}}</h6>
-                                 <a data-toggle="collapse" href="/#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1" class="btn btn-success btn-sm ml-auto">+</a>
-                                 <div class="collapse qty_show" id="collapseExample1">
-                                 <div>
-                                 <span class="ml-auto" href="/#">
-                                 <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                                 <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                                 <input type='text' name='quantity' value='1' class='qty form-control' />
-                                 <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                                 </form>   
-                                 </span>
-                                 </div>
-                                 </div>
                                  </div>
                                  </div>
                                  </a>
@@ -313,332 +301,6 @@
                            </div>
                         </div>
                         {% endfor %}
-                        <!-- <div class="col-6 col-md-3 mb-3">
-                           <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                              <div class="list-card-image">
-                                 <a href="/product_details/" class="text-dark">
-                                    <div class="member-plan position-absolute"><span class="badge m-3 badge-danger">5%</span></div>
-                                    <div class="p-3">
-                                       <img src="{% static 'img/listing/v2.jpg' %}" class="img-fluid item-img w-100 mb-3">
-                                       <h6>Onion</h6>
-                                       <div class="d-flex align-items-center">
-                                          <h6 class="price m-0 text-success">$1.8/kg</h6>
-                                 <a data-toggle="collapse" href="/#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2" class="btn btn-success btn-sm ml-auto">+</a>
-                                 <div class="collapse qty_show" id="collapseExample2">
-                                 <div>
-                                 <span class="ml-auto" href="/#">
-                                 <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                                 <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                                 <input type='text' name='quantity' value='1' class='qty form-control' />
-                                 <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                                 </form>   
-                                 </span>
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-6 col-md-3 mb-3">
-                           <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                              <div class="list-card-image">
-                                 <a href="/product_details/" class="text-dark">
-                                    <div class="member-plan position-absolute"><span class="badge m-3 badge-success">10%</span></div>
-                                    <div class="p-3">
-                                       <img src="{% static 'img/listing/v5.jpg' %}" class="img-fluid item-img w-100 mb-3">
-                                       <h6>Cauliflower</h6>
-                                       <div class="d-flex align-items-center">
-                                          <h6 class="price m-0 text-success">$1.8/kg</h6>
-                                 <a data-toggle="collapse" href="/#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3" class="btn btn-success btn-sm ml-auto">+</a>
-                                 <div class="collapse qty_show" id="collapseExample3">
-                                 <div>
-                                 <span class="ml-auto" href="/#">
-                                 <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                                 <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                                 <input type='text' name='quantity' value='1' class='qty form-control' />
-                                 <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                                 </form>   
-                                 </span>
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-6 col-md-3 mb-3">
-                           <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                              <div class="list-card-image">
-                                 <a href="/product_details/" class="text-dark">
-                                    <div class="member-plan position-absolute"><span class="badge m-3 badge-success">10%</span></div>
-                                    <div class="p-3">
-                                       <img src="{% static 'img/listing/v6.jpg' %}" class="img-fluid item-img w-100 mb-3">
-                                       <h6>Carrot</h6>
-                                       <div class="d-flex align-items-center">
-                                          <h6 class="price m-0 text-success">$0.8/kg</h6>
-                                 <a data-toggle="collapse" href="/#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4" class="btn btn-success btn-sm ml-auto">+</a>
-                                 <div class="collapse qty_show" id="collapseExample4">
-                                 <div>
-                                 <span class="ml-auto" href="/#">
-                                 <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                                 <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                                 <input type='text' name='quantity' value='1' class='qty form-control' />
-                                 <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                                 </form>   
-                                 </span>
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-6 col-md-3 mb-3">
-                           <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                              <div class="list-card-image">
-                                 <a href="/product_details/" class="text-dark">
-                                    <div class="member-plan position-absolute"><span class="badge m-3 badge-warning">5%</span></div>
-                                    <div class="p-3">
-                                       <img src="{% static 'img/listing/v3.jpg' %}" class="img-fluid item-img w-100 mb-3">
-                                       <h6>Tomato</h6>
-                                       <div class="d-flex align-items-center">
-                                          <h6 class="price m-0 text-success">$1/kg</h6>
-                                 <a class="ml-auto" href="/#">
-                                 <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                                 <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                                 <input type='text' name='quantity' value='1' class='qty form-control' />
-                                 <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                                 </form>   
-                                 </a>
-                                 </div>
-                                 </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-6 col-md-3 mb-3">
-                           <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                              <div class="list-card-image">
-                                 <a href="/product_details/" class="text-dark">
-                                    <div class="member-plan position-absolute"><span class="badge m-3 badge-warning">15%</span></div>
-                                    <div class="p-3">
-                                       <img src="{% static 'img/listing/v4.jpg' %}" class="img-fluid item-img w-100 mb-3">
-                                       <h6>Cabbage</h6>
-                                       <div class="d-flex align-items-center">
-                                          <h6 class="price m-0 text-success">$0.8/kg</h6>
-                                 <a data-toggle="collapse" href="/#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample5" class="btn btn-success btn-sm ml-auto">+</a>
-                                 <div class="collapse qty_show" id="collapseExample5">
-                                 <div>
-                                 <span class="ml-auto" href="/#">
-                                 <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                                 <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                                 <input type='text' name='quantity' value='1' class='qty form-control' />
-                                 <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                                 </form>   
-                                 </span>
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-6 col-md-3 mb-3">
-                           <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                              <div class="list-card-image">
-                                 <a href="/product_details/" class="text-dark">
-                                    <div class="member-plan position-absolute"><span class="badge m-3 badge-warning">5%</span></div>
-                                    <div class="p-3">
-                                       <img src="{% static 'img/listing/v7.jpg' %}" class="img-fluid item-img w-100 mb-3">
-                                       <h6>Star Anise</h6>
-                                       <div class="d-flex align-items-center">
-                                          <h6 class="price m-0 text-success">$2.5/kg</h6>
-                                 <a data-toggle="collapse" href="/#collapseExample6" role="button" aria-expanded="false" aria-controls="collapseExample6" class="btn btn-success btn-sm ml-auto">+</a>
-                                 <div class="collapse qty_show" id="collapseExample6">
-                                 <div>
-                                 <span class="ml-auto" href="/#">
-                                 <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                                 <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                                 <input type='text' name='quantity' value='1' class='qty form-control' />
-                                 <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                                 </form>   
-                                 </span>
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-6 col-md-3 mb-3">
-                           <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                              <div class="list-card-image">
-                                 <a href="/product_details/" class="text-dark">
-                                    <div class="member-plan position-absolute"><span class="badge m-3 badge-warning">15%</span></div>
-                                    <div class="p-3">
-                                       <img src="{% static 'img/listing/v8.jpg' %}" class="img-fluid item-img w-100 mb-3">
-                                       <h6>Brinjal</h6>
-                                       <div class="d-flex align-items-center">
-                                          <h6 class="price m-0 text-success">$0.8/kg</h6>
-                                 <a data-toggle="collapse" href="/#collapseExample7" role="button" aria-expanded="false" aria-controls="collapseExample7" class="btn btn-success btn-sm ml-auto">+</a>
-                                 <div class="collapse qty_show" id="collapseExample7">
-                                 <div>
-                                 <span class="ml-auto" href="/#">
-                                 <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                                 <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                                 <input type='text' name='quantity' value='1' class='qty form-control' />
-                                 <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                                 </form>   
-                                 </span>
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-6 col-md-3 mb-3">
-                           <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                              <div class="list-card-image">
-                                 <a href="/product_details/" class="text-dark">
-                                    <div class="member-plan position-absolute"><span class="badge m-3 badge-danger">5%</span></div>
-                                    <div class="p-3">
-                                       <img src="{% static 'img/listing/v9.jpg' %}" class="img-fluid item-img w-100 mb-3">
-                                       <h6>Capsicum</h6>
-                                       <div class="d-flex align-items-center">
-                                          <h6 class="price m-0 text-success">$2.5/kg</h6>
-                                 <a class="ml-auto" href="/#">
-                                 <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                                 <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                                 <input type='text' name='quantity' value='1' class='qty form-control' />
-                                 <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                                 </form>   
-                                 </a>
-                                 </div>
-                                 </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-6 col-md-3 mb-3">
-                           <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                              <div class="list-card-image">
-                                 <a href="/product_details/" class="text-dark">
-                                    <div class="member-plan position-absolute"><span class="badge m-3 badge-danger">5%</span></div>
-                                    <div class="p-3">
-                                       <img src="{% static 'img/listing/v10.jpg' %}" class="img-fluid item-img w-100 mb-3">
-                                       <h6>Lady Finger</h6>
-                                       <div class="d-flex align-items-center">
-                                          <h6 class="price m-0 text-success">$0.8/kg</h6>
-                                 <a data-toggle="collapse" href="/#collapseExample8" role="button" aria-expanded="false" aria-controls="collapseExample8" class="btn btn-success btn-sm ml-auto">+</a>
-                                 <div class="collapse qty_show" id="collapseExample8">
-                                 <div>
-                                 <span class="ml-auto" href="/#">
-                                 <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                                 <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                                 <input type='text' name='quantity' value='1' class='qty form-control' />
-                                 <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                                 </form>   
-                                 </span>
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-6 col-md-3 mb-3">
-                           <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                              <div class="list-card-image">
-                                 <a href="/product_details/" class="text-dark">
-                                    <div class="member-plan position-absolute"><span class="badge m-3 badge-success">10%</span></div>
-                                    <div class="p-3">
-                                       <img src="{% static 'img/listing/v11.jpg' %}" class="img-fluid item-img w-100 mb-3">
-                                       <h6>Garlic</h6>
-                                       <div class="d-flex align-items-center">
-                                          <h6 class="price m-0 text-success">$2.5/kg</h6>
-                                 <a data-toggle="collapse" href="/#collapseExample9" role="button" aria-expanded="false" aria-controls="collapseExample9" class="btn btn-success btn-sm ml-auto">+</a>
-                                 <div class="collapse qty_show" id="collapseExample9">
-                                 <div>
-                                 <span class="ml-auto" href="/#">
-                                 <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                                 <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                                 <input type='text' name='quantity' value='1' class='qty form-control' />
-                                 <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                                 </form>   
-                                 </span>
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-6 col-md-3 mb-3">
-                           <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                              <div class="list-card-image">
-                                 <a href="/product_details/" class="text-dark">
-                                    <div class="member-plan position-absolute"><span class="badge m-3 badge-success">10%</span></div>
-                                    <div class="p-3">
-                                       <img src="{% static 'img/listing/v12.jpg' %}" class="img-fluid item-img w-100 mb-3">
-                                       <h6>Ginger</h6>
-                                       <div class="d-flex align-items-center">
-                                          <h6 class="price m-0 text-success">$0.8/kg</h6>
-                                 <a data-toggle="collapse" href="/#collapseExample10" role="button" aria-expanded="false" aria-controls="collapseExample10" class="btn btn-success btn-sm ml-auto">+</a>
-                                 <div class="collapse qty_show" id="collapseExample10">
-                                 <div>
-                                 <span class="ml-auto" href="/#">
-                                 <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                                 <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                                 <input type='text' name='quantity' value='1' class='qty form-control' />
-                                 <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                                 </form>   
-                                 </span>
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-6 col-md-3 mb-3">
-                           <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                              <div class="list-card-image">
-                                 <a href="/product_details/" class="text-dark">
-                                    <div class="member-plan position-absolute"><span class="badge m-3 badge-success">10%</span></div>
-                                    <div class="p-3">
-                                       <img src="{% static 'img/listing/v12.jpg' %}" class="img-fluid item-img w-100 mb-3">
-                                       <h6>Ginger</h6>
-                                       <div class="d-flex align-items-center">
-                                          <h6 class="price m-0 text-success">$0.8/kg</h6>
-                                 <a data-toggle="collapse" href="/#collapseExample10" role="button" aria-expanded="false" aria-controls="collapseExample10" class="btn btn-success btn-sm ml-auto">+</a>
-                                 <div class="collapse qty_show" id="collapseExample10">
-                                 <div>
-                                 <span class="ml-auto" href="/#">
-                                 <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                                 <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                                 <input type='text' name='quantity' value='1' class='qty form-control' />
-                                 <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                                 </form>   
-                                 </span>
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div> -->
                      </div>
                   </div>
                </div>
@@ -649,7 +311,7 @@
          <ul class="second-nav">
             <li><a href="/home/"><i class="icofont-smart-phone mr-2"></i> Home</a></li>
             <li>
-               <a href="/#"><i class="icofont-login mr-2"></i> Authentication</a>
+               <a href="#"><i class="icofont-login mr-2"></i> Authentication</a>
                <ul>
                   <li><a class="dropdown-item" href="/signin/">Sign In</a></li>
                   <li><a class="dropdown-item" href="/signup/">Sign Up</a></li>
@@ -665,7 +327,7 @@
             <li><a class="dropdown-item" href="/checkout/">Checkout</a></li>
             <li><a class="dropdown-item" href="/successful/">Successful</a></li>
             <li>
-               <a href="/#"><i class="icofont-sub-listing mr-2"></i> My Order</a>
+               <a href="#"><i class="icofont-sub-listing mr-2"></i> My Order</a>
                <ul>
                   <li><a class="dropdown-item" href="/my_order/">My order</a></li>
                   <li><a class="dropdown-item" href="/status_complete/">Status Complete</a></li>
@@ -675,7 +337,7 @@
                </ul>
             </li>
             <li>
-               <a href="/#"><i class="icofont-ui-user mr-2"></i> My Account</a>
+               <a href="#"><i class="icofont-ui-user mr-2"></i> My Account</a>
                <ul>
                   <li><a class="dropdown-item" href="/my_account/">My account</a></li>
                   <li><a class="dropdown-item" href="/promos/">Promos</a></li>
@@ -687,7 +349,7 @@
                </ul>
             </li>
             <li>
-               <a href="/#"><i class="icofont-page mr-2"></i> Pages</a>
+               <a href="#"><i class="icofont-page mr-2"></i> Pages</a>
                <ul>
                   <li><a class="dropdown-item" href="/verification/">Verification</a></li>
                   <li><a class="dropdown-item" href="/promos/">Promos</a></li>
@@ -705,35 +367,35 @@
                </ul>
             </li>
             <li>
-               <a href="/#"><i class="icofont-link mr-2"></i> Navigation Link Example</a>
+               <a href="#"><i class="icofont-link mr-2"></i> Navigation Link Example</a>
                <ul>
                   <li>
-                     <a href="/#">Link Example 1</a>
+                     <a href="#">Link Example 1</a>
                      <ul>
                         <li>
-                           <a href="/#">Link Example 1.1</a>
+                           <a href="#">Link Example 1.1</a>
                            <ul>
-                              <li><a href="/#">Link</a></li>
-                              <li><a href="/#">Link</a></li>
-                              <li><a href="/#">Link</a></li>
-                              <li><a href="/#">Link</a></li>
-                              <li><a href="/#">Link</a></li>
+                              <li><a href="#">Link</a></li>
+                              <li><a href="#">Link</a></li>
+                              <li><a href="#">Link</a></li>
+                              <li><a href="#">Link</a></li>
+                              <li><a href="#">Link</a></li>
                            </ul>
                         </li>
                         <li>
-                           <a href="/#">Link Example 1.2</a>
+                           <a href="#">Link Example 1.2</a>
                            <ul>
-                              <li><a href="/#">Link</a></li>
-                              <li><a href="/#">Link</a></li>
-                              <li><a href="/#">Link</a></li>
-                              <li><a href="/#">Link</a></li>
+                              <li><a href="#">Link</a></li>
+                              <li><a href="#">Link</a></li>
+                              <li><a href="#">Link</a></li>
+                              <li><a href="#">Link</a></li>
                            </ul>
                         </li>
                      </ul>
                   </li>
-                  <li><a href="/#">Link Example 2</a></li>
-                  <li><a href="/#">Link Example 3</a></li>
-                  <li><a href="/#">Link Example 4</a></li>
+                  <li><a href="#">Link Example 2</a></li>
+                  <li><a href="#">Link Example 3</a></li>
+                  <li><a href="#">Link Example 4</a></li>
                   <li data-nav-custom-content>
                      <div class="custom-message">
                         You can add any custom content to your navigation items. This text is just an example.
@@ -811,23 +473,6 @@
                         <!-- Filter -->
                         <div class="p-3 bg-light border-bottom">
                            <h6 class="m-0">SELLER FILTER</h6>
-                        </div>
-                        <!-- Navigation bar -->
-                        
-                        <!-- Dropdown menu -->
-                        <div class="dropdown"> 
-                           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-                              <span class="caret"></span>
-                           </button>
-                           <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"> 
-                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">下拉菜单项</a>
-                              </li>
-                              <li role="presentation" class="divider">
-                              </li> 
-                              <li role="presentation">
-                              <a role="menuitem" tabindex="-1" href="#">下拉菜单项</a>
-                              </li> 
-                           </ul> 
                         </div>
                         <div class="custom-control border-bottom px-0  custom-checkbox">
                            <input type="checkbox" class="custom-control-input" id="defaultCheck1" name="ALDI" value=1 checked>
@@ -910,10 +555,10 @@
                      </form>
                   </div>
                   <div class="col-md-4 text-md-right">
-                     <a href="/#" class="btn btn-icon btn-light"><i class="icofont-facebook"></i></a>
-                     <a href="/#" class="btn btn-icon btn-light"><i class="icofont-twitter"></i></a>
-                     <a href="/#" class="btn btn-icon btn-light"><i class="icofont-instagram"></i></a>
-                     <a href="/#" class="btn btn-icon btn-light"><i class="icofont-youtube"></i></a>
+                     <a href="#" class="btn btn-icon btn-light"><i class="icofont-facebook"></i></a>
+                     <a href="#" class="btn btn-icon btn-light"><i class="icofont-twitter"></i></a>
+                     <a href="#" class="btn btn-icon btn-light"><i class="icofont-instagram"></i></a>
+                     <a href="#" class="btn btn-icon btn-light"><i class="icofont-youtube"></i></a>
                   </div>
                </div>
                <!-- row.// -->
@@ -1009,10 +654,10 @@
                <div class="modal-header p-0">
                   <nav class="schedule w-100">
                      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-link active col-5 py-4" id="nav-home-tab" data-toggle="tab" href="/#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
+                        <a class="nav-link active col-5 py-4" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
                            <p class="mb-0 font-weight-bold">Sign in</p>
                         </a>
-                        <a class="nav-link col-5 py-4" id="nav-profile-tab" data-toggle="tab" href="/#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
+                        <a class="nav-link col-5 py-4" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
                            <p class="mb-0 font-weight-bold">Sign up</p>
                         </a>
                         <a class="nav-link col-2 p-0 d-flex align-items-center justify-content-center" data-dismiss="modal" aria-label="Close">
@@ -1093,7 +738,7 @@
                </div>
                <div class="modal-footer p-0 border-0">
                   <div class="col-6 m-0 p-0">                 
-                     <a href="/#" class="btn border-top border-right btn-lg btn-block" data-dismiss="modal">Close</a>
+                     <a href="#" class="btn border-top border-right btn-lg btn-block" data-dismiss="modal">Close</a>
                   </div>
                   <div class="col-6 m-0 p-0">     
                      <a href="/help_support/" class="btn border-top btn-lg btn-block">Help</a>
