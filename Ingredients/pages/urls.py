@@ -36,9 +36,9 @@ urlpatterns = [
     url(r'^verification/', views.verification), 
     url(r'^home/', views.home),
     url(r'^find/', views.search_test),
-    url(r'^range/', views.range),
+    url(r'^range/', views.ranger),
     url(r'^details/', views.details),
-    url(r'^list/', views.list_test),
+    url(r'^list/', views.listing_search),
     url(r'^login/', views.login),
     url(r'^signup1/', views.signup1),
     url(r'^product_details/(?P<productid>\w{1,50})/$', views.product_details)
