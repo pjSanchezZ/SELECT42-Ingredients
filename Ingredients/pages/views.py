@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from pages.models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import View
+from pages.forms import select_testform
 
 # Create your views here.
 
@@ -212,15 +214,19 @@ def cart(request):
 
 def try_search(request):
 
+  quantity = request.GET.get("quantity")
+
+  print(quantity)
+
   list_result = product_info.objects.filter(
       Product_Name__icontains='apple juice').values()
   
-  paginator = Paginator(list_result, 3)  # Show 10 contacts per page.
+  paginator = Paginator(list_result, 10)  # Show 10 contacts per page.
 
   page_number = request.GET.get('page')
   page_obj = paginator.get_page(page_number)
   total_page = paginator.num_pages
-  print(page_obj.count, ', ', page_number, '/', total_page)
+  # print(page_obj.count, ', ', page_number, '/', total_page)
 
   if page_number:
     page_number = (int)(page_number)  # page_number本来是string型
@@ -229,5 +235,23 @@ def try_search(request):
         'page_obj': page_obj,
         'curr_page': page_number,
         'total_page': total_page,
-        'range': paginator.page_range
+        'range': paginator.page_range,
+        'quantity': quantity
         })
+
+
+class testview(View):
+  def get(self, request):
+    select_form = select_testform()
+    return render(request, 'try.html',{
+      'select_form': select_form,
+    })
+
+  def post(self, request):
+    select_form = select_testform(request.POST)
+    if select_form.is_valid():
+      get_value = request.POST.get('sel_value', "")
+      print(get_value)
+      print(1)
+    else:
+      print("wrong")

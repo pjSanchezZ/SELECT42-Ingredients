@@ -132,3 +132,12 @@ class recipe_images(models.Model):
 
   def __str__(self):
       return self.Recipe_Id
+
+
+class testmodel(models.Model):
+  SELVALUE = (
+    ('title', 'first'),
+    ('content', 'second'),
+    ('writer', 'third'),
+  )
+  select_value = models.CharField(max_length=10, choices=SELVALUE)
