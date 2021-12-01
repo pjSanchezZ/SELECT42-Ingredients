@@ -1,0 +1,112 @@
+<!-- {% load static %} -->
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>try</title>
+    <style>
+        ul.pagination {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+        }
+        ul.pagination li {display: inline;}
+        ul.pagination li a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        ul.pagination li a.active {
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+        }
+        ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+    </style>
+</head>
+
+<br><br>
+<input type='button' name='minus' value='-' field='quantity' onclick="" />
+<input type='text' name='quantity' value={{quantity}}>
+<input type='button' name='plus' value='+' field='quantity' />
+<br><br>
+
+<select name="quantity">
+    <option value="">請選擇數量</option>
+    <option value="1">1</option>
+    <option value="2" selected>2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5" disabled>5</option>
+    <option value="6">6</option>
+</select>
+
+<h2>test_form</h2>
+<form method="post" action="">
+    <select name="sel_value">
+        {% for key, value in select_form.SELVALUE %}
+            <option value="{{value}}"> {{key}} </option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="test"/>
+    {% csrf_token %}
+</form>
+
+<h2>简单的分页</h2>
+<ul class="pagination">
+    <li><a href="?page=1">«</a></li>
+    {% for idx in range %}
+        <li><a {% if idx == curr_page %} class="active" {% endif %} href="?page={{idx}}">{{idx}}</a></li>
+        
+    {% endfor %}
+
+    <li><a href="?page={{total_page}}">»</a></li>
+</ul>
+
+<div class="custom-control border-bottom px-0  custom-checkbox">
+    <input type="checkbox" class="custom-control-input" id="defaultCheck1" name="ALDI" value=1 checked>
+    <label class="custom-control-label py-3 w-100 px-3" for="defaultCheck1">ALDI</label>
+</div>
+
+
+<body>
+    {% for i in page_obj %}
+    <div>{{i.Seller_Id}}</div>
+    <div class="p-3">
+        <img src={{i.Image}} height="100" width="100">
+        <h6>{{i.Product_Name}}</h6>
+        <div>${{i.Price}}</div>
+    </div>
+    {% endfor %}
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</body>
+
+
+</html>
+
+
+
+
+

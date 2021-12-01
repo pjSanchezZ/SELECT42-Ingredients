@@ -3,6 +3,10 @@ from django.urls import path, re_path
 from django.urls.resolvers import URLPattern
 from django.conf.urls import include, url
 from . import views
+
+from django.conf.urls.static import static
+from django.conf import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 #URL config
 
 urlpatterns = [
