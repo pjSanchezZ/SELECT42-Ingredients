@@ -13,6 +13,7 @@ import random
 # Create your views here.
 
 temp_list_result = None
+username = ''
 
 def home(request):
   lucky_num = random.randint(0, 4)
@@ -65,8 +66,10 @@ def help_support(request):
   return  render(request, 'help_support.html')
 
 def listing(request):
-  print("listing:"+str(request.GET))
-  return  render(request, 'listing.html')
+  global username
+  return  render(request, 'listing.html',{
+      'user_name': username
+  })
 
 def my_account(request):
   print("my_account:"+str(request.GET))
@@ -89,6 +92,8 @@ def privacy(request):
   return  render(request, 'privacy.html')
 
 def product_details(request, productid = ''):
+  global username
+  print('product_details ', username)
   flag1 = 0
   flag2 = 0
   product_Name = ''
@@ -103,7 +108,7 @@ def product_details(request, productid = ''):
   sodium = ''
   total_Carbohydrate = ''
   protein = ''
-  print("product_details:"+str(request.GET))
+  # print("product_details:"+str(request.GET))
   table = seller.objects.filter(Seller_Id__icontains='cxtnb')
   list_result = table.none()
   nutrition_result = table.none()
@@ -169,7 +174,8 @@ def product_details(request, productid = ''):
       'Onion': Onion,
       'Cauliflower': Cauliflower,
       'Carrot': Carrot,
-      'Cabbage': Cabbage
+      'Cabbage': Cabbage,
+      'user_name': username
   })
 
 
@@ -185,6 +191,8 @@ def recipe_details(request, recipeid = ''):
         'ingredient_image_list': [image1, image2, image3, ...]
       }
   """
+  global username
+  print('recipe_details ', username)
   PRODUCT_DISPLAY_NUM = 3
   Recipe_Id = recipeid
   recipes = recipe.objects.filter(Recipe_Id__exact=Recipe_Id).values()
@@ -216,11 +224,13 @@ def recipe_details(request, recipeid = ''):
     image_list.append(image['Image'])
   # print(ingredient_name)
   # print(type_list)
+
   return render(request, 'recipe_details.html', {
         'product_dict': product_dict_list,
         'recipe': list(recipes)[0],
         'ingredient_name_list': ingredient_name,
         'ingredient_image_list': image_list,
+        'user_name': username
       })
 
 
@@ -229,8 +239,11 @@ def promos(request):
   return  render(request, 'promos.html')
 
 def recommend(request):
-  print("recommend:"+str(request.GET))
-  return  render(request, 'recommend.html')
+  global username
+  print('recommend ', username)
+  return  render(request, 'recommend.html', {
+      'user_name': username
+  })
 
 def refund_payment(request):
   print("refund_payment:"+str(request.GET))
@@ -374,9 +387,13 @@ def ranger(request):
   page_obj = paginator.get_page(page_number)
   #print('Page:', page_number)
 
+  global username
+  print('ranger', username)
+
   return render(request, 'listing.html', {
     'page_obj': page_obj, 
-    'content': list_result
+    'content': list_result,
+    'user_name': username
     })
 
 
@@ -386,7 +403,7 @@ def listing_search(request):
   # print("listing_search:"+"list_content:"+list_content)
   list_content = request.GET.get("list_key")
   list_result = product_info.objects.filter(Product_Name__icontains=list_content)
-  print(list_content)
+  # print(list_content)
   paginator = Paginator(list_result, 12)  # Show 10 contacts per page.
   page_number = request.GET.get('page')
   page_obj = paginator.get_page(page_number)
@@ -395,6 +412,8 @@ def listing_search(request):
     page_number = (int)(page_number)
 
   print('Page:', page_number)
+  global username
+  print('listing_search', username)
 
   return render(request, 'listing.html', {
     'page_obj': page_obj, 
@@ -402,7 +421,8 @@ def listing_search(request):
     'range': paginator.page_range,
     'total_page': paginator.num_pages,
     'curr_page': page_number,
-    'search_key': list_content
+    'search_key': list_content,
+    'user_name': username
     })
 
 def details(request):
@@ -412,8 +432,6 @@ def details(request):
   search_result = [{'Product_Id': '101484506', 'Product_Name': 'Granny Smith Apple', 'Price': 0.99, 'Type_Id': '54\r', 'Seller_Id': 'Schnucks2', 'Description': 'Apples', 'Image': 'https://storage.cloud.google.com/select_42/product_img/101484506.png'}, {'Product_Id': '10771038646', 'Product_Name': 'Good & Gather Passion Fruit Pineapple Chunks, Dragon Fruit Chunks, Passion Fruit Juice & Mango Puree Blended Cubes Tropical Blend', 'Price': 4.99, 'Type_Id': '73\r', 'Seller_Id': 
 'Target0', 'Description': 'Ingredients,Pineapple, Dragon Fruit, Passion Fruit Juice, Mango Puree.', 'Image': 'https://storage.cloud.google.com/select_42/product_img/10771038646.png'}]
   return render(request, 'product_details.html', {'content': search_result})
-
-username = ''
 
 def login(request):
   """
@@ -508,6 +526,7 @@ def cart(request):
 
   display_num = 8
   global username
+  print(username)
   if username=='':
     return render(request, 'signin.html', {'Error': 100})
   # wanted_all is a list of dictionaries
@@ -519,7 +538,7 @@ def cart(request):
   product_count_dict = {}
   product_cost_dict = {}
   for cart_item in wanted_all:
-    print(cart_item)
+    # print(cart_item)
     product_list.append(cart_item['Product_Id'])
     product_count_dict[cart_item['Product_Id']] = cart_item['Quantity']
     product_cost_dict[cart_item['Product_Id']] = cart_item['Quantity']*cart_item['Price']
@@ -570,6 +589,8 @@ def recipe_search(request):
          - ingredients: a list of strings, [ingredient1, ingredient2, ingredient3,...]
          - recipe_image: a list of images, [image_url1, image_url12, image_url3, ...]
   """
+  global username
+  print('recipe_search ', username)
   list_content = request.GET.get("recipt_search_key")
   # print(list_content)
   list_result = recipe.objects.filter(Title__icontains = list_content).values()[:100]
@@ -610,7 +631,8 @@ def recipe_search(request):
     'curr_page': page_number,
     'total_page': total_page,
     'range': paginator.page_range,
-    'search_key': list_content
+    'search_key': list_content,
+    'user_name': username
     })
 
 '''

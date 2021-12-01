@@ -123,7 +123,12 @@
                <!-- my account -->
                <div class="dropdown mr-3">
                   <a href="/#" class="dropdown-toggle text-dark" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <img src="{% static 'img/user.png' %}" class="img-fluid rounded-circle header-user mr-2"> Hi Osahan
+                  <img src="{% static 'img/user.png' %}" class="img-fluid rounded-circle header-user mr-2">
+                  {% if user_name %}
+                     Hi {{user_name}}!
+                  {% else %}
+                     Hi Visitor!
+                  {% endif %}
                   </a>
                   <div class="dropdown-menu dropdown-menu-right top-profile-drop" aria-labelledby="dropdownMenuButton">
                      <a class="dropdown-item" href="/my_account/">My account</a>
