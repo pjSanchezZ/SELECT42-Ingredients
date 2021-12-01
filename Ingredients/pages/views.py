@@ -125,21 +125,32 @@ def product_details(request, productid = ''):
 
 
 def recipe_details(request):
-  Recipe_Id = "1089"
+  """
+    Output to front-end:
+      {
+        'ingredient_list': [],
+      }
+  """
+  Recipe_Id = "10890"
   ingredient_list = list(product_info.objects.filter(Product_Name__icontains="pork").values())
   recipe_list = list(recipe.objects.filter(
       Recipe_Id__exact=Recipe_Id).values())[0]
-  ingredient_name_list = list(recipe_ingredients.objects.filter(
-      Recipe_Id__exact=Recipe_Id).values())
-  ingredient_image_list = list(
-      recipe_images.objects.filter(Recipe_Id__exact=Recipe_Id).values())
+  ingredient_name_list = recipe_ingredients.objects.filter(
+      Recipe_Id__exact=Recipe_Id).values()
+  ingredient_name = []
+  for name in ingredient_name_list:
+    ingredient_name.append(name['Ingredient'])
+  ingredient_image_list = recipe_images.objects.filter(Recipe_Id__exact=Recipe_Id).values()
+  image_list = []
+  for image in ingredient_image_list:
+    image_list.append(image['Image'])
   
-  print(recipe_list)
+  print(ingredient_name_list)
   return render(request, 'recipe_details.html', {
       'ingredient_list': ingredient_list,
       'recipe_list': recipe_list,
-      'ingredient_name_list': ingredient_name_list,
-      'ingredient_image_list': ingredient_image_list
+      'ingredient_name_list': ingredient_name,
+      'ingredient_image_list': image_list
     })
 
 
@@ -475,12 +486,12 @@ def recipe_search(request):
     new_item['title'] = result['Title']
     id = result['Recipe_Id']
     new_item['recipe_id'] = id
-    ingredients = recipe_ingredients.objects.filter(Recipe_Id__eq = id).values()
+    ingredients = recipe_ingredients.objects.filter(Recipe_Id__exact = id).values()
     ingredients_list = []
     for ingre in ingredients:
       ingredients_list.append(ingre['Ingredient'])
     new_item['ingredients'] = ingredients_list
-    images = recipe_images.objects.filter(Recipe_Id__eq = id).values()
+    images = recipe_images.objects.filter(Recipe_Id__exact = id).values()
     images_list = []
     for image in images:
       images_list.append(image)
@@ -488,3 +499,4 @@ def recipe_search(request):
     return_list.append(new_item)
     
   return render(request, 'recommend.html', {'content': return_list})
+
