@@ -108,12 +108,14 @@
                   </div>
                </div>
                <!-- search  -->
+               <form action="/recipelist/">
                <div class="input-group mr-sm-2 col-lg-12">
-                  <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Search for Products..">
+                     <input type="text" class="form-control" name='recipt_search_key' id="inlineFormInputGroupUsername2" placeholder="Search for Products..">
                   <div class="input-group-prepend">
-                     <div class="btn btn-success rounded-right"><i class="icofont-search"></i></div>
+                     <button type="submit" class="btn btn-success rounded-right"><i class="icofont-search"></i></button>
                   </div>
                </div>
+               </form>
             </div>
             <div class="ml-auto d-flex align-items-center">
                <!-- login/signup -->
@@ -271,13 +273,14 @@
                <div class="col-lg-12">
                   <div class="osahan-listing">
                      <div class="d-flex align-items-center mb-3">
-                        <h4>Recipts</h4>
+                        <h4>Recipes</h4>
                         <div class="m-0 text-center ml-auto">
                            <a href="#" data-toggle="modal" data-target="#exampleModal" class="btn text-muted bg-white mr-2"><i class="icofont-filter mr-1"></i> Filter</a>
                            <a href="#" data-toggle="modal" data-target="#exampleModal" class="btn text-muted bg-white"><i class="icofont-signal mr-1"></i> Sort</a>
                         </div>
                      </div>
                      <div class="row">
+                        {% for i in content %}
                         <div class="col-12 col-md-4 mb-3">
                            <a href="/product_details/" class="text-dark text-decoration-none">
                               <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
@@ -293,9 +296,9 @@
                                     </div>
                                  </div>
                                  <div class="p-3 position-relative">
-                                    <h6 class="mb-1 font-weight-bold text-success">Fresh Orange
+                                    <h6 class="mb-1 font-weight-bold text-success">{{i.Title}}
                                     </h6>
-                                    <p class="text-muted">Orange Great Quality item from Jamaica.</p>
+                                    <p class="text-muted text-overflow:clip white-space:nowrap">{{i.Instruction}}</p>
                                     <div class="d-flex align-items-center">
                                        <h6 class="m-0">$8.8/kg</h6>
                            <a class="ml-auto" href="#">
@@ -310,69 +313,7 @@
                            </div>
                            </a>
                         </div>
-                        <div class="col-12 col-md-4 mb-3">
-                           <a href="/product_details/" class="text-dark text-decoration-none">
-                              <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                                 <div class="recommend-slider rounded m-0">
-                                    <div class="osahan-slider-item m-2">
-                                       <img src="{% static 'img/recommend/r4.jpg' %}" class="img-fluid mx-auto rounded shadow-sm" alt="Responsive image">
-                                    </div>
-                                    <div class="osahan-slider-item m-2">
-                                       <img src="{% static 'img/recommend/r5.jpg' %}" class="img-fluid mx-auto rounded shadow-sm" alt="Responsive image">
-                                    </div>
-                                    <div class="osahan-slider-item m-2">
-                                       <img src="{% static 'img/recommend/r6.jpg' %}" class="img-fluid mx-auto rounded shadow-sm" alt="Responsive image">
-                                    </div>
-                                 </div>
-                                 <div class="p-3 position-relative">
-                                    <h6 class="mb-1 font-weight-bold text-success">Green Apple</h6>
-                                    <p class="text-muted">Green Apple Premium item from Vietnam.</p>
-                                    <div class="d-flex align-items-center">
-                                       <h6 class="m-0">$10.8/kg</h6>
-                           <a class="ml-auto" href="#">
-                           <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                           <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                           <input type='text' name='quantity' value='1' class='qty form-control' />
-                           <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                           </form>   
-                           </a>
-                           </div>
-                           </div>
-                           </div>
-                           </a>
-                        </div>
-                        <div class="col-12 col-md-4 mb-3">
-                           <a href="/product_details/" class="text-dark text-decoration-none">
-                              <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                                 <div class="recommend-slider rounded m-0">
-                                    <div class="osahan-slider-item m-2">
-                                       <img src="{% static 'img/recommend/r7.jpg' %}" class="img-fluid mx-auto rounded shadow-sm" alt="Responsive image">
-                                    </div>
-                                    <div class="osahan-slider-item m-2">
-                                       <img src="{% static 'img/recommend/r8.jpg' %}" class="img-fluid mx-auto rounded shadow-sm" alt="Responsive image">
-                                    </div>
-                                    <div class="osahan-slider-item m-2">
-                                       <img src="{% static 'img/recommend/r9.jpg' %}" class="img-fluid mx-auto rounded shadow-sm" alt="Responsive image">
-                                    </div>
-                                 </div>
-                                 <div class="p-3 position-relative">
-                                    <h6 class="mb-1 font-weight-bold text-success">Fresh Apple
-                                    </h6>
-                                    <p class="text-muted">Fresh Apple Premium item from Thailand.</p>
-                                    <div class="d-flex align-items-center">
-                                       <h6 class="m-0">$12.8/kg</h6>
-                           <a class="ml-auto" href="#">
-                           <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                           <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                           <input type='text' name='quantity' value='1' class='qty form-control' />
-                           <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                           </form>   
-                           </a>
-                           </div>
-                           </div>
-                           </div>
-                           </a>
-                        </div>
+                        {% endfor %}
                      </div>
                   </div>
                </div>

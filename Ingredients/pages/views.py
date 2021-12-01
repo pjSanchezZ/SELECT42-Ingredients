@@ -433,3 +433,10 @@ def try_search(request):
         'total_page': total_page,
         'range': paginator.page_range
         })
+
+# output: title, recipe_ingredients, recipt_image
+def recipe_search(request):
+  list_content = request.GET.get("recipt_search_key")
+  print(list_content)
+  list_result = recipe.objects.filter(Title__icontains = list_content)
+  return render(request, 'recommend.html', {'content': list(list_result)})

@@ -41,5 +41,6 @@ urlpatterns = [
     url(r'^list/', views.listing_search),
     url(r'^login/', views.login),
     url(r'^signup1/', views.signup1),
-    url(r'^product_details/(?P<productid>\w{1,50})/$', views.product_details)
+    url(r'^product_details/(?P<productid>\w{1,50})/$', views.product_details),
+    url(r'^recipelist/', views.recipe_search)
 ]
