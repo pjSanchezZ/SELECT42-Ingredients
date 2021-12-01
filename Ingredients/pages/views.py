@@ -2,6 +2,11 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from pages.models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+<<<<<<< HEAD
+=======
+from django.views.generic import View
+from pages.forms import select_testform
+>>>>>>> cart
 
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
@@ -13,12 +18,15 @@ def home(request):
   print("home:"+str(request.GET))
   return  render(request, 'home.html')
 
+<<<<<<< HEAD
 def cart(request):
   quantity = request.GET.get("quantity")
   print("quantity:")
   print(quantity)
   return  render(request, 'cart.html')
 
+=======
+>>>>>>> cart
 def change_password(request):
   print("change_password:"+str(request.GET))
   return  render(request, 'change_password.html')
@@ -212,7 +220,10 @@ list_result= []
 list_content =''
 
 def ranger(request):
+<<<<<<< HEAD
   print("ranger:"+str(request.GET))
+=======
+>>>>>>> cart
   min_value = request.GET.get("min_value")
   max_value = request.GET.get("max_value")
   order = request.GET.get("order")
@@ -271,6 +282,7 @@ def ranger(request):
     list_result = list_result.order_by('-Product_Name').values()
   elif order == '3'and flag!=1:
     list_result = list_result.order_by('-Price').values()
+<<<<<<< HEAD
   elif order == '4'and flag!=1:
     list_result = list_result.order_by('Price').values()  
     
@@ -291,17 +303,41 @@ def ranger(request):
 
 def listing_search(request):
   print("listing_search:"+str(request.GET))
+=======
+  elif order == '4':
+    list_result = list_result.order_by('Price').values()
+  
+#   search_result = [{'Product_Id': '101484506', 'Product_Name': 'Granny Smith Apple', 'Price': 0.99, 'Type_Id': '54\r', 'Seller_Id': 'Schnucks2', 'Description': 'Apples', 'Image': 'https://storage.cloud.google.com/select_42/product_img/101484506.png'}, {'Product_Id': '10771038646', 'Product_Name': 'Good & Gather Passion Fruit Pineapple Chunks, Dragon Fruit Chunks, Passion Fruit Juice & Mango Puree Blended Cubes Tropical Blend', 'Price': 4.99, 'Type_Id': '73\r', 'Seller_Id': 
+# 'Target0', 'Description': 'Ingredients,Pineapple, Dragon Fruit, Passion Fruit Juice, Mango Puree.', 'Image': 'https://storage.cloud.google.com/select_42/product_img/10771038646.png'}]
+
+  # cxt = product_info.objects.filter(
+  #     Product_Name__icontains='apple juice').values()
+  # paginator = Paginator(cxt, 8)  # Show 10 contacts per page.
+  paginator = Paginator(list_result, 8)  # Show 10 contacts per page.
+  page_number = request.GET.get('page')
+  page_obj = paginator.get_page(page_number)
+  print('Page:', page_number)
+
+  return render(request, 'listing.html', {'page_obj': page_obj, 'content': list_result})
+
+
+def listing_search(request):
+>>>>>>> cart
   global list_result
   global list_content
   print("listing_search:"+"list_content:"+list_content)
   list_content = request.GET.get("list_key")
   list_result = product_info.objects.filter(Product_Name__icontains=list_content)
   print(list_content)
+<<<<<<< HEAD
   paginator = Paginator(list_result, 8)  # Show 10 contacts per page.
   page_number = request.GET.get('page')
   page_obj = paginator.get_page(page_number)
   print('Page:', page_number)
   return render(request, 'listing.html', {'page_obj': page_obj, 'content': list(list_result)})
+=======
+  return render(request, 'listing.html', {'content': list(list_result.values())})
+>>>>>>> cart
 
 def details(request):
   print("details:"+str(request.GET))
@@ -311,7 +347,11 @@ def details(request):
 'Target0', 'Description': 'Ingredients,Pineapple, Dragon Fruit, Passion Fruit Juice, Mango Puree.', 'Image': 'https://storage.cloud.google.com/select_42/product_img/10771038646.png'}]
   return render(request, 'product_details.html', {'content': search_result})
 
+<<<<<<< HEAD
 username = 'Visitor'
+=======
+username = ''
+>>>>>>> cart
 
 def login(request):
   """
@@ -324,8 +364,7 @@ def login(request):
         - if the user name can't be found, return content = 100
         - if the user name can be found, but the password is incorrect, return content = 101
         - login succeeded, return content = 102.
-    TO BE DETERMINED:
-      if the user login in successfully, the website will jump to 'TBD.html'.
+      if the user login in successfully, the website will jump to 'home.html'.
   """
   global username 
   username = request.GET.get("username")
@@ -390,24 +429,48 @@ def signup1(request):
     new_user.save()
     username = name
     return render(request, 'home.html', {'Error': 0})
-
-def mydate(requset, year, month, day):
-    return HttpResponse(str(year) + '-' + str(month) + '-' + str(day))
+  
 
 def cart(request):
-  print("cart:"+str(request.GET))
-  list_result = list(product_info.objects.filter(Product_Name__icontains='apple juice').values())
-  count_of_items = len(list_result)
-  print(count_of_items)
-  sum_of_item = 0
+  """
+  This is a function for displaying want is already in the cart
+    Parameters:
+      1. display_num: determine the num of items on every page.
+      
+    Output to front-end:
+      1. Error: 
+        - 100: the user hasn't log in yet, so the website will be redirected to the sign up page. But notations are needed.
+    TODO:
+      1. give some notations or signs if the user clicked on the cart button without logging in. Currently, if the user clicks on the cart button without logging in, the web will jump to sign up page, which is a bit weird and not user-friendly.
+  """ 
+
+  display_num = 10
+  global username
+  if username=='':
+    return render(request, 'signin.html', {'Error': 100})
+  # wanted_all is a list of dictionaries
+  wanted_all = list(wanted_item.objects.filter(User_Name__exact = 'XutaoC').filter(Valid__exact = 1).values())
+  sum_of_item = len(wanted_all)
   count_of_things = 0
-  for i in range(count_of_items):
-    list_result[i]['Count'] = (i + 1) % 3 + 1
-    list_result[i]['Total_Price'] = round(list_result[i]['Count'] * list_result[i]['Price'], 2)
-    sum_of_item += list_result[i]['Total_Price']
-    count_of_things += list_result[i]['Count']
-  
-  paginator = Paginator(list_result, 10)  # Show 10 contacts per page.
+  total_cost = 0
+  product_list = []
+  product_count_dict = {}
+  product_cost_dict = {}
+  for cart_item in wanted_all:
+    product_list.append(cart_item['Product_Id_id'])
+    product_count_dict[cart_item['Product_Id_id']] = cart_item['Quantity']
+    product_cost_dict[cart_item['Product_Id_id']] = cart_item['Quantity']*cart_item['Price']
+    count_of_things += cart_item['Quantity']
+    total_cost += cart_item['Quantity']*cart_item['Price']
+  # cart is a list of dictionaries
+  cart = []
+  for product in product_list:
+    product_dict = list(product_info.objects.filter(Product_Id__exact = product).values())[0]
+    product_dict['Total_Price'] = round(product_cost_dict[product],2)
+    product_dict['Count'] = product_count_dict[product]
+    cart.append(product_dict)  
+
+  paginator = Paginator(cart, display_num)  # Show 10 contacts per page.
   page_number = request.GET.get('page')
   page_obj = paginator.get_page(page_number)
   total_page = paginator.num_pages
@@ -416,10 +479,18 @@ def cart(request):
     page_number = (int)(page_number)
   
   return render(request, 'cart.html', {
+<<<<<<< HEAD
       'count_of_items': count_of_items, 
       'count_of_things': count_of_things,
       # 'info_of_item': list_result,
       'sum_of_item': round(sum_of_item, 2),
+=======
+      'user_name': username,
+      'count_of_items': sum_of_item, 
+      'count_of_things': count_of_things,
+      # 'info_of_item': list_result,
+      'sum_of_item': round(total_cost, 2),
+>>>>>>> cart
       'page_obj': page_obj,
       'curr_page': page_number,
       'total_page': total_page,
@@ -428,12 +499,64 @@ def cart(request):
 
 
 def try_search(request):
+<<<<<<< HEAD
   print("try_search:"+str(request.GET))
   list_result = product_info.objects.filter(
       Product_Name__icontains='apple juice').values()
+=======
+
+  # quantity = request.GET.get("quantity")
+
+  # print(quantity)
+
+  global username
+  # if username=='':
+  #   return render(request, 'signin.html', {'Error': 100})
+  # wanted_all = wanted_item.objects.filter(User_Name__exact = username).filter(Valid__exact = 1).values()
+  # print(list(wanted_all))
+  list_result = product_info.objects.filter(
+      Product_Name__icontains='apple juice').values()
+  
+  paginator = Paginator(list_result, 10)  # Show 10 contacts per page.
+
+  page_number = request.GET.get('page')
+  page_obj = paginator.get_page(page_number)
+  total_page = paginator.num_pages
+  # print(page_obj.count, ', ', page_number, '/', total_page)
+
+  if page_number:
+    page_number = (int)(page_number)  # page_number本来是string型
+
+  return render(request, 'try.html', {
+        'page_obj': page_obj,
+        'curr_page': page_number,
+        'total_page': total_page,
+        'range': paginator.page_range,
+        'quantity': quantity
+        })
+
+
+class testview(View):
+  def get(self, request):
+    select_form = select_testform()
+    return render(request, 'try.html',{
+      'select_form': select_form,
+    })
+
+  def post(self, request):
+    select_form = select_testform(request.POST)
+    if select_form.is_valid():
+      get_value = request.POST.get('sel_value', "")
+      print(get_value)
+      print(1)
+    else:
+      print("wrong")
+    
+>>>>>>> cart
   
   paginator = Paginator(list_result, 3)  # Show 10 contacts per page.
 
+<<<<<<< HEAD
   page_number = request.GET.get('page')
   page_obj = paginator.get_page(page_number)
   total_page = paginator.num_pages
@@ -488,3 +611,5 @@ def recipe_search(request):
     return_list.append(new_item)
     
   return render(request, 'recommend.html', {'content': return_list})
+=======
+>>>>>>> cart
