@@ -254,11 +254,11 @@ def ranger(request):
    
       if store1 == '1':
         # list_result = list_result.filter(Seller_Id__icontains='ALDI')
-        list_result =  list_result|product_info.objects.filter(Product_Name__icontains=list_content, Seller_Id__icontains='ALDI')
+        list_result =  list_result|product_info.objects.filter(Type_Id__exact = list_result1[0]['Type_Id'],Product_Name__icontains=list_content, Seller_Id__icontains='ALDI')
       if store2 == '1':
-        list_result =  list_result|product_info.objects.filter(Product_Name__icontains=list_content, Seller_Id__icontains='Schnucks')
+        list_result =  list_result|product_info.objects.filter(Type_Id__exact = list_result1[0]['Type_Id'],Product_Name__icontains=list_content, Seller_Id__icontains='Schnucks')
       if store3 == '1':
-        list_result =  list_result|product_info.objects.filter(Product_Name__icontains=list_content, Seller_Id__icontains='Costco')
+        list_result =  list_result|product_info.objects.filter(Type_Id__exact = list_result1[0]['Type_Id'],Product_Name__icontains=list_content, Seller_Id__icontains='Costco')
     else:
       if store1 == '1':
         # list_result = list_result.filter(Seller_Id__icontains='ALDI')
