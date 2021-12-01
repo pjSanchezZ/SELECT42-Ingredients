@@ -636,18 +636,16 @@
                                  <a href="/product_details/" class="text-dark text-decoration-none">
                                     <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
                                        <div class="recommend-slider2 rounded mb-0">
-                                          {% for i in Fresh_Orange_list %}
                                           <div class="osahan-slider-item m-2 rounded">
-                                             <img src="{{i.Image}}" class="img-fluid mx-auto rounded shadow-sm" alt="Responsive image">
+                                             <img src="{{Fresh_Orange.Image}}" class="img-fluid mx-auto rounded shadow-sm" alt="Responsive image">
                                           </div>
-                                          {% endfor %}
                                        </div>
                                        <div class="p-3 position-relative">
                                           <h6 class="mb-1 font-weight-bold text-success">Fresh Orange
                                           </h6>
                                           <p class="text-muted">Orange Great Quality item from Jamaica.</p>
                                           <div class="d-flex align-items-center">
-                                             <h6 class="m-0">$8.8/kg</h6>
+                                             <h6 class="m-0">${{Fresh_Orange.Price}}/kg</h6>
                                  <a class="ml-auto" href="#">
                                  <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
                                  <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />

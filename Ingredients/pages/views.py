@@ -1,4 +1,3 @@
-from django.db.models.expressions import Random
 from django.shortcuts import render
 from django.http import HttpResponse
 from pages.models import *
@@ -9,19 +8,19 @@ from pages.forms import select_testform
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 
-# import random
+import random
 # Create your views here.
 
 temp_list_result = None
 
 def home(request):
-  # lucky_number = random.random()
-  # print(lucky_number)
-  Fresh_Orange_list = list(product_info.objects.filter(
-      Product_Name__icontains="orange").values())[0:2]
-  print(Fresh_Orange_list)
-  return render(request, 'home.html', {
-      'Fresh_Orange_list': Fresh_Orange_list
+  lucky_num = random.randint(0, 10)
+  print("lucky_num: ", lucky_num)
+  Fresh_Orange = list(product_info.objects.filter(
+      Product_Name__icontains="orange").values())[lucky_num]
+  print(Fresh_Orange)
+  return  render(request, 'home.html', {
+      'Fresh_Orange': Fresh_Orange
   })
 
 def change_password(request):
@@ -71,6 +70,9 @@ def picks_today(request):
 def privacy(request):
   print("privacy:"+str(request.GET))
   return  render(request, 'privacy.html')
+
+def product_details(request, productid = ''):
+  return render(request, 'product_details.html', {'product_id': productid})
 
 def product_details(request, productid = ''):
   flag1 = 0
@@ -129,28 +131,16 @@ def product_details(request, productid = ''):
 def recipe_details(request):
   """
     Output to front-end:
-      { 
-        'type_list':list of types(string) e.g. [type1, type2, type3]
-        'product_list': list of lists. [[many products with type1], [many products with type2], [many products with type3],]
-          - the num of products returned can be controled by PRODUCT_DISPLAY_NUM, default = 5
-        'recipe': a recipe object
-        'ingredient_name_list': [ingredient_name1, ingredient_name2, ...],
-        'ingredient_image_list': [image1, image2, image3, ...]
+      {
+        'ingredient_list': [],
       }
   """
-  PRODUCT_DISPLAY_NUM = 5
   Recipe_Id = "10890"
-  recipes = recipe.objects.filter(Recipe_Id__exact=Recipe_Id).values()
-  ingredient_name_list = recipe_ingredients.objects.filter(Recipe_Id__exact=Recipe_Id).values()
-  type_list = []
-  product_list = []
-  for name in ingredient_name_list:
-    type = name['Type_Id']
-    typen = product_type.objects.filter(Type_Id__exact = type).values()['Product_Type']
-    type_list.append(typen)
-    product = list(product_info.objects.filter(Type_Id__exact = type).values()[:PRODUCT_DISPLAY_NUM])
-    product_list.append(product)
-  
+  ingredient_list = list(product_info.objects.filter(Product_Name__icontains="pork").values())
+  recipe_list = list(recipe.objects.filter(
+      Recipe_Id__exact=Recipe_Id).values())[0]
+  ingredient_name_list = recipe_ingredients.objects.filter(
+      Recipe_Id__exact=Recipe_Id).values()
   ingredient_name = []
   for name in ingredient_name_list:
     ingredient_name.append(name['Ingredient'])
@@ -163,9 +153,8 @@ def recipe_details(request):
 
   print(image_list)
   return render(request, 'recipe_details.html', {
-      'type_list': type_list,
-      'product_list': product_list,
-      'recipe': recipes,
+      'ingredient_list': ingredient_list,
+      'recipe_list': recipe_list,
       'ingredient_name_list': ingredient_name,
       'ingredient_image_list': image_list
     })
