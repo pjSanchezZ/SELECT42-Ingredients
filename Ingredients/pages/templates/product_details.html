@@ -272,13 +272,13 @@
                <div class="col-lg-6">
                   <div class="recommend-slider mb-3">
                      <div class="osahan-slider-item">
-                        <img src="{% static 'img/recommend/r1.jpg' %}" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                        <img src="{{image}}" class="img-fluid p-2 mx-auto shadow-sm rounded" alt="Responsive image">
                      </div>
                      <div class="osahan-slider-item">
-                        <img src="{% static 'img/recommend/r2.jpg' %}" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                        <img src="{{image}}" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
                      </div>
                      <div class="osahan-slider-item">
-                        <img src="{% static 'img/recommend/r3.jpg' %}" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
+                        <img src="{{image}}" class="img-fluid mx-auto shadow-sm rounded" alt="Responsive image">
                      </div>
                   </div>
                   <div class="pd-f d-flex align-items-center mb-3">
@@ -292,9 +292,9 @@
                <div class="col-lg-6">
                   <div class="p-4 bg-white rounded shadow-sm">
                      <div class="pt-0">
-                        <h2 class="font-weight-bold">{{product_id}}</h2>
+                        <h2 class="font-weight-bold">{{product_Name}}</h2>
                         <p class="font-weight-light text-dark m-0 d-flex align-items-center">
-                           Product MRP : <b class="h6 text-dark m-0">$263.00</b>
+                           Product MRP : <b class="h6 text-dark m-0">${{price}}</b>
                            <span class="badge badge-danger ml-2">50% OFF</span>
                         </p>
                         <a href="/review/">
@@ -356,7 +356,19 @@
                               <input type="text" class="shadow-none border-0 form-control form-control-lg pl-0" placeholder="Type your city (e.g Chennai, Pune)" aria-label="" aria-describedby="basic-addon1">
                            </div>
                            <p class="font-weight-bold mb-2">Product Details</p>
-                           <p class="text-muted small mb-0">High quality Fresh Orange fruit exporters from South Korea for sale. All citrus trees belong to the single genus Citrus and remain almost entirely interfertile. This includes grapefruits, lemons, limes, oranges, and various other types and hybrids. The fruit of any citrus tree is considered a hesperidium, a kind of modified berry; it is covered by a rind wall.</p>
+                           <p class="text-muted small mb-0">{{description}}</p>
+                        </div>
+                        <div class="pt-3">
+                           <p class="font-weight-bold small mb-2">Nutriction Facts</p>
+                           <p class="mb-1">Calories <span class="float-right text-dark">{{calories}}</span></p>
+                           <p class="mb-1 bg-light">Total Fat <span class="float-right text-dark">{{total_Fat}}</span></p>
+                           <p class="mb-1">Saturated Fat <span class="float-right text-dark">{{saturated_Fat}}</span></p>
+                           <p class="mb-1 bg-light">Transfat <span class="float-right text-dark">{{transfat}}</span></p>
+                           <p class="mb-1 ">Transfat <span class="float-right text-dark">{{transfat}}</span></p>
+                           <p class="mb-1 bg-light">Cholesterol <span class="float-right text-dark">{{cholesterol}}</span></p>
+                           <p class="mb-1">Sodium <span class="float-right text-dark">{{sodium}}</span></p>
+                           <p class="mb-1 bg-light">Total Carbohydrate <span class="float-right text-dark">{{total_Carbohydrate}}</span></p>
+                           <p class="mb-1">Protein <span class="float-right text-dark">{{protein}}</span></p>
                         </div>
                      </div>
                   </div>

@@ -67,7 +67,10 @@ def privacy(request):
   print("privacy:"+str(request.GET))
   return  render(request, 'privacy.html')
 
-def product_details(request):
+def product_details(request, productid = ''):
+  return render(request, 'product_details.html', {'product_id': productid})
+
+def product_details(request, productid = ''):
   flag1 = 0
   flag2 = 0
   product_Name = ''
@@ -83,12 +86,10 @@ def product_details(request):
   total_Carbohydrate = ''
   protein = ''
   print("product_details:"+str(request.GET))
-  product_Id = request.GET.get("productId")
-  #product_Id = 'GANEN'
   table = seller.objects.filter(Seller_Id__icontains='cxtnb')
   list_result = table.none()
   nutrition_result = table.none()
-  list_result = product_info.objects.filter(Product_Id__icontains=product_Id).values()
+  list_result = product_info.objects.filter(Product_Id__icontains = productid).values()
   if list_result:
     print('product_details: list_result[0]:'+str(list_result[0]))
     flag1 = 1
@@ -109,7 +110,7 @@ def product_details(request):
       total_Carbohydrate = nutrition_result[0]['Total_Carbohydrate']
       protein =  nutrition_result[0]['Protein']
   
-  return render(request, 'listing.html', {'product_Name': product_Name,
+  return render(request, 'product_details.html', {'product_Name': product_Name,
                                           'price':price,
                                           'description':description,
                                           'image':image,
@@ -196,7 +197,7 @@ list_result= []
 list_content =''
 
 def ranger(request):
-  print("ranger:"+str(request.GET));
+  print("ranger:"+str(request.GET))
   min_value = request.GET.get("min_value")
   max_value = request.GET.get("max_value")
   order = request.GET.get("order")
@@ -374,9 +375,6 @@ def signup1(request):
     new_user.save()
     username = name
     return render(request, 'home.html', {'Error': 0})
-  
-def product_details(request, productid = ''):
-  return render(request, 'product_details.html', {'product_id': productid})
 
 def mydate(requset, year, month, day):
     return HttpResponse(str(year) + '-' + str(month) + '-' + str(day))
