@@ -124,9 +124,24 @@ def product_details(request, productid = ''):
                                           'protein':protein})
 
 
-def promo_details(request):
-  print("promo_details:"+str(request.GET))
-  return  render(request, 'promo_details.html')
+def recipe_details(request):
+  Recipe_Id = "1089"
+  ingredient_list = list(product_info.objects.filter(Product_Name__icontains="pork").values())
+  recipe_list = list(recipe.objects.filter(
+      Recipe_Id__exact=Recipe_Id).values())[0]
+  ingredient_name_list = list(recipe_ingredients.objects.filter(
+      Recipe_Id__exact=Recipe_Id).values())
+  ingredient_image_list = list(
+      recipe_images.objects.filter(Recipe_Id__exact=Recipe_Id).values())
+  
+  print(recipe_list)
+  return render(request, 'recipe_details.html', {
+      'ingredient_list': ingredient_list,
+      'recipe_list': recipe_list,
+      'ingredient_name_list': ingredient_name_list,
+      'ingredient_image_list': ingredient_image_list
+    })
+
 
 def promos(request):
   print("promos:"+str(request.GET))
