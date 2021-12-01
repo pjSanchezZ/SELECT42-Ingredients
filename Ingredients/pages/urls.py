@@ -19,7 +19,7 @@ urlpatterns = [
     url(r'^picks_today/', views.picks_today), 
     url(r'^privacy/', views.privacy), 
     url(r'^product_details/', views.product_details), 
-    url(r'^promo_details/', views.promo_details), 
+    url(r'^recipe_details/', views.recipe_details), 
     url(r'^promos/', views.promos), 
     url(r'^recommend/', views.recommend), 
     url(r'^refund_payment/', views.refund_payment), 
