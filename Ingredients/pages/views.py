@@ -151,25 +151,29 @@ def recipe_details(request, recipeid = ''):
         'type_list':list of types(string) e.g. [type1, type2, type3]
         'product_list': list of lists. [[many products with type1], [many products with type2], [many products with type3],]
           - the num of products returned can be controled by PRODUCT_DISPLAY_NUM, default = 5
-        'recipe': a recipe object
+        'recipes': a recipe object
         'ingredient_name_list': [ingredient_name1, ingredient_name2, ...],
         'ingredient_image_list': [image1, image2, image3, ...]
       }
   """
-  PRODUCT_DISPLAY_NUM = 5
+  PRODUCT_DISPLAY_NUM = 3
   Recipe_Id = recipeid
   recipes = recipe.objects.filter(Recipe_Id__exact=Recipe_Id).values()
   ingredient_name_list = recipe_ingredients.objects.filter(Recipe_Id__exact=Recipe_Id).values()
-  type_list = []
-  product_list = []
+
+  
+  product_dict_list = []
   # print(ingredient_name_list) 
   for name in ingredient_name_list:
+    product_dict = {}
     type = name['Type_Id_id']
     typen = list(product_type.objects.filter(Type_Id__exact = type).values())[0]['Product_Type']
-    type_list.append(typen)
+
     product = list(product_info.objects.filter(Type_Id__exact = type).values()[:PRODUCT_DISPLAY_NUM])
-    product_list.append(product)
-  
+    product_dict['type_name'] = typen
+    product_dict['product_list'] = product
+    product_dict_list.append(product_dict)
+  print(product_dict_list)
   ingredient_name = []
   for name in ingredient_name_list:
     ingredient_name.append(name['Ingredient'])
@@ -177,16 +181,13 @@ def recipe_details(request, recipeid = ''):
   image_list = []
   for image in ingredient_image_list:
     image_list.append(image['Image'])
-  
-  print(ingredient_name)
-
-  print(image_list)
+  # print(ingredient_name)
+  # print(type_list)
   return render(request, 'recipe_details.html', {
-        'type_list': type_list,
-        'product_list': product_list,
-        'recipe': recipes,
+        'product_dict': product_dict_list,
+        'recipe': list(recipes)[0],
         'ingredient_name_list': ingredient_name,
-        'ingredient_image_list': image_list
+        'ingredient_image_list': image_list,
       })
 
 

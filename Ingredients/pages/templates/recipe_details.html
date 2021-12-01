@@ -278,7 +278,7 @@
                         {% endfor %}
                      </div>
                      <!-- <img class="p-osahan-logo" src="{% static 'img/logo.svg' %}"> -->
-                     <h5 class="mt-2 mb-1 text-white">Recipe photos</h5>
+                     <h5 class="mt-2 mb-1 text-white"> Photos of Recipe </h5>
                      <div class="pt-3"><a href="{{recipe_list.Source_Url}}">
                         <p class="btn btn-warning btn-lg btn-block mb-0"><i class="icofont-tag mr-1"></i> See details</p>
                      </div>
@@ -289,16 +289,16 @@
                      <div class="promo_detail">
                         <div class="title p-3 bg-white shadow-sm d-flex align-items-center">
                            <div class="title">
-                              <h5 class="font-weight-bold text-success">{{recipe_list.Title}}</h5>
-                              <p class="small text-muted m-0">{{recipe_list.Source_Url}}</p>
+                              <h5 class="font-weight-bold text-success">{{recipe.Title}}</h5>
+                              <p class="small text-muted m-0">{{recipe.Source_Url}}</p>
                            </div>
                            <div class="ml-auto">
-                              <a href={{recipe_list.Source_Url}} class="btn btn-lg btn-danger bg-danger px-5 border-0">Buy Now</a>
+                              <a href={{recipe.Source_Url}} class="btn btn-lg btn-danger bg-danger px-5 border-0">buy now</a>
                            </div>
                         </div>
                         <div class="p-3 bg-light">
                            <p class="font-weight-bold mb-2">Instruction😊</p>
-                           <p class="small m-0">{{recipe_list.Instruction}}</p>
+                           <p class="small m-0">{{recipe.Instruction}}</p>
                         </div>
                         <div class="p-3">
                            <p class="font-weight-bold mb-2">Ingredients</p>
@@ -310,41 +310,47 @@
                               {% endfor %}
                            </ul>
                         </div>
-                        <div class="row">
-                           {% for i in ingredient_list %}
-                           <div class="col-6 col-md-3 mb-3">
-                              <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                                 <div class="list-card-image">
-                                    <a href="/product_details/" class="text-dark">
-                                       <div class="member-plan position-absolute"><span class="badge m-3 badge-danger">{{i.Seller_Id}}</span>
-                                       </div>
-                                       <div class="p-3">
-                                          <img src={{i.Image}} class="img-fluid item-img w-100 mb-3">
-                                          <h6>{{i.Product_Name}}</h6>
-                                          <div class="d-flex align-items-center">
-                                             <h6 class="price m-0 text-success">${{i.Price}}</h6>
-                                             <a data-toggle="collapse" href="/#collapseExample1" role="button" aria-expanded="false"
-                                                aria-controls="collapseExample1" class="btn btn-success btn-sm ml-auto">+</a>
-                                             <div class="collapse qty_show" id="collapseExample1">
-                                                <div>
-                                                   <span class="ml-auto" href="/#">
-                                                      <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                                                         <input type='button' value='-' class='qtyminus btn btn-success btn-sm'
-                                                            field='quantity' />
-                                                         <input type='text' name='quantity' value='1' class='qty form-control' />
-                                                         <input type='button' value='+' class='qtyplus btn btn-success btn-sm'
-                                                            field='quantity' />
-                                                      </form>
-                                                   </span>
+                        
+                        <div>
+                        {% for dic in product_dict %}
+                        <p class="font-weight-bold mb-2"> &nbsp &nbsp &nbsp &nbsp <br>&nbsp &nbsp 👍 {{dic.type_name}} <br>  <br> </p>
+                           <div class="row">
+                              {% for i in dic.product_list %} &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                              <div class="col-6 col-md-3 mb-3">
+                                 <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
+                                    <div class="list-card-image">
+                                       <a href="/product_details/{{i.Product_Id}}/" class="text-dark">
+                                          <div class="member-plan position-absolute"><span class="badge m-3 badge-danger">{{i.Seller_Id}}</span>
+                                          </div>
+                                          <div class="p-3">
+                                             <img src={{i.Image}} class="img-fluid item-img w-100 mb-3">
+                                             <h6>{{i.Product_Name}}</h6>
+                                             <div class="d-flex align-items-center">
+                                                <h6 class="price m-0 text-success">${{i.Price}}</h6>
+                                                <a data-toggle="collapse" href="/#collapseExample1" role="button" aria-expanded="false"
+                                                   aria-controls="collapseExample1" class="btn btn-success btn-sm ml-auto">+</a>
+                                                <div class="collapse qty_show" id="collapseExample1">
+                                                   <div>
+                                                      <span class="ml-auto" href="/#">
+                                                         <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
+                                                            <input type='button' value='-' class='qtyminus btn btn-success btn-sm'
+                                                               field='quantity' />
+                                                            <input type='text' name='quantity' value='1' class='qty form-control' />
+                                                            <input type='button' value='+' class='qtyplus btn btn-success btn-sm'
+                                                               field='quantity' />
+                                                         </form>
+                                                      </span>
+                                                   </div>
                                                 </div>
                                              </div>
                                           </div>
-                                       </div>
-                                    </a>
+                                       </a>
+                                    </div>
                                  </div>
                               </div>
+                              {% endfor %}
                            </div>
-                           {% endfor %}
+                        {% endfor %}
                         </div>
                      </div>
                   </div>
