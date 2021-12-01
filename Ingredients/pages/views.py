@@ -124,15 +124,13 @@ def recipe_details(request):
   """
     Output to front-end:
       {
-        'ingredient_list': [],
+        'ingredient_list': [ingredient_name1, ingredient_name2, ...],
+        'ingredient_image_list
       }
   """
   Recipe_Id = "10890"
-  ingredient_list = list(product_info.objects.filter(Product_Name__icontains="pork").values())
-  recipe_list = list(recipe.objects.filter(
-      Recipe_Id__exact=Recipe_Id).values())[0]
-  ingredient_name_list = recipe_ingredients.objects.filter(
-      Recipe_Id__exact=Recipe_Id).values()
+  recipe_list = recipe.objects.filter(Recipe_Id__exact=Recipe_Id).values()
+  ingredient_name_list = recipe_ingredients.objects.filter(Recipe_Id__exact=Recipe_Id).values()
   ingredient_name = []
   for name in ingredient_name_list:
     ingredient_name.append(name['Ingredient'])
@@ -143,7 +141,7 @@ def recipe_details(request):
   
   print(ingredient_name_list)
   return render(request, 'recipe_details.html', {
-      'ingredient_list': ingredient_list,
+      'ingredient_list': ingredient_name_list,
       'recipe_list': recipe_list,
       'ingredient_name_list': ingredient_name,
       'ingredient_image_list': image_list
