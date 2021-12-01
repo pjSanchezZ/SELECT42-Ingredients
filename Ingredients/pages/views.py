@@ -18,7 +18,7 @@ def home(request):
   print("lucky_num: ", lucky_num)
   Fresh_Orange = list(product_info.objects.filter(Product_Name__icontains="orange").values())[lucky_num]
   Fresh_Apple = list(product_info.objects.filter(Product_Name__icontains="apple").values())[lucky_num]
-  Fresh_Tomato = list(product_info.objects.filter(Product_Name__icontains="tomato").values())[lucky_num]
+  Tomato = list(product_info.objects.filter(Product_Name__icontains="tomato").values())[lucky_num]
   Blueberry = list(product_info.objects.filter(Product_Name__icontains="Blueberry").values())[lucky_num]
   Onion = list(product_info.objects.filter(Product_Name__icontains="onion").values())[lucky_num]
   Cauliflower = list(product_info.objects.filter(Product_Name__icontains="cauliflower").values())[lucky_num]
@@ -28,7 +28,7 @@ def home(request):
   return  render(request, 'home.html', {
       'Fresh_Orange': Fresh_Orange,
       'Fresh_Apple': Fresh_Apple,
-      'Fresh_Tomato': Fresh_Tomato,
+      'Tomato': Tomato,
       'Blueberry': Blueberry,
       'Onion': Onion,
       'Cauliflower': Cauliflower,
