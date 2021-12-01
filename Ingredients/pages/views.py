@@ -353,15 +353,21 @@ def ranger(request):
 def listing_search(request):
   global list_result
   global list_content
-  print("listing_search:"+"list_content:"+list_content)
+  # print("listing_search:"+"list_content:"+list_content)
   list_content = request.GET.get("list_key")
   list_result = product_info.objects.filter(Product_Name__icontains=list_content)
   print(list_content)
-  paginator = Paginator(list_result, 8)  # Show 10 contacts per page.
+  paginator = Paginator(list_result, 12)  # Show 10 contacts per page.
   page_number = request.GET.get('page')
   page_obj = paginator.get_page(page_number)
   print('Page:', page_number)
-  return render(request, 'listing.html', {'page_obj': page_obj, 'content': list(list_result)})
+  return render(request, 'listing.html', {
+    'page_obj': page_obj, 
+    'content': list(list_result),
+    'range': paginator.page_range,
+    'total_page': paginator.num_pages,
+    'curr_page': page_number
+    })
 
 def details(request):
   print("details:"+str(request.GET))
