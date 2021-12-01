@@ -709,3 +709,13 @@ def add_cart_many(request, new_list):
 
   return cart(request)
 
+def checkout_to_zero(request):
+  global username
+  UN = username
+  if UN == '':
+    return(render(request, 'signin.html', {'Error': 100}))
+  wanted_items = wanted_item.objects.filter(User_Name__exact = UN).filter(Valid__exact = 1).values()
+  for item in wanted_items:
+    minus_item = wanted_item(User_Name=UN,Product_Id = item['Product_Id'] , Price = item['Price'], Quantity = -1000, Valid = bool(1))
+    minus_item.save()
+  return render(request, 'cart.html')
