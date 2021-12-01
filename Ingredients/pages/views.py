@@ -17,7 +17,7 @@ def home(request):
   lucky_num = random.randint(0, 4)
   print("lucky_num: ", lucky_num)
 
-  recipe_image_list = random.choices(list(recipe_images.objects.filter(id__icontains=lucky_num).values()), k=18)
+  recipe_image_list = random.choices(list(recipe_images.objects.filter(id__icontains=lucky_num).values()), k=10)
   Orange = list(product_info.objects.filter(Product_Name__icontains="orange").values())[lucky_num]
   Apple = list(product_info.objects.filter(Product_Name__icontains="apple").values())[lucky_num]
   Tomato = list(product_info.objects.filter(Product_Name__icontains="tomato").values())[lucky_num]
@@ -177,7 +177,7 @@ def recipe_details(request, recipeid = ''):
   ingredient_name = []
   for name in ingredient_name_list:
     ingredient_name.append(name['Ingredient'])
-  ingredient_image_list = recipe_images.objects.filter(Recipe_Id__exact=Recipe_Id).values()
+  ingredient_image_list = recipe_images.objects.filter(Recipe_Id__exact=Recipe_Id).values()[:6]
   image_list = []
   for image in ingredient_image_list:
     image_list.append(image['Image'])
@@ -336,18 +336,15 @@ def ranger(request):
   elif order == '4':
     list_result = list_result.order_by('Price').values()
   
-#   search_result = [{'Product_Id': '101484506', 'Product_Name': 'Granny Smith Apple', 'Price': 0.99, 'Type_Id': '54\r', 'Seller_Id': 'Schnucks2', 'Description': 'Apples', 'Image': 'https://storage.cloud.google.com/select_42/product_img/101484506.png'}, {'Product_Id': '10771038646', 'Product_Name': 'Good & Gather Passion Fruit Pineapple Chunks, Dragon Fruit Chunks, Passion Fruit Juice & Mango Puree Blended Cubes Tropical Blend', 'Price': 4.99, 'Type_Id': '73\r', 'Seller_Id': 
-# 'Target0', 'Description': 'Ingredients,Pineapple, Dragon Fruit, Passion Fruit Juice, Mango Puree.', 'Image': 'https://storage.cloud.google.com/select_42/product_img/10771038646.png'}]
-
-  # cxt = product_info.objects.filter(
-  #     Product_Name__icontains='apple juice').values()
-  # paginator = Paginator(cxt, 8)  # Show 10 contacts per page.
   paginator = Paginator(list_result, 8)  # Show 10 contacts per page.
   page_number = request.GET.get('page')
   page_obj = paginator.get_page(page_number)
   #print('Page:', page_number)
 
-  return render(request, 'listing.html', {'page_obj': page_obj, 'content': list_result})
+  return render(request, 'listing.html', {
+    'page_obj': page_obj, 
+    'content': list_result
+    })
 
 
 def listing_search(request):
@@ -360,13 +357,19 @@ def listing_search(request):
   paginator = Paginator(list_result, 12)  # Show 10 contacts per page.
   page_number = request.GET.get('page')
   page_obj = paginator.get_page(page_number)
+
+  if page_number:
+    page_number = (int)(page_number)
+
   print('Page:', page_number)
+
   return render(request, 'listing.html', {
     'page_obj': page_obj, 
     'content': list(list_result),
     'range': paginator.page_range,
     'total_page': paginator.num_pages,
-    'curr_page': page_number
+    'curr_page': page_number,
+    'search_key': list_content
     })
 
 def details(request):
@@ -470,7 +473,7 @@ def cart(request):
       1. give some notations or signs if the user clicked on the cart button without logging in. Currently, if the user clicks on the cart button without logging in, the web will jump to sign up page, which is a bit weird and not user-friendly.
   """ 
 
-  display_num = 10
+  display_num = 2
   global username
   if username=='':
     return render(request, 'signin.html', {'Error': 100})
@@ -535,7 +538,7 @@ def recipe_search(request):
   """
   list_content = request.GET.get("recipt_search_key")
   # print(list_content)
-  list_result = recipe.objects.filter(Title__icontains = list_content).values()
+  list_result = recipe.objects.filter(Title__icontains = list_content).values()[:100]
   if len(list_result) == 0:
     return render(request, 'recommend.html', {'ERROR': 100})
   return_list = []
@@ -553,8 +556,45 @@ def recipe_search(request):
     images_list = []
     for image in images:
       images_list.append(image)
-    new_item['recipe_image'] = images_list
-    return_list.append(new_item)
-    
-  return render(request, 'recommend.html', {'content': return_list})
+    if len(images_list) != 0:
+      new_item['recipe_image'] = images_list
+      return_list.append(new_item)
+
+  print(len(return_list))
+
+  paginator = Paginator(return_list, 6)
+  page_number = request.GET.get('page')
+  page_obj = paginator.get_page(page_number)
+  total_page = paginator.num_pages
+
+  if page_number:
+    page_number = (int)(page_number)
+
+  return render(request, 'recommend.html', {
+    # 'content': return_list[:15],
+    'page_obj': page_obj,
+    'curr_page': page_number,
+    'total_page': total_page,
+    'range': paginator.page_range,
+    'search_key': list_content
+    })
+
+'''
+
+{'title': 'Strawberry Fruit Dip', 
+ 'recipe_id': '10053', 
+ 'ingredients': ['1 cup Philadelphia Strawberry Light Cream Cheese Product', '1/2 cup chopped strawberries', '1/4 tsp. grated lemon zest Safeway 4 ct For $5.00 thru 02/09', '2 tsp. lemon juice Safeway 4 ct For $5.00 thru 02/09'], 
+ 'recipe_image': [{'id': 9096, 'Recipe_Id_id': '10053', 'Image': 'https://storage.cloud.google.com/select_42/recipe_img/1a000958ca.jpg'}]
+ }, 
+{'title': 'Strawberry Dipper (Dipping Sauce)', 
+ 'recipe_id': '10061', 
+ 'ingredients': ['12 cup sugar-free strawberry jam', '3 ounces low-fat cream cheese', '12 cup plain low-fat yogurt', '1 tablespoon onion soup mix'], 
+ 'recipe_image': []
+ }, 
+{'title': 'Strawberry Crush', 'recipe_id': '10120', 
+ 'ingredients': ['2 scoops strawberry ice cream', '12 cup whole milk', '2 tablespoons strawberry syrup', '12 cup strawberry, sliced'], 
+ 'recipe_image': []
+ }
+
+'''
 

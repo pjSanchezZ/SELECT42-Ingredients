@@ -19,6 +19,37 @@
       <link href="{% static 'css/style.css' %}" rel="stylesheet">
       <!-- Sidebar CSS -->
       <link href="{% static 'vendor/sidebar/demo.css' %}" rel="stylesheet">
+
+      <style>
+         ul.pagination {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+         }
+      
+         ul.pagination li {
+            display: inline;
+         }
+      
+         ul.pagination li a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+         }
+      
+         ul.pagination li a.active {
+            background-color: #f0c127;
+            color: white;
+            border-radius: 5px;
+         }
+      
+         ul.pagination li a:hover:not(.active) {
+            background-color: #ddd;
+         }
+      </style>
+
    </head>
    <body class="fixed-bottom-padding">
       <div class="top-bar">
@@ -58,7 +89,7 @@
                <div class="input-group-prepend">
                   <button class="border-0 btn btn-outline-secondary text-success bg-white"><i class="icofont-search"></i></button>
                </div>
-               <input type="text" class="shadow-none border-0 form-control pl-0" placeholder="Search for Products.." aria-label="" aria-describedby="basic-addon1">
+               <input type="text" class="shadow-none border-0 form-control pl-0" placeholder="Search for Recipes.." aria-label="" aria-describedby="basic-addon1">
             </div>
          </a>
       </div>
@@ -110,7 +141,7 @@
                <!-- search  -->
                <form action="/recipelist/">
                <div class="input-group mr-sm-2 col-lg-12">
-                     <input type="text" class="form-control" name='recipt_search_key' id="inlineFormInputGroupUsername2" placeholder="Search for Products..">
+                     <input type="text" class="form-control" name='recipt_search_key' id="inlineFormInputGroupUsername2" placeholder="Search for Recipes..">
                   <div class="input-group-prepend">
                      <button type="submit" class="btn btn-success rounded-right"><i class="icofont-search"></i></button>
                   </div>
@@ -279,8 +310,24 @@
                            <a href="/#" data-toggle="modal" data-target="#exampleModal" class="btn text-muted bg-white"><i class="icofont-signal mr-1"></i> Sort</a>
                         </div>
                      </div>
+
+                     {% if search_key %}
+                     <div>
+                        &nbsp &nbsp
+                        <ul class="pagination">
+                           <li><a href="?recipt_search_key={{search_key}}&page=1">«</a></li>
+                           {% for idx in range %}
+                           <li><a {% if idx == curr_page %} class="active" {% endif %} href="?recipt_search_key={{search_key}}&page={{idx}}">{{idx}}</a></li>
+                           {% endfor %}
+                           <li><a href="?recipt_search_key={{search_key}}&page={{total_page}}">»</a></li>
+                        </ul>
+                     </div>
+                     {% else %}
+                     &nbsp &nbsp Search for something...
+                     {% endif %}
+
                      <div class="row">
-                        {% for i in content %}
+                        {% for i in page_obj %}
                         {% if i.recipe_image %}
                         <div class="col-12 col-md-4 mb-3">
                            <a href="/recipe_details/{{i.recipe_id}}" class="text-dark text-decoration-none">
