@@ -64,9 +64,6 @@ def privacy(request):
   return  render(request, 'privacy.html')
 
 def product_details(request, productid = ''):
-  return render(request, 'product_details.html', {'product_id': productid})
-
-def product_details(request, productid = ''):
   flag1 = 0
   flag2 = 0
   product_Name = ''
