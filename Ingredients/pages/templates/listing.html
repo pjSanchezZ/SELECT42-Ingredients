@@ -19,6 +19,37 @@
       <link href="{% static 'css/style.css' %}" rel="stylesheet">
       <!-- Sidebar CSS -->
       <link href="{% static 'vendor/sidebar/demo.css' %}" rel="stylesheet">
+
+      <style>
+         ul.pagination {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+         }
+      
+         ul.pagination li {
+            display: inline;
+         }
+      
+         ul.pagination li a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+         }
+      
+         ul.pagination li a.active {
+            background-color: #f0c127;
+            color: white;
+            border-radius: 5px;
+         }
+      
+         ul.pagination li a:hover:not(.active) {
+            background-color: #ddd;
+         }
+      </style>
+      
    </head>
    <body class="fixed-bottom-padding">
       <div class="top-bar">
@@ -283,25 +314,20 @@
                         </div>
                      </div>
                      <body>
-                        <div> --------------------------- </div>
-                        <div class="pagination">
-                           <span class="step-links">
-                              {% if page_obj.has_previous %}
-                              <a href="?page=1">&laquo; first</a>
-                              <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-                              {% endif %}
-                     
-                              <span class="current">
-                                 Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                              </span>
-                     
-                              {% if page_obj.has_next %}
-                              <a href="?page={{ page_obj.next_page_number }}">next</a>
-                              <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-                              {% endif %}
-                           </span>
+                        {% if search_key %}
+                        <div>
+                           &nbsp &nbsp
+                           <ul class="pagination">
+                              <li><a href="?list_key={{search_key}}&page=1">«</a></li>
+                              {% for idx in range %}
+                              <li><a {% if idx == curr_page %} class="active" {% endif %} href="?list_key={{search_key}}&page={{idx}}">{{idx}}</a></li>
+                              {% endfor %}
+                              <li><a href="?list_key={{search_key}}&page={{total_page}}">»</a></li>
+                           </ul>
                         </div>
-                        <div> --------------------------- </div>
+                        {% else %}
+                        &nbsp &nbsp Search for something...
+                        {% endif %}
                      </body>
                      <div class="row">
                         {% for i in page_obj %}
@@ -323,11 +349,26 @@
                         </div>
                         {% endfor %}
                      </div>
+
+                     {% if search_key %}
+                     <div>
+                        &nbsp &nbsp
+                        <ul class="pagination">
+                           <li><a href="?list_key={{search_key}}&page=1">«</a></li>
+                           {% for idx in range %}
+                           <li><a {% if idx == curr_page %} class="active" {% endif %} href="?list_key={{search_key}}&page={{idx}}">{{idx}}</a> </li>
+                           {% endfor %}
+                           <li><a href="?list_key={{search_key}}&page={{total_page}}">»</a></li>
+                        </ul>
+                     </div>
+                     {% endif %}
+
                   </div>
                </div>
             </div>
          </div>
       </section>
+
       <nav id="main-nav">
          <ul class="second-nav">
             <li><a href="/home/"><i class="icofont-smart-phone mr-2"></i> Home</a></li>
