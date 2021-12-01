@@ -73,9 +73,6 @@ def privacy(request):
   return  render(request, 'privacy.html')
 
 def product_details(request, productid = ''):
-  return render(request, 'product_details.html', {'product_id': productid})
-
-def product_details(request, productid = ''):
   flag1 = 0
   flag2 = 0
   product_Name = ''
@@ -132,16 +129,28 @@ def product_details(request, productid = ''):
 def recipe_details(request):
   """
     Output to front-end:
-      {
-        'ingredient_list': [],
+      { 
+        'type_list':list of types(string) e.g. [type1, type2, type3]
+        'product_list': list of lists. [[many products with type1], [many products with type2], [many products with type3],]
+          - the num of products returned can be controled by PRODUCT_DISPLAY_NUM, default = 5
+        'recipe': a recipe object
+        'ingredient_name_list': [ingredient_name1, ingredient_name2, ...],
+        'ingredient_image_list': [image1, image2, image3, ...]
       }
   """
+  PRODUCT_DISPLAY_NUM = 5
   Recipe_Id = "10890"
-  ingredient_list = list(product_info.objects.filter(Product_Name__icontains="pork").values())
-  recipe_list = list(recipe.objects.filter(
-      Recipe_Id__exact=Recipe_Id).values())[0]
-  ingredient_name_list = recipe_ingredients.objects.filter(
-      Recipe_Id__exact=Recipe_Id).values()
+  recipes = recipe.objects.filter(Recipe_Id__exact=Recipe_Id).values()
+  ingredient_name_list = recipe_ingredients.objects.filter(Recipe_Id__exact=Recipe_Id).values()
+  type_list = []
+  product_list = []
+  for name in ingredient_name_list:
+    type = name['Type_Id']
+    typen = product_type.objects.filter(Type_Id__exact = type).values()['Product_Type']
+    type_list.append(typen)
+    product = list(product_info.objects.filter(Type_Id__exact = type).values()[:PRODUCT_DISPLAY_NUM])
+    product_list.append(product)
+  
   ingredient_name = []
   for name in ingredient_name_list:
     ingredient_name.append(name['Ingredient'])
@@ -154,8 +163,9 @@ def recipe_details(request):
 
   print(image_list)
   return render(request, 'recipe_details.html', {
-      'ingredient_list': ingredient_list,
-      'recipe_list': recipe_list,
+      'type_list': type_list,
+      'product_list': product_list,
+      'recipe': recipes,
       'ingredient_name_list': ingredient_name,
       'ingredient_image_list': image_list
     })
