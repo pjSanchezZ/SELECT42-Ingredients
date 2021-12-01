@@ -598,5 +598,19 @@ def recipe_search(request):
 
 '''
 
-  from jan
+from django.db import connection
+cursor = connection.cursor()
+def buy_all_store_proc():
+  """
+  sp
+  """
+  try:
+    cursor.callproc('new_procedure', recipeid)
+    if cursor.return_value == 1:
+      result = cursor.fetchall()
+      print(result)
+  finally:
+    cursor.close()
+  return render()
+
 
