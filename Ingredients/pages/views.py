@@ -167,12 +167,15 @@ def recipe_details(request, recipeid = ''):
 
   
   product_dict_list = []
+  type_set = set()
   # print(ingredient_name_list) 
   for name in ingredient_name_list:
     product_dict = {}
     type = name['Type_Id_id']
     typen = list(product_type.objects.filter(Type_Id__exact = type).values())[0]['Product_Type']
-
+    if type in type_set:
+      continue
+    type_set.add([type])
     product = list(product_info.objects.filter(Type_Id__exact = type).values()[:PRODUCT_DISPLAY_NUM])
     product_dict['type_name'] = typen
     product_dict['product_list'] = product
