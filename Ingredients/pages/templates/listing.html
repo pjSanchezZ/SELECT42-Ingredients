@@ -314,37 +314,20 @@
                         </div>
                      </div>
                      <body>
-                        <div> --------------------------- </div>
-                        <div class="pagination">
-                           <span class="step-links">
-                              {% if page_obj.has_previous %}
-                              <a href="?page=1">&laquo; first</a>
-                              <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-                              {% endif %}
-                     
-                              <span class="current">
-                                 Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                              </span>
-                     
-                              {% if page_obj.has_next %}
-                              <a href="?page={{ page_obj.next_page_number }}">next</a>
-                              <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-                              {% endif %}
-                           </span>
-                        </div>
-                        <div> --------------------------- </div>
-
+                        {% if search_key %}
                         <div>
                            &nbsp &nbsp
                            <ul class="pagination">
-                              <li><a href="/?page=1">«</a></li>
+                              <li><a href="?list_key={{search_key}}&page=1">«</a></li>
                               {% for idx in range %}
-                              <li><a {% if idx == curr_page %} class="active" {% endif %} href="/?page={{idx}}">{{idx}}</a></li>
+                              <li><a {% if idx == curr_page %} class="active" {% endif %} href="?list_key={{search_key}}&page={{idx}}">{{idx}}</a></li>
                               {% endfor %}
-                              <li><a href="/?page={{total_page}}">»</a></li>
+                              <li><a href="?list_key={{search_key}}&page={{total_page}}">»</a></li>
                            </ul>
                         </div>
-
+                        {% else %}
+                        &nbsp &nbsp Search for something...
+                        {% endif %}
                      </body>
                      <div class="row">
                         {% for i in page_obj %}
@@ -367,16 +350,18 @@
                         {% endfor %}
                      </div>
 
+                     {% if search_key %}
                      <div>
                         &nbsp &nbsp
                         <ul class="pagination">
-                           <li><a href="?page=1">«</a></li>
+                           <li><a href="?list_key={{search_key}}&page=1">«</a></li>
                            {% for idx in range %}
-                           <li><a {% if idx == curr_page %} class="active" {% endif %} href="?page={{idx}}">{{idx}}</a></li>
+                           <li><a {% if idx == curr_page %} class="active" {% endif %} href="?list_key={{search_key}}&page={{idx}}">{{idx}}</a> </li>
                            {% endfor %}
-                           <li><a href="?page={{total_page}}">»</a></li>
+                           <li><a href="?list_key={{search_key}}&page={{total_page}}">»</a></li>
                         </ul>
                      </div>
+                     {% endif %}
 
                   </div>
                </div>
