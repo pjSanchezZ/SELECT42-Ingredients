@@ -234,7 +234,7 @@ def ranger(request):
   global list_content
   table = seller.objects.filter(Seller_Id__icontains='cxtnb')
   list_result= table.none()
-  print("relavantt:"+str(relavant))
+  #print("relavantt:"+str(relavant))
   flag = 0
   #print(min_value)
 
@@ -249,7 +249,7 @@ def ranger(request):
       list_result1 = product_type.objects.filter(Product_Type__startswith = list_content).values()[:1]
       list_result1 = list(list_result1)
       list_result = list_result&product_info.objects.filter(Type_Id__exact = list_result1[0]['Type_Id'])
-      print(list_result1[0]['Type_Id'])
+      #print(list_result1[0]['Type_Id'])
       # product_type.objects.raw('SELECT * FROM pages_product_info NATURAL JOIN pages_product_type WHERE ')
    
       if store1 == '1':
@@ -291,7 +291,7 @@ def ranger(request):
   paginator = Paginator(list_result, 8)  # Show 10 contacts per page.
   page_number = request.GET.get('page')
   page_obj = paginator.get_page(page_number)
-  print('Page:', page_number)
+  #print('Page:', page_number)
 
   return render(request, 'listing.html', {'page_obj': page_obj, 'content': list_result})
 
