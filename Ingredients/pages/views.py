@@ -1,3 +1,4 @@
+from django.db.models.expressions import Random
 from django.shortcuts import render
 from django.http import HttpResponse
 from pages.models import *
@@ -7,13 +8,21 @@ from pages.forms import select_testform
 
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+
+# import random
 # Create your views here.
 
 temp_list_result = None
 
 def home(request):
-  print("home:"+str(request.GET))
-  return  render(request, 'home.html')
+  # lucky_number = random.random()
+  # print(lucky_number)
+  Fresh_Orange_list = list(product_info.objects.filter(
+      Product_Name__icontains="orange").values())[0:2]
+  print(Fresh_Orange_list)
+  return render(request, 'home.html', {
+      'Fresh_Orange_list': Fresh_Orange_list
+  })
 
 def change_password(request):
   print("change_password:"+str(request.GET))
