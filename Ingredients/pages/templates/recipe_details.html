@@ -260,7 +260,7 @@
          <div class="container">
             <ol class="d-flex align-items-center mb-0 p-0">
                <li class="breadcrumb-item"><a href="/#" class="text-success">Home</a></li>
-               <li class="breadcrumb-item active" aria-current="page">Promo details</li>
+               <li class="breadcrumb-item active" aria-current="page">Recipe details</li>
             </ol>
          </div>
       </nav>
@@ -273,7 +273,7 @@
                      <div class="recommend-slider rounded m-0">
                         {% for i in ingredient_image_list %}
                         <div class="osahan-slider-item m-2 rounded">
-                           <img src="{{i.Image}}" class="img-fluid mx-auto rounded shadow-sm" alt="Responsive image">
+                           <img src="{{i}}" class="img-fluid mx-auto rounded shadow-sm" alt="Responsive image">
                         </div>
                         {% endfor %}
                      </div>
@@ -293,7 +293,7 @@
                               <p class="small text-muted m-0">{{recipe_list.Source_Url}}</p>
                            </div>
                            <div class="ml-auto">
-                              <a href="/product_details/" class="btn btn-lg btn-danger bg-danger px-5 border-0">Buy Now</a>
+                              <a href={{recipe_list.Source_Url}} class="btn btn-lg btn-danger bg-danger px-5 border-0">Buy Now</a>
                            </div>
                         </div>
                         <div class="p-3 bg-light">
@@ -304,7 +304,7 @@
                            <p class="font-weight-bold mb-2">Ingredients</p>
                            <ul class="pl-3 mb-0">
                               {% for i in ingredient_name_list %}
-                              <li class="text-muted">{{i.Ingredient}}
+                              <li class="text-muted">{{i}}
                                  <br>
                               </li>
                               {% endfor %}

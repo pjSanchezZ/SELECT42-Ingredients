@@ -141,7 +141,9 @@ def recipe_details(request):
   for image in ingredient_image_list:
     image_list.append(image['Image'])
   
-  print(ingredient_name_list)
+  print(ingredient_name)
+
+  print(image_list)
   return render(request, 'recipe_details.html', {
       'ingredient_list': ingredient_list,
       'recipe_list': recipe_list,
