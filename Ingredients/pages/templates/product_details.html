@@ -375,225 +375,252 @@
                </div>
             </div>
             </form>
-            <h5 class="mt-3 mb-3">Maybe You Like this.</h5>
+            <h5 class="mt-3 mb-3">Maybe You Like these.</h5>
             <div class="row">
-               <div class="col-sm-3 col-md-3 mb-3">
+               <div class="col-6 col-md-3 mb-3">
                   <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
                      <div class="list-card-image">
-                        <a href="/product_details/" class="text-dark">
-                           <div class="member-plan position-absolute"><span class="badge m-3 badge-danger">10%</span></div>
+                        <a href="/product_details/{{Blueberry.Product_Id}}/" class="text-dark">
+                           <div c`lass="member-plan position-absolute"><span
+                                 class="badge m-3 badge-danger">{{Blueberry.Seller_Id}}</span></div>
                            <div class="p-3">
-                              <img src="{% static 'img/listing/v1.jpg' %}" class="img-fluid item-img w-100 mb-3">
-                              <h6>Chilli</h6>
+                              <img src="{{Blueberry.Image}}" class="img-fluid item-img w-100 mb-3">
+                              <h6>{{Blueberry.Product_Name}}</h6>
                               <div class="d-flex align-items-center">
-                                 <h6 class="price m-0 text-success">$0.8/kg</h6>
-                        <a data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1" class="btn btn-success btn-sm ml-auto">+</a>
-                        <div class="collapse qty_show" id="collapseExample1">
-                        <div>
-                        <span class="ml-auto" href="#">
-                        <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                        <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                        <input type='text' name='quantity' value='1' class='qty form-control' />
-                        <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                        </form>   
-                        </span>
-                        </div>
-                        </div>
-                        </div>
-                        </div>
+                                 <h6 class="price m-0 text-success">${{Blueberry.Price}}/kg</h6>
+                                 <a data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false"
+                                    aria-controls="collapseExample1" class="btn btn-success btn-sm ml-auto">+</a>
+                                 <div class="collapse qty_show" id="collapseExample1">
+                                    <div>
+                                       <span class="ml-auto" href="#">
+                                          <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
+                                             <input type='button' value='-' class='qtyminus btn btn-success btn-sm'
+                                                field='quantity' />
+                                             <input type='text' name='quantity' value='1' class='qty form-control' />
+                                             <input type='button' value='+' class='qtyplus btn btn-success btn-sm'
+                                                field='quantity' />
+                                          </form>
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
                         </a>
                      </div>
                   </div>
                </div>
-               <div class="col-sm-3 col-md-3 mb-3">
+               <div class="col-6 col-md-3 mb-3">
                   <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
                      <div class="list-card-image">
-                        <a href="/product_details/" class="text-dark">
-                           <div class="member-plan position-absolute"><span class="badge m-3 badge-danger">5%</span></div>
+                        <a href="/product_details/{{Onion.Product_Id}}/" class="text-dark">
+                           <div class="member-plan position-absolute"><span
+                                 class="badge m-3 badge-danger">{{Onion.Seller_Id}}</span></div>
                            <div class="p-3">
-                              <img src="{% static 'img/listing/v2.jpg' %}" class="img-fluid item-img w-100 mb-3">
-                              <h6>Onion</h6>
+                              <img src="{{Onion.Image}}" class="img-fluid item-img w-100 mb-3">
+                              <h6>{{Onion.Product_Name}}</h6>
                               <div class="d-flex align-items-center">
-                                 <h6 class="price m-0 text-success">$1.8/kg</h6>
-                        <a data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2" class="btn btn-success btn-sm ml-auto">+</a>
-                        <div class="collapse qty_show" id="collapseExample2">
-                        <div>
-                        <span class="ml-auto" href="#">
-                        <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                        <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                        <input type='text' name='quantity' value='1' class='qty form-control' />
-                        <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                        </form>   
-                        </span>
-                        </div>
-                        </div>
-                        </div>
-                        </div>
+                                 <h6 class="price m-0 text-success">${{Onion.Price}}/kg</h6>
+                                 <a data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false"
+                                    aria-controls="collapseExample2" class="btn btn-success btn-sm ml-auto">+</a>
+                                 <div class="collapse qty_show" id="collapseExample2">
+                                    <div>
+                                       <span class="ml-auto" href="#">
+                                          <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
+                                             <input type='button' value='-' class='qtyminus btn btn-success btn-sm'
+                                                field='quantity' />
+                                             <input type='text' name='quantity' value='1' class='qty form-control' />
+                                             <input type='button' value='+' class='qtyplus btn btn-success btn-sm'
+                                                field='quantity' />
+                                          </form>
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
                         </a>
                      </div>
                   </div>
                </div>
-               <div class="col-sm-3 col-md-3 mb-3">
+               <div class="col-6 col-md-3 mb-3">
                   <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
                      <div class="list-card-image">
-                        <a href="/product_details/" class="text-dark">
-                           <div class="member-plan position-absolute"><span class="badge m-3 badge-warning">5%</span></div>
+                        <a href="/product_details/{{Cauliflower.Product_Id}}/" class="text-dark">
+                           <div class="member-plan position-absolute"><span
+                                 class="badge m-3 badge-success">{{Cauliflower.Seller_Id}}</span></div>
                            <div class="p-3">
-                              <img src="{% static 'img/listing/v3.jpg' %}" class="img-fluid item-img w-100 mb-3">
-                              <h6>Tomato</h6>
+                              <img src="{{Cauliflower.Image}}" class="img-fluid item-img w-100 mb-3">
+                              <h6>{{Cauliflower.Product_Name}}</h6>
                               <div class="d-flex align-items-center">
-                                 <h6 class="price m-0 text-success">$1/kg</h6>
-                        <a class="ml-auto" href="#">
-                        <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                        <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                        <input type='text' name='quantity' value='1' class='qty form-control' />
-                        <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                        </form>   
-                        </a>
-                        </div>
-                        </div>
-                        </a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-sm-3 col-md-3 mb-3">
-                  <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                     <div class="list-card-image">
-                        <a href="/product_details/" class="text-dark">
-                           <div class="member-plan position-absolute"><span class="badge m-3 badge-warning">15%</span></div>
-                           <div class="p-3">
-                              <img src="{% static 'img/listing/v4.jpg' %}" class="img-fluid item-img w-100 mb-3">
-                              <h6>Cabbage</h6>
-                              <div class="d-flex align-items-center">
-                                 <h6 class="price m-0 text-success">$0.8/kg</h6>
-                        <a data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3" class="btn btn-success btn-sm ml-auto">+</a>
-                        <div class="collapse qty_show" id="collapseExample3">
-                        <div>
-                        <span class="ml-auto" href="#">
-                        <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                        <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                        <input type='text' name='quantity' value='1' class='qty form-control' />
-                        <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                        </form>   
-                        </span>
-                        </div>
-                        </div>
-                        </div>
-                        </div>
+                                 <h6 class="price m-0 text-success">${{Cauliflower.Price}}/kg</h6>
+                                 <a data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false"
+                                    aria-controls="collapseExample3" class="btn btn-success btn-sm ml-auto">+</a>
+                                 <div class="collapse qty_show" id="collapseExample3">
+                                    <div>
+                                       <span class="ml-auto" href="#">
+                                          <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
+                                             <input type='button' value='-' class='qtyminus btn btn-success btn-sm'
+                                                field='quantity' />
+                                             <input type='text' name='quantity' value='1' class='qty form-control' />
+                                             <input type='button' value='+' class='qtyplus btn btn-success btn-sm'
+                                                field='quantity' />
+                                          </form>
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
                         </a>
                      </div>
                   </div>
                </div>
-            </div>
-            <div class="row">
-               <div class="col-sm-3 col-md-3 mb-3">
+               <div class="col-6 col-md-3 mb-3">
                   <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
                      <div class="list-card-image">
-                        <a href="/product_details/" class="text-dark">
-                           <div class="member-plan position-absolute"><span class="badge m-3 badge-success">10%</span></div>
+                        <a href="/product_details/{{Carrot.Product_Id}}/" class="text-dark">
+                           <div class="member-plan position-absolute"><span
+                                 class="badge m-3 badge-success">{{Carrot.Seller_Id}}</span></div>
                            <div class="p-3">
-                              <img src="{% static 'img/listing/v5.jpg' %}" class="img-fluid item-img w-100 mb-3">
-                              <h6>Cauliflower</h6>
+                              <img src="{{Carrot.Image}}" class="img-fluid item-img w-100 mb-3">
+                              <h6>{{Carrot.Product_Name}}</h6>
                               <div class="d-flex align-items-center">
-                                 <h6 class="price m-0 text-success">$1.8/kg</h6>
-                        <a data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4" class="btn btn-success btn-sm ml-auto">+</a>
-                        <div class="collapse qty_show" id="collapseExample4">
-                        <div>
-                        <span class="ml-auto" href="#">
-                        <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                        <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                        <input type='text' name='quantity' value='1' class='qty form-control' />
-                        <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                        </form>   
-                        </span>
-                        </div>
-                        </div>
-                        </div>
-                        </div>
+                                 <h6 class="price m-0 text-success">${{Carrot.Price}}/kg</h6>
+                                 <a data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false"
+                                    aria-controls="collapseExample4" class="btn btn-success btn-sm ml-auto">+</a>
+                                 <div class="collapse qty_show" id="collapseExample4">
+                                    <div>
+                                       <span class="ml-auto" href="#">
+                                          <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
+                                             <input type='button' value='-' class='qtyminus btn btn-success btn-sm'
+                                                field='quantity' />
+                                             <input type='text' name='quantity' value='1' class='qty form-control' />
+                                             <input type='button' value='+' class='qtyplus btn btn-success btn-sm'
+                                                field='quantity' />
+                                          </form>
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
                         </a>
                      </div>
                   </div>
                </div>
-               <div class="col-sm-3 col-md-3 mb-3">
+               <div class="col-6 col-md-3 mb-3">
                   <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
                      <div class="list-card-image">
-                        <a href="/product_details/" class="text-dark">
-                           <div class="member-plan position-absolute"><span class="badge m-3 badge-success">10%</span></div>
+                        <a href="/product_details/{{Tomato.Product_Id}}/" class="text-dark">
+                           <div class="member-plan position-absolute"><span
+                                 class="badge m-3 badge-warning">{{Tomato.Seller_Id}}</span></div>
                            <div class="p-3">
-                              <img src="{% static 'img/listing/v6.jpg' %}" class="img-fluid item-img w-100 mb-3">
-                              <h6>Carrot</h6>
+                              <img src="{{Tomato.Image}}" class="img-fluid item-img w-100 mb-3">
+                              <h6>{{Tomato.Product_Name}}</h6>
                               <div class="d-flex align-items-center">
-                                 <h6 class="price m-0 text-success">$0.8/kg</h6>
-                        <a data-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample5" class="btn btn-success btn-sm ml-auto">+</a>
-                        <div class="collapse qty_show" id="collapseExample5">
-                        <div>
-                        <span class="ml-auto" href="#">
-                        <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                        <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                        <input type='text' name='quantity' value='1' class='qty form-control' />
-                        <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                        </form>   
-                        </span>
-                        </div>
-                        </div>
-                        </div>
-                        </div>
+                                 <h6 class="price m-0 text-success">${{Tomato.Price}}/kg</h6>
+                                 <a class="ml-auto" href="#">
+                                    <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
+                                       <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
+                                       <input type='text' name='quantity' value='1' class='qty form-control' />
+                                       <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
+                                    </form>
+                                 </a>
+                              </div>
+                           </div>
                         </a>
                      </div>
                   </div>
                </div>
-               <div class="col-sm-3 col-md-3 mb-3">
+               <div class="col-6 col-md-3 mb-3">
                   <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
                      <div class="list-card-image">
-                        <a href="/product_details/" class="text-dark">
-                           <div class="member-plan position-absolute"><span class="badge m-3 badge-danger">10%</span></div>
+                        <a href="/product_details/{{Cabbage.Product_Id}}/" class="text-dark">
+                           <div class="member-plan position-absolute"><span
+                                 class="badge m-3 badge-warning">{{Cabbage.Seller_Id}}</span></div>
                            <div class="p-3">
-                              <img src="{% static 'img/listing/v7.jpg' %}" class="img-fluid item-img w-100 mb-3">
-                              <h6>Star Anise</h6>
+                              <img src="{{Cabbage.Image}}" class="img-fluid item-img w-100 mb-3">
+                              <h6>{{Cabbage.Product_Name}}</h6>
                               <div class="d-flex align-items-center">
-                                 <h6 class="price m-0 text-success">$2.5/kg</h6>
-                        <a data-toggle="collapse" href="#collapseExample6" role="button" aria-expanded="false" aria-controls="collapseExample6" class="btn btn-success btn-sm ml-auto">+</a>
-                        <div class="collapse qty_show" id="collapseExample6">
-                        <div>
-                        <span class="ml-auto" href="#">
-                        <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                        <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                        <input type='text' name='quantity' value='1' class='qty form-control' />
-                        <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                        </form>   
-                        </span>
-                        </div>
-                        </div>
-                        </div>
-                        </div>
+                                 <h6 class="price m-0 text-success">${{Cabbage.Price}}/kg</h6>
+                                 <a data-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false"
+                                    aria-controls="collapseExample5" class="btn btn-success btn-sm ml-auto">+</a>
+                                 <div class="collapse qty_show" id="collapseExample5">
+                                    <div>
+                                       <span class="ml-auto" href="#">
+                                          <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
+                                             <input type='button' value='-' class='qtyminus btn btn-success btn-sm'
+                                                field='quantity' />
+                                             <input type='text' name='quantity' value='1' class='qty form-control' />
+                                             <input type='button' value='+' class='qtyplus btn btn-success btn-sm'
+                                                field='quantity' />
+                                          </form>
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
                         </a>
                      </div>
                   </div>
                </div>
-               <div class="col-sm-3 col-md-3 mb-3">
+               <div class="col-6 col-md-3 mb-3">
                   <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
                      <div class="list-card-image">
-                        <a href="/product_details/" class="text-dark">
-                           <div class="member-plan position-absolute"><span class="badge m-3 badge-success">10%</span></div>
+                        <a href="/product_details/{{Apple.Product_Id}}/" class="text-dark">
+                           <div class="member-plan position-absolute"><span
+                                 class="badge m-3 badge-danger">{{Apple.Seller_Id}}</span></div>
                            <div class="p-3">
-                              <img src="{% static 'img/listing/v8.jpg' %}" class="img-fluid item-img w-100 mb-3">
-                              <h6>Brinjal</h6>
+                              <img src="{{Apple.Image}}" class="img-fluid item-img w-100 mb-3">
+                              <h6>{{Apple.Product_Name}}</h6>
                               <div class="d-flex align-items-center">
-                                 <h6 class="price m-0 text-success">$0.8/kg</h6>
-                        <a data-toggle="collapse" href="#collapseExample7" role="button" aria-expanded="false" aria-controls="collapseExample7" class="btn btn-success btn-sm ml-auto">+</a>
-                        <div class="collapse qty_show" id="collapseExample7">
-                        <div>
-                        <span class="ml-auto" href="#">
-                        <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
-                        <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                        <input type='text' name='quantity' value='1' class='qty form-control' />
-                        <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
-                        </form>   
-                        </span>
-                        </div>
-                        </div>
-                        </div>
-                        </div>
+                                 <h6 class="price m-0 text-success">${{Apple.Price}}/kg</h6>
+                                 <a data-toggle="collapse" href="#collapseExample6" role="button" aria-expanded="false"
+                                    aria-controls="collapseExample6" class="btn btn-success btn-sm ml-auto">+</a>
+                                 <div class="collapse qty_show" id="collapseExample6">
+                                    <div>
+                                       <span class="ml-auto" href="#">
+                                          <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
+                                             <input type='button' value='-' class='qtyminus btn btn-success btn-sm'
+                                                field='quantity' />
+                                             <input type='text' name='quantity' value='1' class='qty form-control' />
+                                             <input type='button' value='+' class='qtyplus btn btn-success btn-sm'
+                                                field='quantity' />
+                                          </form>
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-6 col-md-3 mb-3">
+                  <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
+                     <div class="list-card-image">
+                        <a href="/product_details/{{Orange.Product_Id}}/" class="text-dark">
+                           <div class="member-plan position-absolute"><span
+                                 class="badge m-3 badge-danger">{{Orange.Seller_Id}}</span></div>
+                           <div class="p-3">
+                              <img src="{{Orange.Image}}" class="img-fluid item-img w-100 mb-3">
+                              <h6>{{Orange.Product_Name}}</h6>
+                              <div class="d-flex align-items-center">
+                                 <h6 class="price m-0 text-success">${{Orange.Price}}/kg</h6>
+                                 <a data-toggle="collapse" href="#collapseExample7" role="button" aria-expanded="false"
+                                    aria-controls="collapseExample7" class="btn btn-success btn-sm ml-auto">+</a>
+                                 <div class="collapse qty_show" id="collapseExample7">
+                                    <div>
+                                       <span class="ml-auto" href="#">
+                                          <form id='myform' class="cart-items-number d-flex" method='POST' action='#'>
+                                             <input type='button' value='-' class='qtyminus btn btn-success btn-sm'
+                                                field='quantity' />
+                                             <input type='text' name='quantity' value='1' class='qty form-control' />
+                                             <input type='button' value='+' class='qtyplus btn btn-success btn-sm'
+                                                field='quantity' />
+                                          </form>
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
                         </a>
                      </div>
                   </div>

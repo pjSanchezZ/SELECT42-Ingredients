@@ -89,9 +89,6 @@ def privacy(request):
   return  render(request, 'privacy.html')
 
 def product_details(request, productid = ''):
-  return render(request, 'product_details.html', {'product_id': productid})
-
-def product_details(request, productid = ''):
   flag1 = 0
   flag2 = 0
   product_Name = ''
@@ -132,19 +129,48 @@ def product_details(request, productid = ''):
       total_Carbohydrate = nutrition_result[0]['Total_Carbohydrate']
       protein =  nutrition_result[0]['Protein']
   
+  lucky_num = random.randint(0, 4)
+  print("lucky_num: ", lucky_num)
+
+  Orange = list(product_info.objects.filter(
+      Product_Name__icontains="orange").values())[lucky_num]
+  Apple = list(product_info.objects.filter(
+      Product_Name__icontains="apple").values())[lucky_num]
+  Tomato = list(product_info.objects.filter(
+      Product_Name__icontains="tomato").values())[lucky_num]
+  Blueberry = list(product_info.objects.filter(
+      Product_Name__icontains="Blueberry").values())[lucky_num]
+  Onion = list(product_info.objects.filter(
+      Product_Name__icontains="onion").values())[lucky_num]
+  Cauliflower = list(product_info.objects.filter(
+      Product_Name__icontains="cauliflower").values())[lucky_num]
+  Carrot = list(product_info.objects.filter(
+      Product_Name__icontains="carrot").values())[lucky_num]
+  Cabbage = list(product_info.objects.filter(
+      Product_Name__icontains="cabbage").values())[lucky_num]
+  
   return render(request, 'product_details.html', {'product_Name': product_Name,
-                                          'product_id':product_id,
-                                          'price':price,
-                                          'description':description,
-                                          'image':image,
-                                          'calories':calories,
-                                          'total_Fat':total_Fat,
-                                          'saturated_Fat':saturated_Fat,
-                                          'transfat':transfat,
-                                          'cholesterol':cholesterol,
-                                          'sodium':sodium,
-                                          'total_Carbohydrate':total_Carbohydrate,
-                                          'protein':protein})
+      'product_id':product_id,
+      'price':price,
+      'description':description,
+      'image':image,
+      'calories':calories,
+      'total_Fat':total_Fat,
+      'saturated_Fat':saturated_Fat,
+      'transfat':transfat,
+      'cholesterol':cholesterol,
+      'sodium':sodium,
+      'total_Carbohydrate':total_Carbohydrate,
+      'protein':protein,
+      'Orange': Orange,
+      'Apple': Apple,
+      'Tomato': Tomato,
+      'Blueberry': Blueberry,
+      'Onion': Onion,
+      'Cauliflower': Cauliflower,
+      'Carrot': Carrot,
+      'Cabbage': Cabbage
+  })
 
 
 def recipe_details(request, recipeid = ''):
@@ -480,7 +506,7 @@ def cart(request):
       1. give some notations or signs if the user clicked on the cart button without logging in. Currently, if the user clicks on the cart button without logging in, the web will jump to sign up page, which is a bit weird and not user-friendly.
   """ 
 
-  display_num = 2
+  display_num = 8
   global username
   if username=='':
     return render(request, 'signin.html', {'Error': 100})
@@ -503,7 +529,7 @@ def cart(request):
   cart = []
   for product in product_list:
     product_dict = list(product_info.objects.filter(Product_Id__exact = product).values())[0]
-    product_dict['Total_Price'] = round(product_cost_dict[product],2)
+    product_dict['Total_Price'] = round(product_cost_dict[product], 2)
     product_dict['Count'] = product_count_dict[product]
     cart.append(product_dict)  
 

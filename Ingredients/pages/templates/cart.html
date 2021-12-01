@@ -339,8 +339,8 @@
                                     <span class="badge badge-danger m-3">{{i.Seller_Id}}</span>
                                     </a>
                                     <div class="d-flex  align-items-center p-3">
-                                       <a href="/product_details/"><img src="{{i.Image}}" class="img-fluid"></a>
-                                       <a href="/product_details/" class="ml-3 text-dark text-decoration-none w-100">
+                                       <a href="/product_details/{{i.Product_Id}}"><img src="{{i.Image}}" class="img-fluid"></a>
+                                       <a href="/product_details/{{i.Product_Id}}" class="ml-3 text-dark text-decoration-none w-100">
                                           <h5 class="mb-1">{{i.Prodcut_Name}}</h5>
                                           <p class="text-muted mb-2">{{i.Product_Name}} </p>
                                           <p> ${{i.Price}} / per </p>
