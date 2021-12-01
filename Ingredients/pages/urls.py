@@ -3,6 +3,10 @@ from django.urls import path, re_path
 from django.urls.resolvers import URLPattern
 from django.conf.urls import include, url
 from . import views
+
+from django.conf.urls.static import static
+from django.conf import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 #URL config
 
 urlpatterns = [
@@ -40,6 +44,7 @@ urlpatterns = [
     url(r'^range/', views.ranger),
     url(r'^details/', views.details),
     url(r'^list/', views.listing_search),
+    url(r'^try/', views.try_search),
     url(r'^login/', views.login),
     url(r'^signup1/', views.signup1),
     url(r'^product_details/(?P<productid>\w{1,50})/$', views.product_details),
