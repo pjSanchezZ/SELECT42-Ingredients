@@ -451,7 +451,40 @@ def try_search(request):
 
 # output: title, recipe_ingredients, recipt_image
 def recipe_search(request):
+  """
+  This is a function for recipe search
+    Input from front-end:
+      1. recipt_search_key: the search key of recipe.
+    Output to front-end:
+      1. ERROR: if ERROR == 100, no search result for this search key!
+      2. content: a list of dictionaries.
+        each dictionary contents following items:
+         - title: a string of recipe title.
+         - recipe_id: the id of the resulting recipe
+         - ingredients: a list of strings, [ingredient1, ingredient2, ingredient3,...]
+         - recipe_image: a list of images, [image_url1, image_url12, image_url3, ...]
+  """
   list_content = request.GET.get("recipt_search_key")
-  print(list_content)
-  list_result = recipe.objects.filter(Title__icontains = list_content)
-  return render(request, 'recommend.html', {'content': list(list_result)})
+  # print(list_content)
+  list_result = recipe.objects.filter(Title__icontains = list_content).values()
+  if len(list_result) == 0:
+    return render(request, 'recommend.html', {'ERROR': 100})
+  return_list = []
+  for result in list_result:
+    new_item = {}
+    new_item['title'] = result['Title']
+    id = result['Recipe_Id']
+    new_item['recipe_id'] = id
+    ingredients = recipe_ingredients.objects.filter(Recipe_Id__eq = id).values()
+    ingredients_list = []
+    for ingre in ingredients:
+      ingredients_list.append(ingre['Ingredient'])
+    new_item['ingredients'] = ingredients_list
+    images = recipe_images.objects.filter(Recipe_Id__eq = id).values()
+    images_list = []
+    for image in images:
+      images_list.append(image)
+    new_item['recipe_image'] = images_list
+    return_list.append(new_item)
+    
+  return render(request, 'recommend.html', {'content': return_list})
