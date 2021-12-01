@@ -156,7 +156,7 @@
                   <a href="/#" class="dropdown-toggle text-dark" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <img src="{% static 'img/user.png' %}" class="img-fluid rounded-circle header-user mr-2"> 
                   {% if user_name %}
-                     Hi {{user_name}}
+                     Hi {{user_name}}!
                   {% else %}
                      Hi Visitor!
                   {% endif %}
@@ -312,11 +312,16 @@
                            <h2 class="mb-0">
                               <button class="btn d-flex align-items-center bg-white btn-block text-left btn-lg h5 px-3 py-4 m-0" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                               <!-- <span class="c-number">1</span> Cart ({{count_of_items}} item(s)) -->
-                              Cart ({{count_of_items}} item(s))
+                              {% if count_of_items > 1 %}
+                                 Cart ({{count_of_items}} items)
+                              {% else %}
+                                 Cart ({{count_of_items}} item)
+                              {% endif %}
                               </button>
                            </h2>
                         </div>
                         <!-- labels of pages -->
+                        {% if count_of_items %}
                         <div>
                            &nbsp &nbsp
                            <ul class="pagination">
@@ -329,6 +334,7 @@
                               <li><a href="?page={{total_page}}">»</a></li>
                            </ul>
                         </div>
+                        {% endif %}
                         <!-- body cart items -->
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                            <div class="card-body p-0 border-top">
@@ -425,6 +431,7 @@
                            </div>
                         </div>
                         <!-- labels of pages -->
+                        {% if count_of_items %}
                         <div>
                            <br>
                            &nbsp &nbsp
@@ -438,6 +445,10 @@
                               <li><a href="?page={{total_page}}">»</a></li>
                            </ul>
                         </div>
+                        {% else %}
+                           <p><br><br>&nbsp &nbsp &nbsp &nbsp Nothing in the cart.<br><br></p>
+                           
+                        {% endif %}
                      </div>
                      <!-- cart address -->
                      <!-- <div class="card border-0 osahan-accor rounded shadow-sm overflow-hidden mt-3"> -->
@@ -853,7 +864,13 @@
                               <h6 class="mb-0 text-success">Total Discount<span class="float-right text-success">$1884</span></h6>
                            </div> -->
                            <div class="p-3 border-top">
-                              <h5 class="mb-0">COUNT <span class="float-right text-danger">{{count_of_things}} piece(s)</span></h5>
+                              <h5 class="mb-0">COUNT <span class="float-right text-danger">
+                                 {% if count_of_things > 1 %}
+                                    {{count_of_things}} pieces
+                                 {% else %}
+                                    {{count_of_things}} piece
+                                 {% endif %}
+                              </span></h5>
                               <br>
                               <h5 class="mb-0">TOTAL PRICE <span class="float-right text-danger">${{sum_of_item}}</span></h5>
                            </div>
