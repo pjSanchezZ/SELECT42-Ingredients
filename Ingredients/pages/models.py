@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models.base import Model
 from django.db.models.deletion import CASCADE
-from django.db.models.fields import DateTimeField
+from django.db.models.fields import BooleanField, DateTimeField
 from django.db.models.fields.files import ImageField
 from django.db.models.fields.related import ForeignKey
 
@@ -9,6 +9,8 @@ from django.db.models.fields.related import ForeignKey
 # Create your models here.
 class user(models.Model):
   User_Name = models.CharField(max_length = 50, primary_key = True)
+  Password = models.CharField(max_length = 25, blank=True)
+  Photo = models.ImageField(null=True, blank = True)
   First_Name = models.CharField(max_length = 25)
   Last_Name = models.CharField(max_length = 25)
   Email = models.EmailField()
@@ -92,16 +94,17 @@ class nutrition_table(models.Model):
 
 class wanted_item(models.Model):
   User_Name = models.ForeignKey('user', on_delete=models.CASCADE, db_column='User_Name')
-  Product_Id = models.ForeignKey('product_info', on_delete=models.CASCADE, db_column='product_info')
+  Product_Id = models.ForeignKey('product_info', on_delete=models.CASCADE, db_column='Product_Id')
   Price = models.FloatField()
   Quantity = models.IntegerField()
   Date = DateTimeField(auto_now=True)
+  Valid = BooleanField()
 
   class Meta:
     unique_together =(('User_Name', 'Product_Id'),)
   
   def __str__(self):
-    return self.Product_Id
+    return str(self.Product_Id)
 
 class test_image(models.Model):
   img = ImageField()
@@ -127,6 +130,7 @@ class recipe_ingredients(models.Model):
       return self.Recipe_Id
 
 class recipe_images(models.Model):
+  id = models.IntegerField(primary_key=True, blank=False)
   Recipe_Id = models.ForeignKey('recipe', on_delete=CASCADE, db_column='Recipe_Id')
   Image = models.URLField()
 
