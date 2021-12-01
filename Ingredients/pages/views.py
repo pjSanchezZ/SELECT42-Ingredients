@@ -148,13 +148,13 @@ def recipe_details(request, recipeid = ''):
   """
     Output to front-end:
       {
-        'type_list':list of types(string) e.g. [type1, type2, type3]
-        'product_list': list of lists. [[many products with type1], [many products with type2], [many products with type3],]
-          - the num of products returned can be controled by PRODUCT_DISPLAY_NUM, default = 5
-        'recipe': a recipe object
-        'ingredient_name_list': [ingredient_name1, ingredient_name2, ...],
-        'ingredient_image_list': [image1, image2, image3, ...]
-    }
+        'type_list':list of types(string) e.g. [type1, type2, type3]
+        'product_list': list of lists. [[many products with type1], [many products with type2], [many products with type3],]
+          - the num of products returned can be controled by PRODUCT_DISPLAY_NUM, default = 5
+        'recipe': a recipe object
+        'ingredient_name_list': [ingredient_name1, ingredient_name2, ...],
+        'ingredient_image_list': [image1, image2, image3, ...]
+      }
   """
   PRODUCT_DISPLAY_NUM = 5
   Recipe_Id = recipeid
@@ -182,12 +182,12 @@ def recipe_details(request, recipeid = ''):
 
   print(image_list)
   return render(request, 'recipe_details.html', {
-    'type_list': type_list,
-    'product_list': product_list,
-    'recipe': recipes,
-    'ingredient_name_list': ingredient_name,
-    'ingredient_image_list': image_list
-    })
+        'type_list': type_list,
+        'product_list': product_list,
+        'recipe': recipes,
+        'ingredient_name_list': ingredient_name,
+        'ingredient_image_list': image_list
+      })
 
 
 def promos(request):
