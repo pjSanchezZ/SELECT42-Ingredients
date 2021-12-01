@@ -44,7 +44,6 @@ urlpatterns = [
     url(r'^range/', views.ranger),
     url(r'^details/', views.details),
     url(r'^list/', views.listing_search),
-    url(r'^try/', views.try_search),
     url(r'^login/', views.login),
     url(r'^signup1/', views.signup1),
     url(r'^product_details/(?P<productid>\w{1,50})/$', views.product_details),
