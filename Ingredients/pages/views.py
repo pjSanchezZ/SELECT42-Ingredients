@@ -89,9 +89,6 @@ def privacy(request):
   return  render(request, 'privacy.html')
 
 def product_details(request, productid = ''):
-  return render(request, 'product_details.html', {'product_id': productid})
-
-def product_details(request, productid = ''):
   flag1 = 0
   flag2 = 0
   product_Name = ''
@@ -132,19 +129,48 @@ def product_details(request, productid = ''):
       total_Carbohydrate = nutrition_result[0]['Total_Carbohydrate']
       protein =  nutrition_result[0]['Protein']
   
+  lucky_num = random.randint(0, 4)
+  print("lucky_num: ", lucky_num)
+
+  Orange = list(product_info.objects.filter(
+      Product_Name__icontains="orange").values())[lucky_num]
+  Apple = list(product_info.objects.filter(
+      Product_Name__icontains="apple").values())[lucky_num]
+  Tomato = list(product_info.objects.filter(
+      Product_Name__icontains="tomato").values())[lucky_num]
+  Blueberry = list(product_info.objects.filter(
+      Product_Name__icontains="Blueberry").values())[lucky_num]
+  Onion = list(product_info.objects.filter(
+      Product_Name__icontains="onion").values())[lucky_num]
+  Cauliflower = list(product_info.objects.filter(
+      Product_Name__icontains="cauliflower").values())[lucky_num]
+  Carrot = list(product_info.objects.filter(
+      Product_Name__icontains="carrot").values())[lucky_num]
+  Cabbage = list(product_info.objects.filter(
+      Product_Name__icontains="cabbage").values())[lucky_num]
+  
   return render(request, 'product_details.html', {'product_Name': product_Name,
-                                          'product_id':product_id,
-                                          'price':price,
-                                          'description':description,
-                                          'image':image,
-                                          'calories':calories,
-                                          'total_Fat':total_Fat,
-                                          'saturated_Fat':saturated_Fat,
-                                          'transfat':transfat,
-                                          'cholesterol':cholesterol,
-                                          'sodium':sodium,
-                                          'total_Carbohydrate':total_Carbohydrate,
-                                          'protein':protein})
+      'product_id':product_id,
+      'price':price,
+      'description':description,
+      'image':image,
+      'calories':calories,
+      'total_Fat':total_Fat,
+      'saturated_Fat':saturated_Fat,
+      'transfat':transfat,
+      'cholesterol':cholesterol,
+      'sodium':sodium,
+      'total_Carbohydrate':total_Carbohydrate,
+      'protein':protein,
+      'Orange': Orange,
+      'Apple': Apple,
+      'Tomato': Tomato,
+      'Blueberry': Blueberry,
+      'Onion': Onion,
+      'Cauliflower': Cauliflower,
+      'Carrot': Carrot,
+      'Cabbage': Cabbage
+  })
 
 
 def recipe_details(request, recipeid = ''):
@@ -167,12 +193,15 @@ def recipe_details(request, recipeid = ''):
 
   
   product_dict_list = []
+  type_set = set()
   # print(ingredient_name_list) 
   for name in ingredient_name_list:
     product_dict = {}
     type = name['Type_Id_id']
     typen = list(product_type.objects.filter(Type_Id__exact = type).values())[0]['Product_Type']
-
+    if type in type_set:
+      continue
+    type_set.add(type)
     product = list(product_info.objects.filter(Type_Id__exact = type).values()[:PRODUCT_DISPLAY_NUM])
     product_dict['type_name'] = typen
     product_dict['product_list'] = product
