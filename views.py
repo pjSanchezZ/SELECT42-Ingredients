@@ -202,7 +202,7 @@ def ranger(request):
   global list_content
   table = seller.objects.filter(Seller_Id__icontains='cxtnb')
   list_result= table.none()
-  print("relavantt:"+str(relavant))
+  #print("relavantt:"+str(relavant))
   flag = 0
   #print(min_value)
 
@@ -222,11 +222,11 @@ def ranger(request):
    
       if store1 == '1':
         # list_result = list_result.filter(Seller_Id__icontains='ALDI')
-        list_result =  list_result|product_info.objects.filter(Product_Name__icontains=list_content, Seller_Id__icontains='ALDI')
+        list_result =  list_result|product_info.objects.filter(Type_Id__exact = list_result1[0]['Type_Id'],Product_Name__icontains=list_content, Seller_Id__icontains='ALDI')
       if store2 == '1':
-        list_result =  list_result|product_info.objects.filter(Product_Name__icontains=list_content, Seller_Id__icontains='Schnucks')
+        list_result =  list_result|product_info.objects.filter(Type_Id__exact = list_result1[0]['Type_Id'],Product_Name__icontains=list_content, Seller_Id__icontains='Schnucks')
       if store3 == '1':
-        list_result =  list_result|product_info.objects.filter(Product_Name__icontains=list_content, Seller_Id__icontains='Costco')
+        list_result =  list_result|product_info.objects.filter(Type_Id__exact = list_result1[0]['Type_Id'],Product_Name__icontains=list_content, Seller_Id__icontains='Costco')
     else:
       if store1 == '1':
         # list_result = list_result.filter(Seller_Id__icontains='ALDI')
@@ -250,7 +250,7 @@ def ranger(request):
   elif order == '4'and flag!=1:
     list_result = list_result.order_by('Price').values()  
     
-  print(str(list_result[0]['Product_Name']))
+  #print(str(list_result[0]['Product_Name']))
 #   search_result = [{'Product_Id': '101484506', 'Product_Name': 'Granny Smith Apple', 'Price': 0.99, 'Type_Id': '54\r', 'Seller_Id': 'Schnucks2', 'Description': 'Apples', 'Image': 'https://storage.cloud.google.com/select_42/product_img/101484506.png'}, {'Product_Id': '10771038646', 'Product_Name': 'Good & Gather Passion Fruit Pineapple Chunks, Dragon Fruit Chunks, Passion Fruit Juice & Mango Puree Blended Cubes Tropical Blend', 'Price': 4.99, 'Type_Id': '73\r', 'Seller_Id': 
 # 'Target0', 'Description': 'Ingredients,Pineapple, Dragon Fruit, Passion Fruit Juice, Mango Puree.', 'Image': 'https://storage.cloud.google.com/select_42/product_img/10771038646.png'}]
 
@@ -260,7 +260,7 @@ def ranger(request):
   paginator = Paginator(list_result, 8)  # Show 10 contacts per page.
   page_number = request.GET.get('page')
   page_obj = paginator.get_page(page_number)
-  print('Page:', page_number)
+  #print('Page:', page_number)
 
   return render(request, 'listing.html', {'page_obj': page_obj, 'content': list(list_result)})
 
