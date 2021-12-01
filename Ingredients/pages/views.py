@@ -2,11 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from pages.models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-<<<<<<< HEAD
-=======
 from django.views.generic import View
 from pages.forms import select_testform
->>>>>>> cart
 
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
@@ -18,15 +15,6 @@ def home(request):
   print("home:"+str(request.GET))
   return  render(request, 'home.html')
 
-<<<<<<< HEAD
-def cart(request):
-  quantity = request.GET.get("quantity")
-  print("quantity:")
-  print(quantity)
-  return  render(request, 'cart.html')
-
-=======
->>>>>>> cart
 def change_password(request):
   print("change_password:"+str(request.GET))
   return  render(request, 'change_password.html')
