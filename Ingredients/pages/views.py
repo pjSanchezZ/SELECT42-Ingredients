@@ -16,8 +16,10 @@ temp_list_result = None
 def home(request):
   lucky_num = random.randint(0, 4)
   print("lucky_num: ", lucky_num)
-  Fresh_Orange = list(product_info.objects.filter(Product_Name__icontains="orange").values())[lucky_num]
-  Fresh_Apple = list(product_info.objects.filter(Product_Name__icontains="apple").values())[lucky_num]
+
+  recipe_image_list = random.choices(list(recipe_images.objects.filter(id__icontains=lucky_num).values()), k=6)
+  Orange = list(product_info.objects.filter(Product_Name__icontains="orange").values())[lucky_num]
+  Apple = list(product_info.objects.filter(Product_Name__icontains="apple").values())[lucky_num]
   Tomato = list(product_info.objects.filter(Product_Name__icontains="tomato").values())[lucky_num]
   Blueberry = list(product_info.objects.filter(Product_Name__icontains="Blueberry").values())[lucky_num]
   Onion = list(product_info.objects.filter(Product_Name__icontains="onion").values())[lucky_num]
@@ -26,8 +28,9 @@ def home(request):
   Cabbage = list(product_info.objects.filter(Product_Name__icontains="cabbage").values())[lucky_num]
   
   return  render(request, 'home.html', {
-      'Fresh_Orange': Fresh_Orange,
-      'Fresh_Apple': Fresh_Apple,
+      'recipe_image_list': recipe_image_list,
+      'Orange': Orange,
+      'Apple': Apple,
       'Tomato': Tomato,
       'Blueberry': Blueberry,
       'Onion': Onion,
