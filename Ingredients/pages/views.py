@@ -17,7 +17,7 @@ def home(request):
   lucky_num = random.randint(0, 4)
   print("lucky_num: ", lucky_num)
 
-  recipe_image_list = random.choices(list(recipe_images.objects.filter(id__icontains=lucky_num).values()), k=6)
+  recipe_image_list = random.choices(list(recipe_images.objects.filter(id__icontains=lucky_num).values()), k=18)
   Orange = list(product_info.objects.filter(Product_Name__icontains="orange").values())[lucky_num]
   Apple = list(product_info.objects.filter(Product_Name__icontains="apple").values())[lucky_num]
   Tomato = list(product_info.objects.filter(Product_Name__icontains="tomato").values())[lucky_num]
