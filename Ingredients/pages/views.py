@@ -239,6 +239,9 @@ def ranger(request):
   store1 = request.GET.get("ALDI")
   store2 = request.GET.get("Schnucks")
   store3 = request.GET.get("Costco")
+  store4 = request.GET.get("Fresh Thyme Market")
+  store5 = request.GET.get("Meijer")
+  store6 = request.GET.get("Target")
   # print(234134)
   # print(relavant, store1, store2, store3, order, min_value, max_value)
   global list_result
@@ -270,6 +273,12 @@ def ranger(request):
         list_result =  list_result|product_info.objects.filter(Type_Id__exact = list_result1[0]['Type_Id'],Product_Name__icontains=list_content, Seller_Id__icontains='Schnucks')
       if store3 == '1':
         list_result =  list_result|product_info.objects.filter(Type_Id__exact = list_result1[0]['Type_Id'],Product_Name__icontains=list_content, Seller_Id__icontains='Costco')
+      if store4 == '1':
+        list_result =  list_result|product_info.objects.filter(Type_Id__exact = list_result1[0]['Type_Id'],Product_Name__icontains=list_content, Seller_Id__icontains='Fresh Thyme Market')
+      if store5 == '1':
+        list_result =  list_result|product_info.objects.filter(Type_Id__exact = list_result1[0]['Type_Id'],Product_Name__icontains=list_content, Seller_Id__icontains='Meijer')
+      if store6 == '1':
+        list_result =  list_result|product_info.objects.filter(Type_Id__exact = list_result1[0]['Type_Id'],Product_Name__icontains=list_content, Seller_Id__icontains='Fresh Thyme Market')
     else:
       if store1 == '1':
         # list_result = list_result.filter(Seller_Id__icontains='ALDI')
@@ -278,6 +287,12 @@ def ranger(request):
         list_result =  list_result|product_info.objects.filter(Product_Name__icontains=list_content, Seller_Id__icontains='Schnucks')
       if store3 == '1':
         list_result =  list_result|product_info.objects.filter(Product_Name__icontains=list_content, Seller_Id__icontains='Costco')
+      if store4 == '1':
+        list_result =  list_result|product_info.objects.filter(Product_Name__icontains=list_content, Seller_Id__icontains='Fresh Thyme Market')
+      if store5 == '1':
+        list_result =  list_result|product_info.objects.filter(Product_Name__icontains=list_content, Seller_Id__icontains='Meijer')
+      if store6 == '1':
+        list_result =  list_result|product_info.objects.filter(Product_Name__icontains=list_content, Seller_Id__icontains='Fresh Thyme Market')
     
   if min_value and flag!=1:
     list_result = list_result & product_info.objects.filter(Price__gte= float(min_value))
