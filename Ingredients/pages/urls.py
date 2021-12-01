@@ -1,4 +1,5 @@
-from django.urls import path
+from django.http.request import HttpRequest
+from django.urls import path, re_path
 from django.urls.resolvers import URLPattern
 from django.conf.urls import include, url
 from . import views
@@ -18,7 +19,6 @@ urlpatterns = [
     url(r'^my_order/', views.my_order), 
     url(r'^picks_today/', views.picks_today), 
     url(r'^privacy/', views.privacy), 
-    url(r'^product_details/', views.product_details), 
     url(r'^promo_details/', views.promo_details), 
     url(r'^promos/', views.promos), 
     url(r'^recommend/', views.recommend), 
@@ -36,7 +36,11 @@ urlpatterns = [
     url(r'^verification/', views.verification), 
     url(r'^home/', views.home),
     url(r'^find/', views.search_test),
-    url(r'^range/', views.range),
+    url(r'^range/', views.ranger),
     url(r'^details/', views.details),
-    url(r'^list/', views.list_test),
+    url(r'^list/', views.listing_search),
+    url(r'^login/', views.login),
+    url(r'^signup1/', views.signup1),
+    url(r'^product_details/(?P<productid>\w{1,50})/$', views.product_details),
+    url(r'^recipelist/', views.recipe_search)
 ]
