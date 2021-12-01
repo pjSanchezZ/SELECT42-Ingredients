@@ -117,7 +117,7 @@ def product_details(request, productid = ''):
                                           'protein':protein})
 
 
-def recipe_details(request):
+def recipe_details(request, recipeid = ''):
   """
     Output to front-end:
       { 
@@ -130,14 +130,15 @@ def recipe_details(request):
       }
   """
   PRODUCT_DISPLAY_NUM = 5
-  Recipe_Id = "10890"
+  Recipe_Id = recipeid
   recipes = recipe.objects.filter(Recipe_Id__exact=Recipe_Id).values()
   ingredient_name_list = recipe_ingredients.objects.filter(Recipe_Id__exact=Recipe_Id).values()
   type_list = []
   product_list = []
+  # print(ingredient_name_list) 
   for name in ingredient_name_list:
-    type = name['Type_Id']
-    typen = product_type.objects.filter(Type_Id__exact = type).values()['Product_Type']
+    type = name['Type_Id_id']
+    typen = list(product_type.objects.filter(Type_Id__exact = type).values())[0]['Product_Type']
     type_list.append(typen)
     product = list(product_info.objects.filter(Type_Id__exact = type).values()[:PRODUCT_DISPLAY_NUM])
     product_list.append(product)
