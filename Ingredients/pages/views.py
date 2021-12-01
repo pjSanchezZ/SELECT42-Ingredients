@@ -551,3 +551,5 @@ def recipe_search(request):
     
   return render(request, 'recommend.html', {'content': return_list})
 
+  from jan
+
