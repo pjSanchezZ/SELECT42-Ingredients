@@ -49,4 +49,5 @@ urlpatterns = [
     url(r'^buy_all_ingredients/(?P<recipeid>\w{1,50})/$', views.buy_all_store_proc),
     url(r'^recipelist/', views.recipe_search),
     url(r'^add_to_cart/(?P<productid>\w{1,50})/$', views.add_cart),
+    url(r'^checkout/', views.checkout),
 ]

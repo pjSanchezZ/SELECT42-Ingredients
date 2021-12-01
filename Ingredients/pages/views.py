@@ -708,3 +708,4 @@ def add_cart_many(request, new_list):
     total_wanted_item_result = wanted_item.objects.filter(User_Name = user_Name).values('User_Name','Product_Id','Quantity')
 
   return cart(request)
+
