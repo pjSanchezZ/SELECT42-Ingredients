@@ -46,5 +46,5 @@ CREATE PROCEDURE Fuckcxt (IN Recipe_Id VARCHAR(50))
             FROM MaxTable
             WHERE a.Type_Id = Type_Id
         )
-        
+
     END;
