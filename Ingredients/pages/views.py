@@ -475,12 +475,12 @@ def recipe_search(request):
     new_item['title'] = result['Title']
     id = result['Recipe_Id']
     new_item['recipe_id'] = id
-    ingredients = recipe_ingredients.objects.filter(Recipe_Id__eq = id).values()
+    ingredients = recipe_ingredients.objects.filter(Recipe_Id__exact = id).values()
     ingredients_list = []
     for ingre in ingredients:
       ingredients_list.append(ingre['Ingredient'])
     new_item['ingredients'] = ingredients_list
-    images = recipe_images.objects.filter(Recipe_Id__eq = id).values()
+    images = recipe_images.objects.filter(Recipe_Id__exact = id).values()
     images_list = []
     for image in images:
       images_list.append(image)
