@@ -730,3 +730,13 @@ def add_cart_many(request, new_list):
     total_wanted_item_result = wanted_item.objects.filter(User_Name = user_Name).values('User_Name','Product_Id','Quantity')
 
   return cart(request)
+
+def checkout_to_zero(request):
+  global username
+  UN = username
+  if UN == '':
+    return(render(request, 'signin.html', {'Error': 100}))
+  wanted_items = wanted_item.objects.filter(User_Name__exact = UN).filter(Valid__exact = 1).values()
+  for item in wanted_items:
+    wanted_item.objects.filter(User_Name = UN, Product_Id = item['Product_Id']).update(Quantity = (-1000))
+  return cart(request)
