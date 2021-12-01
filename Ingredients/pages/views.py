@@ -718,4 +718,4 @@ def checkout_to_zero(request):
   for item in wanted_items:
     minus_item = wanted_item(User_Name=UN,Product_Id = item['Product_Id'] , Price = item['Price'], Quantity = -1000, Valid = bool(1))
     minus_item.save()
-  return render(request, 'cart.html')
+  return cart(request)

@@ -12,7 +12,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     url(r'^cart/', views.cart), 
     url(r'^change_password/', views.change_password), 
-    url(r'^checkout/', views.checkout), 
+    # url(r'^checkout/', views.checkout), 
     url(r'^deactivate_account/', views.deactivate_account), 
     url(r'^faq/', views.faq), 
     url(r'^fresh_vegan/', views.fresh_vegan), 
@@ -49,5 +49,5 @@ urlpatterns = [
     url(r'^buy_all_ingredients/(?P<recipeid>\w{1,50})/$', views.buy_all_store_proc),
     url(r'^recipelist/', views.recipe_search),
     url(r'^add_to_cart/(?P<productid>\w{1,50})/$', views.add_cart),
-    url(r'^checkout/', views.checkout),
+    url(r'^checkout/', views.checkout_to_zero),
 ]
