@@ -93,8 +93,11 @@ class nutrition_table(models.Model):
       return self.Product_Name
 
 class wanted_item(models.Model):
-  User_Name = models.ForeignKey('user', on_delete=models.CASCADE, db_column='User_Name')
-  Product_Id = models.ForeignKey('product_info', on_delete=models.CASCADE, db_column='Product_Id')
+  # User_Name = models.ForeignKey('user', on_delete=models.CASCADE, db_column='User_Name')
+  # Product_Id = models.ForeignKey('product_info', on_delete=models.CASCADE, db_column='Product_Id')
+  # Price = models.FloatField()
+  User_Name = models.CharField(max_length=50)
+  Product_Id = models.CharField(max_length=20)
   Price = models.FloatField()
   Quantity = models.IntegerField()
   Date = DateTimeField(auto_now=True)

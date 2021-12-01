@@ -267,7 +267,7 @@
       <!-- body -->
       <section class="py-4 osahan-main-body">
          <div class="container">
-            <form id='myform' action="/cart/">          
+            <form id='myform' action="/add_to_cart/{{product_id}}">          
             <div class="row">
                <div class="col-lg-6">
                   <div class="recommend-slider mb-3">
@@ -342,7 +342,7 @@
                                  <!-- <form id='myform' class="cart-items-number d-flex" method='POST' action='/cart/'> -->
                                  <div class="cart-items-number d-flex">
                                     <input type='button' value='-' class='qtyminus btn btn-success btn-sm' field='quantity' />
-                                    <input type='text' name='quantity' value='1' class='qty form-control' />
+                                    <input type='text' name='quantity' value='-10' class='qty form-control' />
                                     <input type='button' value='+' class='qtyplus btn btn-success btn-sm' field='quantity' />
                                  </div>
                               </a>

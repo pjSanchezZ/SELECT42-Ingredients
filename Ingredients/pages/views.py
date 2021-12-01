@@ -1,3 +1,4 @@
+from django.db.backends.utils import CursorWrapper
 from django.shortcuts import render
 from django.http import HttpResponse
 from pages.models import *
@@ -114,6 +115,7 @@ def product_details(request, productid = ''):
     print('product_details: list_result[0]:'+str(list_result[0]))
     flag1 = 1
     product_Name = list_result[0]['Product_Name']
+    product_id = list_result[0]['Product_Id']
     price = list_result[0]['Price']
     description = list_result[0]['Description']
     image = list_result[0]['Image']
@@ -131,6 +133,7 @@ def product_details(request, productid = ''):
       protein =  nutrition_result[0]['Protein']
   
   return render(request, 'product_details.html', {'product_Name': product_Name,
+                                          'product_id':product_id,
                                           'price':price,
                                           'description':description,
                                           'image':image,
@@ -159,6 +162,7 @@ def recipe_details(request, recipeid = ''):
   PRODUCT_DISPLAY_NUM = 3
   Recipe_Id = recipeid
   recipes = recipe.objects.filter(Recipe_Id__exact=Recipe_Id).values()
+  print(recipes)
   ingredient_name_list = recipe_ingredients.objects.filter(Recipe_Id__exact=Recipe_Id).values()
 
   
@@ -173,7 +177,7 @@ def recipe_details(request, recipeid = ''):
     product_dict['type_name'] = typen
     product_dict['product_list'] = product
     product_dict_list.append(product_dict)
-  print(product_dict_list)
+  # print(product_dict_list)
   ingredient_name = []
   for name in ingredient_name_list:
     ingredient_name.append(name['Ingredient'])
@@ -478,7 +482,7 @@ def cart(request):
   if username=='':
     return render(request, 'signin.html', {'Error': 100})
   # wanted_all is a list of dictionaries
-  wanted_all = list(wanted_item.objects.filter(User_Name__exact = 'XutaoC').filter(Valid__exact = 1).values())
+  wanted_all = list(wanted_item.objects.filter(User_Name__exact = username).filter(Valid__exact = 1).values())
   sum_of_item = len(wanted_all)
   count_of_things = 0
   total_cost = 0
@@ -486,9 +490,10 @@ def cart(request):
   product_count_dict = {}
   product_cost_dict = {}
   for cart_item in wanted_all:
-    product_list.append(cart_item['Product_Id_id'])
-    product_count_dict[cart_item['Product_Id_id']] = cart_item['Quantity']
-    product_cost_dict[cart_item['Product_Id_id']] = cart_item['Quantity']*cart_item['Price']
+    print(cart_item)
+    product_list.append(cart_item['Product_Id'])
+    product_count_dict[cart_item['Product_Id']] = cart_item['Quantity']
+    product_cost_dict[cart_item['Product_Id']] = cart_item['Quantity']*cart_item['Price']
     count_of_things += cart_item['Quantity']
     total_cost += cart_item['Quantity']*cart_item['Price']
   # cart is a list of dictionaries
@@ -599,18 +604,78 @@ def recipe_search(request):
 '''
 
 from django.db import connection
-cursor = connection.cursor()
-def buy_all_store_proc():
-  """
-  sp
-  """
-  try:
-    cursor.callproc('new_procedure', recipeid)
-    if cursor.return_value == 1:
-      result = cursor.fetchall()
-      print(result)
-  finally:
-    cursor.close()
-  return render()
+# from callsp.models import getempdetails
+# cursor = connection.cursor()
+# def buy_all_store_proc(request, recipeid):
+#   """
+#   sp
+#   """
+#   print(recipeid)
+#   global curser
+#   try:
+#     cursor.callproc('new_procedure', recipeid)
+#     if cursor.return_value == 1:
+#       result = cursor.fetchall()
+#       print(result)
+#   finally:
+#     cursor.close()
+#   return render(request, 'cart.html')
 
+def buy_all_store_proc(request, recipeid):
+  cursor = connection.cursor()
+  cursor.callproc('new_procedure', [recipeid, ])
+  result = cursor.fetchall()
+  new_list = []
+  for str in result:
+    new_list.append(str[0])
+  # some deal with the result
+  return add_cart_many(request, new_list)
 
+def add_cart(request, productid):
+  global username
+  product_Id = ''
+  user_Name = username
+  price = -1.0
+  quantity = 0
+  wanted_list_result = product_info.objects.none() #空Queryset?
+  temp_wanted_item_result = wanted_item.objects.none()#空Queryset?
+  total_wanted_item_result = wanted_item.objects.none()
+  product_Id = productid
+  quantity = request.GET.get("quantity")
+  wanted_list_result = product_info.objects.filter(Product_Id__icontains=product_Id).values()
+  #if wanted_list_result:#一定会有
+  price = wanted_list_result[0]['Price']
+  print(user_Name, quantity, price)
+  temp_wanted_item_result = wanted_item.objects.filter(User_Name = user_Name, Product_Id = product_Id).values()
+  if temp_wanted_item_result:
+      wanted_item.objects.filter(User_Name = user_Name, Product_Id = product_Id).update(Quantity = (quantity))
+  else:
+      ans = wanted_item(User_Name=user_Name,Product_Id = product_Id , Price = price, Quantity = quantity, Valid = bool(1))
+      ans.save()
+  total_wanted_item_result = wanted_item.objects.filter(User_Name = user_Name).values('User_Name','Product_Id','Quantity')
+
+  return cart(request)
+
+def add_cart_many(request, new_list):
+  global username
+  user_Name = username
+  price = -1.0
+  quantity = 0
+  wanted_list_result = product_info.objects.none() #空Queryset?
+  temp_wanted_item_result = wanted_item.objects.none()#空Queryset?
+  total_wanted_item_result = wanted_item.objects.none()
+  quantity = 1
+  for product_Id in new_list:
+    wanted_list_result = product_info.objects.filter(Product_Id__icontains=product_Id).values()
+    #if wanted_list_result:#一定会有
+    price = wanted_list_result[0]['Price']
+    print(user_Name, quantity, price)
+    temp_wanted_item_result = wanted_item.objects.filter(User_Name = user_Name, Product_Id = product_Id).values()
+    if temp_wanted_item_result:
+        wanted_item.objects.filter(User_Name = user_Name, Product_Id = product_Id).update(Quantity = (quantity))
+    else:
+        ans = wanted_item(User_Name=user_Name,Product_Id = product_Id , Price = price, Quantity = quantity, Valid = bool(1))
+        ans.save()
+    total_wanted_item_result = wanted_item.objects.filter(User_Name = user_Name).values('User_Name','Product_Id','Quantity')
+
+  return cart(request)
